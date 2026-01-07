@@ -4,20 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeamHC 공식 링크</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f4f4f9; }
-        .container { text-align: center; }
-        .link-button { display: block; width: 250px; padding: 15px; margin: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; }
-        .link-button:hover { background-color: #0056b3; }
+        :root {
+            --primary-color: #4f46e5;
+            --hover-bg: #f8faff;
+            --text-main: #1f2937;
+            --text-sub: #6b7280;
+            --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 24px;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .description {
+            margin-bottom: 32px;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+
+        .link-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background-color: white;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 600;
+            border: 1px solid #e5e7eb;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 마우스를 올렸을 때 효과 */
+        .link-button:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-color);
+            background-color: var(--hover-bg);
+            color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+        }
+
+        .footer {
+            margin-top: 32px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>TeamHC</h1>
-        <p>공식 사이트 및 서비스 바로가기</p>
-        <a href="https://teamhc.net" class="link-button">공식 홈페이지</a>
-        <a href="#" class="link-button">프로젝트 A</a>
-        <a href="#" class="link-button">커뮤니티</a>
+        <h1>Team HC</h1>
+        <p class="description">공식 사이트 및 서비스 바로가기</p>
+        
+        <div class="link-group">
+            <a href="https://site.teamhc.net/" class="link-button">🏠 공식 홈페이지</a>
+            <a href="https://blog.naver.com/team_hc" class="link-button">📝 네이버 블로그</a>
+            <a href="https://cafe.naver.com/indieteamhc" class="link-button">☕ 네이버 카페</a>
+            <a href="https://3000won.com/teamhc" class="link-button">🎁 도네이션</a>
+        </div>
+
+        <div class="footer">
+            © TeamHC. All rights reserved.
+        </div>
     </div>
 </body>
 </html>
