@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의 - Team HC</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary-color:#33b1e8;--bg-gradient:linear-gradient(135deg,#e6f9ff 0%,#f7fdff 100%);--text-main:#1f2937}
+        body{font-family:'Noto Sans KR',sans-serif;min-height:100vh;margin:0;display:flex;align-items:center;justify-content:center;background:var(--bg-gradient);color:var(--text-main)}
+        .container{background:rgba(255,255,255,0.98);padding:32px;border-radius:18px;max-width:720px;width:92%;box-shadow:0 20px 40px rgba(15,23,42,0.06);border:1px solid rgba(51,177,232,0.06)}
+        h1{margin:0 0 12px;font-size:1.4rem;color:var(--primary-color)}
+        p{margin:8px 0;color:#374151}
+        a.button{display:inline-block;margin-top:18px;padding:10px 14px;background:var(--primary-color);color:#fff;border-radius:10px;text-decoration:none;box-shadow:0 6px 18px rgba(51,177,232,0.10)}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>문의하기</h1>
+        <p>현재 메일을 통해 문의를 받고 있습니다.</p>
+        <p>일러스트레이터 모집, 게임 내 버그에 대한 문의는 해당 이메일을 통해 보내주세요.</p>
+        <p><strong>이메일:</strong> <span id="contact-email">로딩 중...</span></p>
+        <noscript>
+            <p>자바스크립트가 비활성화되어 있습니다. 이메일 주소: contact[at]teamhc[dot]net</p>
+        </noscript>
+        <a class="button" href="index.html">메인으로 돌아가기</a>
+    </div>
+    <script>
+        (function(){
+            var codes = [116,101,97,109,104,99,46,107,111,64,103,109,97,105,108,46,99,111,109];
+            var email = codes.map(function(c){ return String.fromCharCode(c); }).join('');
+            var el = document.getElementById('contact-email');
+            if(el){
+                var a = document.createElement('a');
+                a.href = 'mailto:' + email;
+                a.textContent = email;
+                a.rel = 'noopener noreferrer';
+                a.setAttribute('aria-label','이메일로 문의하기');
+                el.textContent = '';
+                el.appendChild(a);
+            }
+        })();
+    </script>
+</body>
+</html>

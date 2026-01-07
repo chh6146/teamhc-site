@@ -1,0 +1,342 @@
+/* ==========================================================================
+   1. CSS Variables & Reset
+   ========================================================================== */
+:root {
+    --accent: #33b1e8;
+    --bg: #f7fdff;
+    --card: #ffffff;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border-light: rgba(15, 23, 42, 0.03);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.wrap {
+    max-width: 980px;
+    margin: 28px auto;
+    padding: 24px 0;
+}
+
+/* ==========================================================================
+   2. Header & Top Navigation
+   ========================================================================== */
+header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.game-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 2px;
+}
+
+.game-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0;
+}
+
+.logo {
+    width: 240px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.meta {
+    color: #475569;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+/* 상단 뒤로가기/홈 버튼 */
+.top-link {
+    padding: 0 8px 12px;
+    text-align: left;
+}
+
+.home-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all .18s ease;
+}
+
+.home-button:hover {
+    color: var(--accent);
+    background: rgba(51, 177, 232, 0.06);
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+/* ==========================================================================
+   3. Content Cards & Media
+   ========================================================================== */
+.card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+    border: 1px solid var(--border-light);
+}
+
+h2 {
+    font-size: 1.05rem;
+    margin: 0 0 6px;
+}
+
+p {
+    color: #344154;
+    margin: 0;
+}
+
+img.responsive {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 12px 0;
+}
+
+.media {
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+.media img {
+    width: 320px;
+    height: auto;
+    border-radius: 8px;
+    flex: 0 0 180px;
+}
+
+.media .text {
+    flex: 1;
+}
+
+.media .text h2 {
+    margin: 0 0 6px;
+    color: var(--accent);
+    font-size: 1.05rem;
+}
+
+/* 다운로드 영역 */
+.download {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.btn {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer {
+    margin-top: 30px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* ==========================================================================
+   4. Bottom Floating Tab Bar
+   ========================================================================== */
+body {
+    padding-bottom: 100px; /* 탭바 공간 확보 */
+}
+
+.bottom-tabbar {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: 1300;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: auto;
+    min-width: 240px;
+    height: 56px;
+    padding: 0 8px;
+    box-sizing: border-box;
+
+    /* Glassmorphism 효과 */
+    background: rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(4px) saturate(180%);
+    backdrop-filter: blur(4px) saturate(180%);
+    
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+}
+
+/* 2. 홈(게임 목록) 버튼 - 호버 효과 및 색상 수정 */
+.bottom-tabbar .tab-button.home { 
+    display: flex; /* 또는 inline-flex 상관없으나 통일 */
+    align-items: center;
+    justify-content: center;
+
+    /* 고정 너비 대신 padding을 써야 글자가 안 답답합니다 */
+    padding: 0 24px; 
+    height: 44px; /* 높이 하나로 통일 */
+
+    background: #ffffff;
+    color: var(--text);
+    border-radius: 14px; 
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    text-decoration: none; 
+    white-space: nowrap; /* 글자가 버튼 안에서 줄바꿈되지 않게 방지 */
+    
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.bottom-tabbar .tab-button.home:hover {
+    transform: translateY(-2px);
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 6px 20px rgba(51, 177, 232, 0.3);
+}
+
+/* ==========================================================================
+   5. Responsive Design (Media Queries)
+   ========================================================================== */
+
+/* 모바일 뷰 (640px 이하) */
+@media (max-width: 640px) {
+    .media {
+        flex-direction: column;
+        align-items: center;
+    }
+    .media img {
+        width: 100%;
+        flex: auto;
+    }
+    .wrap {
+        padding: 16px;
+    }
+}
+
+/* 데스크탑 뷰 (900px 이상) */
+@media (min-width: 900px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .bottom-tabbar {
+        bottom: 32px;
+    }
+}
+
+/* 1. 전체 배경 - 즉시 나타남 */
+.toast-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2000;
+    /* 전체 투명도는 즉시 또는 아주 빠르게 */
+    transition: opacity 100ms linear;
+}
+
+.toast-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 2. 배경 블러 - 가장 먼저 실행 */
+.toast-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+    /* 블러 애니메이션은 즉시 시작 (0ms 지연) */
+    transition: backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
+}
+
+.toast-overlay.visible::before {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+/* 3. 토스트 내용물 - 배경보다 0.1초 늦게 실행 */
+.toast-content {
+    position: relative;
+    background: #ffffff;
+    width: min(300px, 85%);
+    padding: 30px 20px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    
+    /* 시작 위치 */
+    transform: translateY(30px); 
+    opacity: 0;
+
+    /* [핵심] 배경 블러가 시작된 후 0.1초(100ms) 뒤에 나타나도록 설정 */
+    transition: transform 300ms cubic-bezier(0.18, 0.89, 0.32, 1.28) 100ms, 
+                opacity 200ms ease 100ms;
+}
+
+/* 활성화 시 토스트 위치와 투명도 */
+.toast-overlay.visible .toast-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.badge-img { width: 100px; height: 100px; margin-bottom: 15px; }
+.badge-title { font-size: 1.2rem; font-weight: 800; margin: 0 0 10px; }
+.badge-desc { font-size: 0.9rem; color: #64748b; margin-bottom: 25px; }
+
+.badge-close-btn {
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+}

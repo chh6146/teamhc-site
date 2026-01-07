@@ -1,0 +1,161 @@
+:root {
+    --primary-color: #33b1e8;
+    --hover-bg: #e6f9ff;
+    --text-main: #1f2937;
+    --text-sub: #4b5563;
+    --bg-gradient: linear-gradient(135deg, #e6f9ff 0%, #f7fdff 100%);
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 24px;
+    border-radius: 24px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0 0 8px 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.logo {
+    width: 200px;
+    max-width: 92%;
+    height: auto;
+    display: block;
+    margin: 0 auto 14px;
+}
+
+.description {
+    margin-bottom: 32px;
+    color: var(--text-sub);
+    font-size: 0.95rem;
+}
+
+.link-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.link-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    width: 88%;
+    max-width: 420px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: white;
+    color: var(--text-main);
+    text-decoration: none;
+    border-radius: 16px;
+    font-weight: 600;
+    border: 1px solid #e5e7eb;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-button img,
+.link-button .icon-img {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: block;
+    border-radius: 12px;
+    padding: 4px;
+    background: #ffffff;
+    border: 2px solid rgba(51,177,232,0.12);
+    box-shadow: 0 8px 22px rgba(51,177,232,0.12);
+    object-fit: cover;
+    margin-right: 12px;
+    transition: box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.link-button:hover img,
+.link-button:hover .icon-img {
+    border-color: rgba(51,177,232,0.28);
+    box-shadow: 0 12px 30px rgba(51,177,232,0.18);
+    transform: translateY(-2px);
+}
+
+.link-button svg path, .link-button svg rect, .link-button svg circle {
+    fill: currentColor;
+}
+
+.link-button span {
+    display: inline-block;
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.link-button:hover {
+    transform: scale(1.02);
+    border-color: var(--primary-color);
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(51, 177, 232, 0.12);
+}
+
+.footer {
+    margin-top: 24px;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.footer-links {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+    background: rgba(51,177,232,0.06);
+}
+
+/* games page extras */
+.top-link { display:block; margin-bottom:12px; text-align:left; }
+.home-button { display:inline-flex; align-items:center; gap:8px; padding:8px 10px; background:white; border-radius:12px; border:1px solid #e5e7eb; color:var(--text-main); text-decoration:none; font-weight:600; transition:all .18s ease; }
+.home-button:hover { color:var(--primary-color); background:var(--hover-bg); transform:translateY(-2px); border-color:var(--primary-color); }
+.game-info { flex:1 1 auto; display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.game-sub { font-size:0.78rem; color:var(--text-sub); line-height:1; }
+.game-title { font-size:1rem; font-weight:600; text-align:right; }
+
+@media (max-width:640px){
+    .container{padding:24px 12px}
+}
+
+/* 프로젝트 그룹 라벨 스타일 */
+.project-list { display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 6px }
+.project-label { background:transparent;color:var(--text-main);padding:6px 10px;border-radius:8px;border:1px dashed rgba(0,0,0,0.06);font-size:0.85rem }

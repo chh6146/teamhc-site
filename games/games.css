@@ -1,0 +1,170 @@
+/* ==========================================================================
+   목록 페이지 하단 바 (상세 페이지 디자인과 동기화)
+   ========================================================================== */
+:root {
+    --accent: #33b1e8;
+    --bg: #f7fdff;
+    --card: #ffffff;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border-light: rgba(15, 23, 42, 0.03);
+}
+
+/* 1. 바닥 여백 통일 */
+body { padding-bottom: 100px; }
+
+.bottom-tabbar { 
+    position: fixed; 
+    left: 50%; 
+    bottom: 24px; 
+    transform: translateX(-50%); 
+    z-index: 1300;
+
+    /* 상세 페이지와 규격 통일 */
+    width: min(560px, calc(100% - 40px)); 
+    box-sizing: border-box; 
+    height: 60px; 
+    display: flex; 
+    gap: 8px; 
+    align-items: center; 
+    padding: 8px; 
+
+    /* 상세 페이지의 초투명 유리 효과 적용 */
+    background: rgba(255, 255, 255, 0.05); 
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    backdrop-filter: blur(8px) saturate(180%);
+    
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); 
+}
+
+/* 2. 홈(게임 목록) 버튼 - 호버 효과 및 색상 수정 */
+.bottom-tabbar .tab-button.home { 
+    display: flex; /* 또는 inline-flex 상관없으나 통일 */
+    align-items: center;
+    justify-content: center;
+
+    /* 고정 너비 대신 padding을 써야 글자가 안 답답합니다 */
+    padding: 0 24px; 
+    height: 44px; /* 높이 하나로 통일 */
+
+    background: #ffffff;
+    color: var(--text);
+    border-radius: 14px; 
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    text-decoration: none; 
+    white-space: nowrap; /* 글자가 버튼 안에서 줄바꿈되지 않게 방지 */
+    
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 마우스 커서 올렸을 때 색상 변경 (--accent 사용) */
+.bottom-tabbar .tab-button.home:hover { 
+    transform: translateY(-2px);
+    background: var(--accent); /* 상세 페이지와 동일한 #33b1e8 */
+    color: #ffffff; 
+    border-color: var(--accent);
+    box-shadow: 0 6px 20px rgba(51, 177, 232, 0.3);
+}
+
+/* 3. 정렬 버튼 그룹 디자인 수정 */
+.bottom-tabbar .seg-group { 
+    display: flex; 
+    flex: 1; 
+    background: rgba(0, 0, 0, 0.05); /* 더 은은한 배경색 */
+    border-radius: 14px; 
+    padding: 4px; 
+    gap: 4px; 
+}
+
+.bottom-tabbar .seg-group button { 
+    flex: 1; 
+    border: 0; 
+    background: transparent; 
+    height: 36px; 
+    font-size: 0.85rem;
+    font-weight: 700; 
+    cursor: pointer; 
+    color: var(--text);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+/* 활성화된 정렬 버튼 색상 수정 */
+.bottom-tabbar .seg-group button.active { 
+    background: #ffffff; 
+    color: var(--accent); /* 강조색 적용 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+}
+
+/* 4. 데스크탑 위치 고정 */
+@media(min-width:900px){ 
+    .bottom-tabbar { 
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 560px; /* 고정 너비로 안정감 부여 */
+    } 
+}
+
+/* 팝업 전체 배경 */
+.toast-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2000;
+    transition: opacity 150ms linear; /* 전체 투명도는 빠르게 */
+}
+
+.toast-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 배경 블러 - 즉시 실행 */
+.toast-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+    /* 블러 애니메이션은 0.3초간 즉시 실행 */
+    transition: backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
+}
+
+.toast-overlay.visible::before {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+/* 토스트 내용물 - 배경보다 늦게 나타남 */
+.toast-content {
+    position: relative;
+    background: #ffffff;
+    width: min(300px, 85%);
+    padding: 30px 20px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    
+    transform: translateY(15px);
+    opacity: 0;
+    /* 핵심: 100ms(0.1초)의 지연시간을 주어 배경이 먼저 흐려지게 함 */
+    transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1) 100ms, 
+                opacity 200ms ease 100ms;
+}
+
+.toast-overlay.visible .toast-content {
+    transform: translateY(0);
+    opacity: 1;
+}
