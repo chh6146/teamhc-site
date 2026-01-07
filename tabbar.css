@@ -1,67 +1,87 @@
+/* 1. 바닥 여백 */
+body { padding-bottom: 100px !important; }
 
-/* ==========================================================================
-   4. Bottom Floating Tab Bar
-   ========================================================================== */
-body {
-    padding-bottom: 100px; /* 탭바 공간 확보 */
-}
+.bottom-tabbar { 
+    position: fixed; 
+    left: 50%; 
+    bottom: 24px; 
+    transform: translateX(-50%); 
+    z-index: 2000;
 
-.bottom-tabbar {
-    position: fixed;
-    /* [수정] 중앙 정렬 해제 및 왼쪽 여백 설정 */
-    left: 24px; 
-    bottom: 24px;
-    transform: none; /* 중앙으로 당기던 효과 제거 */
+    /* 핵심: 내용물만큼만 딱 맞게 너비 설정 */
+    display: flex; 
+    width: fit-content; /* 가로 너비 강제 고정 해제 */
+    max-width: calc(100% - 40px);
     
-    z-index: 1300;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* [수정] 내부 버튼들도 왼쪽부터 정렬 */
-    
-    /* [참고] width가 auto면 내용물만큼만 길어집니다 */
-    width: auto;
-    height: 56px;
-    padding: 0 8px;
+    align-items: center; 
+    justify-content: center; /* 내부 요소들을 중앙으로 밀착 */
+    gap: 10px; /* 홈 버튼과 정렬 그룹 사이 간격 */
+    padding: 8px; /* 탭바 내부 상하좌우 여백 */
+    height: 60px;
     box-sizing: border-box;
 
-    /* 이하 Glassmorphism 효과 동일 */
-    background: rgba(255, 255, 255, 0.03);
-    -webkit-backdrop-filter: blur(4px) saturate(180%);
-    backdrop-filter: blur(4px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+    /* 유리 효과 */
+    background: rgba(255, 255, 255, 0.45) !important; 
+    -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+    backdrop-filter: blur(12px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 20px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); 
 }
 
-/* 2. 홈(게임 목록) 버튼 - 호버 효과 및 색상 수정 */
+/* 2. 홈(게임 목록) 버튼 - 크기 고정 */
 .bottom-tabbar .tab-button.home { 
-    display: flex; /* 또는 inline-flex 상관없으나 통일 */
+    flex: 0 0 auto; /* 크기가 늘어나거나 줄어들지 않도록 고정 */
+    display: flex;
     align-items: center;
-    justify-content: center;
-
-    /* 고정 너비 대신 padding을 써야 글자가 안 답답합니다 */
-    padding: 0 24px; 
-    height: 44px; /* 높이 하나로 통일 */
-
-    background: #ffffff;
-    color: var(--text);
+    padding: 0 20px; 
+    height: 44px; 
+    background: #ffffff !important;
+    color: #1f2937 !important; 
+    text-decoration: none !important;
     border-radius: 14px; 
     border: 1px solid rgba(0, 0, 0, 0.05);
-    
     font-size: 0.85rem; 
     font-weight: 700; 
-    text-decoration: none; 
-    white-space: nowrap; /* 글자가 버튼 안에서 줄바꿈되지 않게 방지 */
-    
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
 }
 
-.bottom-tabbar .tab-button.home:hover {
-    transform: translateY(-2px);
-    background: var(--accent);
-    color: #ffffff;
-    border-color: var(--accent);
-    box-shadow: 0 6px 20px rgba(51, 177, 232, 0.3);
+/* 3. 정렬 버튼 그룹 */
+.bottom-tabbar .seg-group { 
+    display: flex; 
+    flex: 1; /* 탭바 내 남은 공간을 채우거나 적절히 확장되도록 설정 */
+    min-width: 180px; /* 그룹 전체의 최소 너비를 확보해서 버튼을 크게 만듦 */
+    background: rgba(0, 0, 0, 0.06); 
+    border-radius: 14px; 
+    padding: 4px; 
+    gap: 4px; 
+}
+
+.bottom-tabbar .seg-group button { 
+    /* 핵심: 최신순/가나다순 버튼이 동일한 크기를 갖도록 flex: 1 설정 */
+    flex: 1; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 40px; /* 높이를 키움 */
+    padding: 0 10px;
+    border: 0; 
+    background: transparent; 
+    
+    font-size: 0.85rem;
+    font-weight: 700; 
+    cursor: pointer; 
+    color: #4b5563;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* 활성화된 버튼에만 흰색 배경과 강조색 */
+.bottom-tabbar .seg-group button.active { 
+    background: #ffffff !important; 
+    color: #33b1e8 !important; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
 }
