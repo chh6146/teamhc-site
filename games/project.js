@@ -70,3 +70,73 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// 1. 아이템 열기 함수
+function openItem(title, desc, imgSrc) {
+    const modal = document.getElementById('badge-toast');
+    if (modal) {
+        // 내부 내용 변경
+        modal.querySelector('.badge-title').innerText = title;
+        modal.querySelector('.badge-desc').innerText = desc;
+        modal.querySelector('.badge-img').src = imgSrc;
+        
+        // 보이기
+        modal.classList.add('visible');
+    }
+}
+
+// 2. 아이템 닫기 함수
+function closeBadge() {
+    const modal = document.getElementById('badge-toast');
+    if (modal) {
+        modal.classList.remove('visible');
+    }
+}
+
+// 3. 배경(블러) 클릭 시 닫기 기능
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('badge-toast');
+    // 클릭된 대상(e.target)이 모달의 가장 바깥 배경(overlay)인 경우에만 닫기
+    if (e.target === modal) {
+        closeBadge();
+    }
+});
+
+// 4. 탭 전환 함수
+(function() {
+    document.addEventListener("click", function (e) {
+        const btn = e.target.closest('.tab-inner button');
+        if (!btn) return;
+
+        const group = btn.closest('.tab-inner');
+        const slider = group.querySelector('.tab-slider'); 
+        const buttons = Array.from(group.querySelectorAll('.tab-item'));
+        const index = buttons.indexOf(btn);
+
+        if (index === -1) return;
+
+        // 1. 버튼 활성화 클래스 처리
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // 2. 슬라이더 이동
+        if (slider) {
+            slider.style.transform = `translateX(${index * 100}%)`;
+        }
+        
+        // 3. 탭 콘텐츠 전환 (핵심 수정 부분)
+        // 클릭한 버튼의 onclick에 들어있는 ID값을 가져와서 해당 섹션만 보여줍니다.
+        const tabId = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+        
+        // 모든 섹션 숨기기
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // 선택한 섹션만 보이기
+        const targetContent = document.getElementById(tabId);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
+        
+    }, true);
+})();

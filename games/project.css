@@ -14,12 +14,13 @@ html, body {
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
+    scrollbar-gutter: stable;
 }
 
 .wrap {
     max-width: 980px;
-    margin: 28px auto;
-    padding: 24px 0;
+    margin: 10px auto; /* 28px에서 10px로 줄여서 상단 여백 밀착 */
+    padding: 0 20px;   /* 상하 패딩을 0으로 만들고 좌우만 남김 */
 }
 
 /* ==========================================================================
@@ -75,7 +76,6 @@ header {
     background-attachment: fixed;
     
     /* 2. 레이아웃: 높이를 고정하지 않고 패딩으로 웅장함 조절 */
-    margin: 60px 0;
     padding: 60px 40px;
     display: flex;
     flex-direction: column;
@@ -113,6 +113,11 @@ header {
     margin-bottom: 18px;
     box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
     border: 1px solid var(--border-light);
+
+    /* 추가: 모든 카드가 최대 800px를 넘지 않게 함 */
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .card .text {
@@ -274,4 +279,88 @@ img.responsive {
 
 .item-btn:active {
     transform: translateY(0); /* 클릭 시 다시 내려옴 */
+}
+
+/* ==========================================================================
+   7. 카테고리 탭 스타일
+   ========================================================================== */
+.tab-inner {
+    position: relative;
+    display: flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto 40px;
+    overflow: hidden; /* 슬라이더가 삐져나가지 않게 */
+}
+
+/* 움직이는 배경 박스 */
+.tab-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(33.333% - 4px); /* 버튼 3개 기준 */
+    height: calc(100% - 8px);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    
+    /* 애니메이션 설정 */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0; 
+    pointer-events: none; /* 클릭 방해 금지 */
+}
+
+.tab-item {
+    flex: 1;
+    position: relative; /* 슬라이더보다 위에 올라오게 */
+    z-index: 1;
+    padding: 12px 0;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.tab-item.active {
+    color: #1e293b;
+}
+
+/* 탭 콘텐츠 기본 숨김 */
+.tab-content {
+    display: none; 
+}
+
+/* active 클래스가 붙은 섹션만 보여줌 */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out; /* 나타날 때 부드럽게 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   8. 캐릭터 섹션 스타일
+   ========================================================================== */
+/* 캐릭터 섹션 전용 스타일 */
+#characters .media img {
+    width: 150px;       /* 캐릭터 이미지는 적당한 크기로 고정 */
+    height: 150px;
+    flex: 0 0 150px;    /* 크기가 줄어들지 않게 고정 */
+    object-fit: cover;  /* 이미지가 잘리지 않고 꽉 차게 */
+    border-radius: 12px;
+}
+
+#characters p strong {
+    color: var(--accent); /* 대사나 강조 포인트에 강조색 적용 */
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
 }

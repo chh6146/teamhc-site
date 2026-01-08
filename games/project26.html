@@ -20,79 +20,150 @@
             </div>
         </header>
 
-        <div class="mid-notice">
-            <div class="notice-text">
-                <p>학생회장 선거는 다가오고, 미휘월은 혼란에 빠진다.</p>
-                <p>누군가는 상대를 끌어내리려 하고, 누군가는 그 손을 잡는다.</p>
-                <p class="split">그리고, 모든 것을 지켜보는 또 한 사람—</p>
+        <nav class="tab-container">
+            <div class="tab-inner">
+                <div class="tab-slider"></div>
                 
-                <p>진실을 밝혀낼 것인가, 아니면 같은 거짓 선동을 할 것인가?</p>
-                <p>선택은 당신에게 달렸다.</p>
+                <button class="tab-item active" onclick="showTab('summary')">개요</button>
+                <button class="tab-item" onclick="showTab('manual')">설명서</button>
+                <button class="tab-item" onclick="showTab('characters')">캐릭터</button>
+            </div>
+        </nav>
+
+        <section id="summary" class="tab-content active">
+            <div class="mid-notice">
+                <div class="notice-text">
+                    <p>학생회장 선거는 다가오고, 미휘월은 혼란에 빠진다.</p>
+                    <p>누군가는 상대를 끌어내리려 하고, 누군가는 그 손을 잡는다.</p>
+                    <p class="split">그리고, 모든 것을 지켜보는 또 한 사람—</p>
+                    
+                    <p>진실을 밝혀낼 것인가, 아니면 같은 거짓 선동을 할 것인가?</p>
+                    <p>선택은 당신에게 달렸다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="manual" class="tab-content">
+            <div class="card">
+                <div class="media">
+                    <img src="pj26_01.webp" alt="선택지는 기본">
+                    <div class="text">
+                        <h2>선택지는 기본</h2>
+                        <p>일반적으로 여러분이 알고 있는 비주얼 노벨처럼 미휘월 심화 학교에 발생한 일에 대해 알아봅니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="media">
+                    <img src="pj26_02.webp" alt="강화된 선택지">
+                    <div class="text">
+                        <h2>강화된 선택지</h2>
+                        <p>하지만 학교에서 벌어진 일을 선택지로만 해결할 수 없습니다. 학교를 탐색하며 획득한 증거품과, 지식으로 학생들과 대화해서 상황을 좀 더 해결해 나갑니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="media">
+                    <img src="pj26_03.webp" alt="상대방의 마음">
+                    <div class="text">
+                        <h2>상대방의 마음이 움직인다</h2>
+                        <p>상대방과 대화를 하며 곤란한 상대방의 의견을 듣고 도와주거나, 학교에서 소외된 학생을 도와줌으로서 사건을 해결해나갑니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="media">
+                    <img src="pj26_04.webp" alt="학교를 돌아다닌다">
+                    <div class="text">
+                        <h2>학교를 돌아다닌다</h2>
+                        <p>학교를 돌아다니며, 어쩌다 얻게 된
+                            <button class="item-btn" onclick="openItem('선도부 뱃지', '선도부 활동에 참여한 사람에게 주어지는 특별한 뱃지. 이 뱃지를 소지하면 점심시간에 학교를 나가는 것도 가능하다. 학교 밖으로 나가고 싶을 때 유용하다.', 'pj26_badge.webp')">선도부 뱃지</button>
+                            를 이용해서 야외로도 돌아다닙니다. 생각지도 못한 행동을 통해 숨겨진 결말을 발견하게 될지도 모릅니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="media">
+                    <img src="pj26_05.webp" alt="호감도로 숨겨진 루트">
+                    <div class="text">
+                        <h2>호감도로 숨겨진 루트</h2>
+                        <p>호감도를 상승 시키면 특별한 루트를 발견할 지도 모릅니다. 숨겨진 루트에서 특별한 시나리오를 감상해보세요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="media">
+                    <img src="pj26_06.webp" alt="다운로드">
+                    <div class="text">
+                        <h2>발매일</h2>
+                        <p>Android 발매일 : 2025년 2월 24일</p>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
+    <section id="characters" class="tab-content">
         <div class="card">
             <div class="media">
-                <img src="pj26_01.webp" alt="선택지는 기본">
+                <!-- <img src="char_01.webp" alt="주인공"> -->
                 <div class="text">
-                    <h2>선택지는 기본</h2>
-                    <p>일반적으로 여러분이 알고 있는 비주얼 노벨처럼 미휘월 심화 학교에 발생한 일에 대해 알아봅니다.</p>
+                    <h2>주인공 (플레이어)</h2>
+                    <!-- <p><strong>"제압하는 것 자체가 좋을 뿐입니다."</strong><br> -->
+                    정의감보다는 자신의 감을 우선시하는 성격. 평범했던 그의 일상에 인생 최대의 제압 기회가 찾아온다.</p>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <div class="media">
-                <img src="pj26_02.webp" alt="강화된 선택지">
+                <!-- <img src="char_02.webp" alt="이랑"> -->
                 <div class="text">
-                    <h2>강화된 선택지</h2>
-                    <p>하지만 학교에서 벌어진 일을 선택지로만 해결할 수 없습니다. 학교를 탐색하며 획득한 증거품과, 지식으로 학생들과 대화해서 상황을 좀 더 해결해 나갑니다.</p>
+                    <h2>이랑</h2>
+                    <!-- <p><strong>"사람은 서로 배신하는 존재잖아요."</strong><br> -->
+                    푸른색 펌 헤어에 실크 셔츠를 즐겨 입는 여리여리한 소녀. 어린 시절 본 드라마의 충격으로 대인기피증이 있으며, 물 공포증 때문에 얼음을 즐겨 먹는다. 가방 속 프릴 달린 양산은 그녀만의 방어기제다.</p>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <div class="media">
-                <img src="pj26_03.webp" alt="상대방의 마음">
+                <!-- <img src="char_03.webp" alt="도희"> -->
                 <div class="text">
-                    <h2>상대방의 마음이 움직인다</h2>
-                    <p>상대방과 대화를 하며 곤란한 상대방의 의견을 듣고 도와주거나, 학교에서 소외된 학생을 도와줌으로서 사건을 해결해나갑니다.</p>
+                    <h2>도희</h2>
+                    <!-- <p><strong>"학칙보다 중요한 저만의 스타일이 있어요."</strong><br> -->
+                    단정한 벌룬펌에 붉은 입술이 매력적인 똑부러지는 성격. 건강미 넘치는 모습이지만 검은색 액세서리에 집착하는 고집이 있다. 학교 규칙마저 무시하며 자신만의 스타일을 고수하는 강단 있는 인물.</p>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <div class="media">
-                <img src="pj26_04.webp" alt="학교를 돌아다닌다">
+                <!-- <img src="char_04.webp" alt="N"> -->
                 <div class="text">
-                    <h2>학교를 돌아다닌다</h2>
-                    <p>학교를 돌아다니며, 어쩌다 얻게 된
-                        <button class="item-btn" onclick="openItem('선도부 뱃지', '선도부 활동에 참여한 사람에게 주어지는 특별한 뱃지. 이 뱃지를 소지하면 점심시간에 학교를 나가는 것도 가능하다. 학교 밖으로 나가고 싶을 때 유용하다.', 'pj26_badge.webp')">선도부 뱃지</button>
-                        를 이용해서 야외로도 돌아다닙니다. 생각지도 못한 행동을 통해 숨겨진 결말을 발견하게 될지도 모릅니다.</p>
+                    <h2>N</h2>
+                    <!-- <p><strong>"네가 어디까지 갈 수 있을지 궁금해."</strong><br> -->
+                    노란 트윈테일에 작지만 위압적인 분위기를 풍기는 수수께끼의 선배. 졸업반이라 학생회장 자리에 무관심하지만, 주인공의 특이한 행동에 호기심을 느껴 뒤에서 도움을 주는 관찰자적 인물.</p>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <div class="media">
-                <img src="pj26_05.webp" alt="호감도로 숨겨진 루트">
+                <!-- <img src="char_05.webp" alt="료"> -->
                 <div class="text">
-                    <h2>호감도로 숨겨진 루트</h2>
-                    <p>호감도를 상승 시키면 특별한 루트를 발견할 지도 모릅니다. 숨겨진 루트에서 특별한 시나리오를 감상해보세요.</p>
+                    <h2>료</h2>
+                    <!-- <p><strong>"학생회장이 되면 모든 걸 지울 수 있어."</strong><br> -->
+                    주황색 긴 생머리로 과거를 숨긴 채 살아가는 소녀. 부정 입학과 흡연 사실이 폭로될 위기에 처하자, 권력을 쥐어 모든 것을 덮기 위해 수단과 방법을 가리지 않고 학생회장 자리를 노린다.</p>
                 </div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="media">
-                <img src="pj26_06.webp" alt="다운로드">
-                <div class="text">
-                    <h2>발매일</h2>
-                    <p>Android 발매일 : 2025년 2월 24일</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <nav class="bottom-tabbar">
         <a href="../index.html" class="tab-button home">홈</a>
@@ -118,7 +189,6 @@
     </div>
 
     <script src="project.js"></script>
-    <script src="project26.js"></script>
 </div>
 </body>
 </html>
