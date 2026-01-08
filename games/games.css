@@ -34,11 +34,3 @@
         box-shadow: 0 0 12px rgba(51, 177, 232, 0.6);
     }
 }
-
-/* 헤더 로고 살짝 띄우기 (선택사항) */
-.logo {
-    transition: transform 0.3s ease;
-}
-.logo:hover {
-    transform: translateY(-5px);
-}

@@ -1,140 +1,107 @@
-// 준비중 오버레이 토스트 및 정렬 기능
 document.addEventListener('DOMContentLoaded', function () {
-    var overlay = document.getElementById('overlay-toast');
-    var toastTimer = null;
+    const listRoot = document.querySelector('.link-group');
+    const overlay = document.getElementById('overlay-toast');
+    let toastTimer = null;
 
-    function showToast(title) {
-        if (!overlay) { alert(title + '\n준비중입니다.'); return; }
-        var titleEl = overlay.querySelector('.toast-title');
-        if (titleEl) titleEl.textContent = '준비중입니다.';
+    // 1. 토스트 알림 함수
+    function showToast() {
+        if (!overlay) return;
         overlay.classList.add('visible');
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(function () { overlay.classList.remove('visible'); }, 1500);
+        toastTimer = setTimeout(() => overlay.classList.remove('visible'), 1500);
     }
 
+    // 토스트 닫기 클릭 이벤트
     if (overlay) {
-        overlay.addEventListener('click', function () {
+        overlay.addEventListener('click', () => {
             overlay.classList.remove('visible');
             clearTimeout(toastTimer);
         });
     }
 
-    // 준비중 항목 클릭 핸들러
-    document.querySelectorAll('.coming-soon').forEach(function (el) {
-        el.addEventListener('click', function (e) {
+    // 2. [복구] 준비중 항목(.coming-soon) 클릭 시 토스트 표시
+    // 이 부분이 빠져서 토스트가 안 떴던 것입니다.
+    document.addEventListener('click', function(e) {
+        const soonEl = e.target.closest('.coming-soon');
+        if (soonEl) {
             e.preventDefault();
-            var title = el.getAttribute('data-title') || '해당 항목';
-            showToast(title);
-        });
+            showToast();
+        }
     });
 
-    var listRoot = document.querySelector('.link-group');
-
-    // [수정] 항목 정보 추출 시 NEW 뱃지 유무 확인 추가
+    // 3. 정보 추출 로직 (NEW 뱃지 및 숫자 파싱)
     function getInfo(el) {
-        var subEl = el.querySelector('.game-sub');
-        var titleEl = el.querySelector('.game-title');
+        const subText = el.querySelector('.game-sub')?.textContent.trim() || '';
+        const nameText = el.querySelector('.game-title')?.textContent.trim() || el.textContent.trim();
+        const isNew = el.querySelector('.new-badge') !== null;
         
-        // NEW 뱃지(<span class="new-badge">)가 있는지 체크
-        var isNew = el.querySelector('.new-badge') !== null; 
+        let num = parseInt(subText.match(/(\d+)/)?.[0], 10) || null;
+        if (num === null && /β|beta|베타/i.test(subText)) num = 8;
 
-        var sub = subEl ? subEl.textContent.trim() : '';
-        var name = titleEl ? titleEl.textContent.trim() : (el.textContent || '').trim();
-        var match = sub.match(/(\d+)/);
-        var num = match ? parseInt(match[1], 10) : null;
-
-        // 베타 버전 숫자 처리
-        if (num === null) {
-            var lower = sub.toLowerCase();
-            if (sub.indexOf('β') !== -1 || lower.indexOf('beta') !== -1 || lower.indexOf('베타') !== -1) {
-                num = 8;
-            }
-        }
-        return { el: el, sub: sub, name: name, num: num, isNew: isNew };
+        return { el, name: nameText, num, isNew };
     }
 
-    // [수정] 정렬 로직: NEW 우선 정렬 반영
+    // 4. 정렬 로직
     function sortList(mode) {
-        var items = Array.from(listRoot.querySelectorAll('.link-button'));
-        var infos = items.map(getInfo);
+        if (!listRoot) return;
+        const items = Array.from(listRoot.querySelectorAll('.link-button'));
+        const infos = items.map(getInfo);
 
-        infos.sort(function (a, b) {
-            // 1순위 정렬: NEW 뱃지가 있으면 최상단으로 (a가 NEW면 위로)
-            if (a.isNew && !b.isNew) return -1;
-            if (!a.isNew && b.isNew) return 1;
-
-            // 2순위 정렬: 선택된 모드에 따름
-            if (mode === 'project-desc' || mode === 'project-asc') {
-                var desc = mode === 'project-desc';
-                var aHas = a.num !== null;
-                var bHas = b.num !== null;
-                if (aHas && bHas) return desc ? b.num - a.num : a.num - b.num;
-                if (aHas && !bHas) return -1;
-                if (!aHas && bHas) return 1;
-                return a.name.localeCompare(b.name, 'ko');
-            } else if (mode === 'name-asc') {
-                return a.name.localeCompare(b.name, 'ko');
-            } else if (mode === 'name-desc') {
-                return b.name.localeCompare(a.name, 'ko');
+        infos.sort((a, b) => {
+            if (a.isNew !== b.isNew) return a.isNew ? -1 : 1;
+            if (mode.startsWith('project')) {
+                if (a.num !== b.num) return (a.num === null) ? 1 : (b.num === null) ? -1 : b.num - a.num;
             }
-            return 0;
+            return a.name.localeCompare(b.name, 'ko');
         });
 
-        // FLIP 애니메이션: 위치 기록 및 부드러운 이동
-        var firstRects = new Map();
-        items.forEach(function (el) { firstRects.set(el, el.getBoundingClientRect()); });
+        const rects = new Map();
+        items.forEach(el => rects.set(el, el.getBoundingClientRect()));
 
-        // DOM 재배치
-        infos.forEach(function (info) { listRoot.appendChild(info.el); });
+        infos.forEach(info => listRoot.appendChild(info.el));
 
-        infos.forEach(function (info) {
-            var el = info.el;
-            var first = firstRects.get(el);
-            var last = el.getBoundingClientRect();
-            var dx = first.left - last.left;
-            var dy = first.top - last.top;
-            if (dx || dy) {
+        infos.forEach(({ el }) => {
+            const first = rects.get(el);
+            const last = el.getBoundingClientRect();
+            const dy = first.top - last.top;
+            if (dy) {
                 el.style.transition = 'none';
-                el.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
-                el.getBoundingClientRect(); // 강제 리플로우
+                el.style.transform = `translateY(${dy}px)`;
+                el.getBoundingClientRect();
                 el.style.transition = 'transform 420ms cubic-bezier(.2,.8,.2,1)';
                 el.style.transform = '';
-                
-                (function(node){
-                    var handler = function(){
-                        node.style.transition = '';
-                        node.style.transform = '';
-                        node.removeEventListener('transitionend', handler);
-                    };
-                    node.addEventListener('transitionend', handler);
-                })(el);
             }
         });
     }
 
-    // 초기 정렬 실행
-    sortList('project-desc');
+    // 5. 하단 탭바 통합 제어 (모션 + 정렬)
+    const segGroups = document.querySelectorAll('.seg-group');
 
-    // 하단 탭바 정렬 버튼 인터랙션
-    var segButtons = document.querySelectorAll('.bottom-tabbar .seg-group button');
-    if (segButtons && segButtons.length) {
-        segButtons.forEach(function (btn) {
+    segGroups.forEach(group => {
+        const buttons = group.querySelectorAll('button');
+        
+        buttons.forEach((btn, index) => {
             btn.addEventListener('click', function () {
-                segButtons.forEach(function (b) { 
-                    b.classList.remove('active'); 
-                    b.setAttribute('aria-pressed', 'false'); 
-                });
+                // 디자인 처리
+                buttons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                if (index === 0) group.classList.remove('en-active');
+                else group.classList.add('en-active');
+
+                // 정렬 기능 실행
+                const tab = this.getAttribute('data-tab');
+                if (tab === 'latest') sortList('project-desc');
+                else if (tab === 'name') sortList('name-asc');
                 
-                btn.classList.add('active'); 
-                btn.setAttribute('aria-pressed', 'true');
-                
-                var t = btn.getAttribute('data-tab');
-                if (t === 'latest') { 
-                    sortList('project-desc'); 
-                } else if (t === 'name') { 
-                    sortList('name-asc'); 
+                // 언어 변경은 별도의 setLang 함수가 있다면 여기서 호출 가능
+                if (tab === 'ko' || tab === 'en') {
+                    if (typeof setLang === 'function') setLang(tab);
                 }
             });
         });
-    }
+    });
+
+    // 초기 정렬 실행
+    sortList('project-desc');
 });

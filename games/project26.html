@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="view-transition" content="same-origin" />
     <title>그x그녀의 계획은 훼방x훼방 - Team HC</title>
     <link rel="icon" href="../favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="project26.css">
-    <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
     <link rel="stylesheet" href="../tabbar.css">
+    <link rel="stylesheet" href="toast.css">
 </head>
 <body>
     <div class="wrap">
@@ -18,6 +19,17 @@
                 <div class="game-title">그X그녀의 계획은 훼방X훼방</div>
             </div>
         </header>
+
+        <div class="mid-notice">
+            <div class="notice-text">
+                <p>학생회장 선거는 다가오고, 미휘월은 혼란에 빠진다.</p>
+                <p>누군가는 상대를 끌어내리려 하고, 누군가는 그 손을 잡는다.</p>
+                <p class="split">그리고, 모든 것을 지켜보는 또 한 사람—</p>
+                
+                <p>진실을 밝혀낼 것인가, 아니면 같은 거짓 선동을 할 것인가?</p>
+                <p>선택은 당신에게 달렸다.</p>
+            </div>
+        </div>
 
         <div class="card">
             <div class="media">
@@ -51,7 +63,7 @@
 
         <div class="card">
             <div class="media">
-                <img src="pj26_03.png" alt="학교를 돌아다닌다">
+                <img src="pj26_04.png" alt="학교를 돌아다닌다">
                 <div class="text">
                     <h2>학교를 돌아다닌다</h2>
                     <p>학교를 돌아다니며, 어쩌다 얻게 된 <button onclick="openBadge()">선도부 뱃지</button>를 이용해서 야외로도 돌아다닙니다. 생각지도 못한 행동을 통해 숨겨진 결말을 발견하게 될지도 모릅니다.</p>
@@ -61,7 +73,7 @@
 
         <div class="card">
             <div class="media">
-                <img src="pj26_04.png" alt="호감도로 숨겨진 루트">
+                <img src="pj26_05.png" alt="호감도로 숨겨진 루트">
                 <div class="text">
                     <h2>호감도로 숨겨진 루트</h2>
                     <p>호감도를 상승 시키면 특별한 루트를 발견할 지도 모릅니다. 숨겨진 루트에서 특별한 시나리오를 감상해보세요.</p>
@@ -71,13 +83,10 @@
 
         <div class="card">
             <div class="media">
-                <img src="pj26_05.png" alt="다운로드">
+                <img src="pj26_06.png" alt="다운로드">
                 <div class="text">
-                    <h2>다운로드</h2>
-                    <p>발매일 2025년 2월 24일</p>
-                    <div class="download">
-                        <a class="btn" href="https://play.google.com/store/apps/details?id=com.teamhc.project26&hl=ko" target="_blank" rel="noopener">구글 플레이에서 다운로드</a>
-                    </div>
+                    <h2>발매일</h2>
+                    <p>Android 발매일 : 2025년 2월 24일</p>
                 </div>
             </div>
         </div>
@@ -85,7 +94,12 @@
 
     <nav class="bottom-tabbar">
         <a href="games.html" class="tab-button home">◀︎ 게임 목록으로</a>
+        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project26&hl=ko" class="tab-button download aos">다운로드</a>
     </nav>
+
+    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <img class="lightbox-content" id="fullImage">
+    </div>
 
     <div id="badge-toast" class="toast-overlay">
     <div class="toast-content">
@@ -96,6 +110,7 @@
         
         <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
     </div>
+    <script src="project.js"></script>
     <script src="project26.js"></script>
 </div>
 </body>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin" />
     <title>문의 - Team HC</title>
     <link rel="icon" href="favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -49,26 +50,11 @@
             <p>자바스크립트가 비활성화되어 있습니다. 이메일 주소: contact[at]teamhc[dot]net</p>
         </noscript>
     </div>
-    <script>
-        (function(){
-            var codes = [116,101,97,109,104,99,46,107,111,64,103,109,97,105,108,46,99,111,109];
-            var email = codes.map(function(c){ return String.fromCharCode(c); }).join('');
-            var el = document.getElementById('contact-email');
-            if(el){
-                var a = document.createElement('a');
-                a.href = 'mailto:' + email;
-                a.textContent = email;
-                a.rel = 'noopener noreferrer';
-                a.setAttribute('aria-label','이메일로 문의하기');
-                el.textContent = '';
-                el.appendChild(a);
-            }
-        })();
-    </script>
     <nav class="bottom-tabbar">
         <a href="index.html" class="tab-button home">
             <span style="margin-right:6px;">◀</span> 메인 페이지
         </a>
     </nav>
+    <script src="security.js"></script>
 </body>
 </html>

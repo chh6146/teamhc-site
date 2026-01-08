@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin" />
     <title>개인정보처리방침 - Team HC</title>
     <link rel="icon" href="favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
@@ -41,11 +42,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="lang-toggle" role="tablist" aria-label="언어 선택">
-            <button id="btn-ko" class="active" aria-controls="lang-ko" role="tab">한국어</button>
-            <button id="btn-en" aria-controls="lang-en" role="tab">English</button>
-        </div>
-
         <div id="lang-ko" class="lang-section active" role="region" aria-labelledby="btn-ko">
             <h1>개인정보처리방침</h1>
             <p>본 개인정보처리방침은 Team HC가 모바일 기기용으로 제작한 Team HC 앱(이하 "앱")에 적용되며, Team HC(이하 "서비스 제공자")가 무료로 제공하는 서비스입니다. 본 서비스는 "있는 그대로" 사용되도록 제공됩니다.</p>
@@ -76,7 +72,7 @@
         </div>
 
         <div id="lang-en" class="lang-section" role="region" aria-labelledby="btn-en">
-            <h1>Privacy Policy (English)</h1>
+            <h1>Privacy Policy</h1>
             <p>This privacy policy applies to the Team HC app (hereby referred to as "Application") for mobile devices that was created by Team HC (hereby referred to as "Service Provider") as a Free service. This service is intended for use "AS IS".</p>
 
             <h3>What information does the Application obtain and how is it used?</h3>
@@ -109,49 +105,13 @@
     </div>
 
     <nav class="bottom-tabbar">
-        <a href="index.html" class="tab-button home">
-            <span style="margin-right:6px;">◀</span> 메인 페이지
-        </a>
+        <a class="tab-button home" data-tab="home" href="../index.html">◀︎ 메인 페이지</a>
+        <div class="seg-group" role="tablist" aria-label="언어 선택">
+            <button id="btn-ko" class="active" role="tab">한국어</button>
+            <button id="btn-en" role="tab">English</button>
+    </div>
     </nav>
 </body>
-    <script>
-        (function(){
-            // 이메일을 문자 코드 배열로 보관 (bots로부터 직접 노출 방지)
-            var codes = [116,101,97,109,104,99,46,107,111,64,103,109,97,105,108,46,99,111,109];
-            var email = codes.map(function(c){ return String.fromCharCode(c); }).join('');
-            var anchors = ['privacy-email','privacy-email-en','privacy-email-2','contact-email'];
-            anchors.forEach(function(id){
-                var el = document.getElementById(id);
-                if(!el) return;
-                var a = document.createElement('a');
-                a.href = 'mailto:' + email;
-                a.textContent = email;
-                a.rel = 'noopener noreferrer';
-                a.setAttribute('aria-label','이메일로 문의하기');
-                el.textContent = '';
-                el.appendChild(a);
-            });
-
-            // 언어 토글 동작: 버튼 클릭 시 섹션 전환 및 선택 저장
-            function setLang(lang){
-                document.getElementById('lang-ko').classList.toggle('active', lang === 'ko');
-                document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-                document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
-                document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-                try{ localStorage.setItem('site-lang', lang); }catch(e){}
-            }
-
-            var btnKo = document.getElementById('btn-ko');
-            var btnEn = document.getElementById('btn-en');
-            if(btnKo && btnEn){
-                btnKo.addEventListener('click', function(){ setLang('ko'); });
-                btnEn.addEventListener('click', function(){ setLang('en'); });
-                // 초기 로드 시 저장된 값 불러오기
-                try{
-                    var saved = localStorage.getItem('site-lang');
-                    if(saved === 'en') setLang('en'); else setLang('ko');
-                }catch(e){ setLang('ko'); }
-            }
-        })();
-    </script>
+    <script src="tabbar.js"></script>
+    <script src="security.js"></script>
 </html>

@@ -1,0 +1,72 @@
+/**
+ * 이미지 라이트박스 및 UI 컨트롤러
+ */
+
+// 1. 라이트박스 열기/닫기 로직 (객체로 묶어 관리)
+const Lightbox = {
+    overlay: null,
+    content: null,
+
+    init() {
+        this.overlay = document.getElementById("imageLightbox");
+        this.content = document.getElementById("fullImage");
+
+        if (!this.overlay || !this.content) return;
+
+        // [수정] 배경, 이미지, X버튼 등 '오버레이 영역 내 어디든' 클릭하면 닫기
+        this.overlay.addEventListener("click", () => {
+            this.close();
+        });
+
+        // [추가] 이미지 자체를 클릭했을 때 닫기가 발생하는 것을 방지하고 싶다면 아래 주석을 해제하세요.
+        // 하지만 "어딜 터치하건" 닫히길 원하시니 위 코드로 충분합니다.
+
+        // ESC 키 누르면 닫기
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") this.close();
+        });
+    },
+
+    open(src) {
+        if (!this.overlay || !this.content) return;
+        
+        // 이미지 로딩 전 이전 이미지 잔상 제거
+        this.content.style.opacity = "0";
+        this.content.src = src;
+        
+        // 이미지가 로드된 후 자연스럽게 보여주기
+        this.content.onload = () => {
+            this.content.style.opacity = "1";
+        };
+
+        this.overlay.style.display = "block";
+        document.body.style.overflow = "hidden";
+    },
+
+    close() {
+        if (!this.overlay) return;
+        this.overlay.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+};
+
+// 2. 실행부
+document.addEventListener("DOMContentLoaded", () => {
+    // 라이트박스 설정 초기화
+    Lightbox.init();
+
+    // 이미지 대상 수집 및 이벤트 바인딩
+    const selectors = '.card .media img, .link-button img, .icon-img';
+    const images = document.querySelectorAll(selectors);
+    
+    images.forEach(img => {
+        // 스타일은 CSS에서 처리하는 것이 좋으나, JS에서도 확인 차 추가
+        img.style.cursor = 'zoom-in';
+        
+        img.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            Lightbox.open(img.src);
+        });
+    });
+});
