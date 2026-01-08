@@ -66,7 +66,9 @@
                 <img src="pj26_04.webp" alt="학교를 돌아다닌다">
                 <div class="text">
                     <h2>학교를 돌아다닌다</h2>
-                    <p>학교를 돌아다니며, 어쩌다 얻게 된 <button onclick="openBadge()">선도부 뱃지</button>를 이용해서 야외로도 돌아다닙니다. 생각지도 못한 행동을 통해 숨겨진 결말을 발견하게 될지도 모릅니다.</p>
+                    <p>학교를 돌아다니며, 어쩌다 얻게 된
+                        <button class="item-btn" onclick="openItem('선도부 뱃지', '선도부 활동에 참여한 사람에게 주어지는 특별한 뱃지. 이 뱃지를 소지하면 점심시간에 학교를 나가는 것도 가능하다. 학교 밖으로 나가고 싶을 때 유용하다.', 'pj26_badge.webp')">선도부 뱃지</button>
+                        를 이용해서 야외로도 돌아다닙니다. 생각지도 못한 행동을 통해 숨겨진 결말을 발견하게 될지도 모릅니다.</p>
                 </div>
             </div>
         </div>
@@ -102,14 +104,19 @@
     </div>
 
     <div id="badge-toast" class="toast-overlay">
-    <div class="toast-content">
-        <img src="pj26_badge.webp" alt="선도부 뱃지" class="badge-img">
-        
-        <h3 class="badge-title">선도부 뱃지</h3>
-        <p class="badge-desc">선도부 활동에 참여한 사람에게 주어지는 특별한 뱃지. 이 뱃지를 소지하면 점심시간에 학교를 나가는 것도 가능하다. 학교 밖으로 나가고 싶을 때 유용하다.</p>
-        
-        <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
+        <div class="toast-content">
+            <div class="badge-body">
+                <img src="" alt="아이템" class="badge-img">
+                <div class="badge-info">
+                    <h3 class="badge-title">제목</h3>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
+                </div>
+            </div>
+            
+            <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
+        </div>
     </div>
+
     <script src="project.js"></script>
     <script src="project26.js"></script>
 </div>

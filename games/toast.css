@@ -9,7 +9,7 @@
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    z-index: 3000; /* 탭바보다 높게 설정 */
+    z-index: 3000;
     transition: opacity 200ms linear;
 }
 
@@ -23,7 +23,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35); /* 중간 정도의 어두움 */
+    background: rgba(0, 0, 0, 0.35);
     -webkit-backdrop-filter: blur(0px);
     backdrop-filter: blur(0px);
     transition: backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
@@ -38,115 +38,59 @@
 .toast-content {
     position: relative;
     background: #ffffff;
-    width: min(320px, 85%);
-    padding: 30px 24px;
+    width: min(350px, 90%); /* 가로 정렬을 위해 너비를 살짝 여유 있게 조절 */
+    padding: 24px;
     border-radius: 28px;
-    text-align: center;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     
-    /* 시작 위치: 살짝 아래에서 대기 */
     transform: translateY(20px); 
     opacity: 0;
-
-    /* 배경이 먼저 흐려진 후 0.1초 뒤에 쓱 나타남 */
-    /* 탄력 있는 애니메이션(cubic-bezier) 적용 */
     transition: transform 400ms cubic-bezier(0.18, 0.89, 0.32, 1.15) 100ms, 
                 opacity 250ms ease 100ms;
 }
 
-/* 활성화 시 위치 */
 .toast-overlay.visible .toast-content {
     transform: translateY(0);
     opacity: 1;
 }
 
-/* 4. 내부 요소들 (공통) */
-.badge-img { width: 100px; height: 100px; margin-bottom: 16px; object-fit: contain; }
-.badge-title { font-size: 1.25rem; font-weight: 800; margin: 0 0 8px; color: #1e293b; }
-.badge-desc { font-size: 0.95rem; color: #64748b; margin-bottom: 24px; line-height: 1.5; }
-
-.badge-close-btn {
-    width: 100%;
-    padding: 14px;
-    border: 0;
-    background: #f1f5f9;
-    color: #0f172a;
-    font-weight: 700;
-    font-size: 1rem;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.badge-close-btn:hover {
-    background: #e2e8f0;
-}/* toast.css */
-
-/* 1. 전체 배경 레이어 */
-.toast-overlay {
-    position: fixed;
-    inset: 0;
+/* 4. 가로 정렬 레이아웃 (추가됨) */
+.badge-body {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 3000; /* 탭바보다 높게 설정 */
-    transition: opacity 200ms linear;
+    align-items: center;  
+    gap: 20px;           /* 간격을 조금 더 넓힘 */
+    margin-bottom: 24px; /* 아래 버튼과의 간격 확보 */
+    text-align: left;    
 }
 
-.toast-overlay.visible {
-    opacity: 1;
-    pointer-events: auto;
+.badge-img { 
+    width: 80px; 
+    height: 80px; 
+    object-fit: contain; 
+    flex-shrink: 0;      /* 이미지 형태 유지 */
 }
 
-/* 2. 배경 블러 효과 */
-.toast-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35); /* 중간 정도의 어두움 */
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
-    transition: backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
+.badge-info {
+    flex: 1;             /* 남은 공간을 텍스트가 채움 */
 }
 
-.toast-overlay.visible::before {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+.badge-title { 
+    font-size: 1.2rem;   /* 크기를 살짝 키움 */
+    font-weight: 800; 
+    margin: 0 0 6px;    /* 설명과의 간격 확보 */
+    color: #1e293b; 
+    letter-spacing: -0.02em; /* 한글 가독성을 위해 자간을 살짝 좁힘 */
 }
 
-/* 3. 토스트 내용물 */
-.toast-content {
-    position: relative;
-    background: #ffffff;
-    width: min(320px, 85%);
-    padding: 30px 24px;
-    border-radius: 28px;
-    text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    
-    /* 시작 위치: 살짝 아래에서 대기 */
-    transform: translateY(20px); 
-    opacity: 0;
-
-    /* 배경이 먼저 흐려진 후 0.1초 뒤에 쓱 나타남 */
-    /* 탄력 있는 애니메이션(cubic-bezier) 적용 */
-    transition: transform 400ms cubic-bezier(0.18, 0.89, 0.32, 1.15) 100ms, 
-                opacity 250ms ease 100ms;
+.badge-desc { 
+    font-size: 0.92rem;  /* 너무 작지 않게 조정 */
+    color: #475569;      /* 대비를 높여 더 잘 읽히도록 색상 변경 (#64748b -> #475569) */
+    line-height: 1.6;    /* 줄 간격을 넓혀서 눈이 편하게 함 */
+    margin: 0;
+    word-break: keep-all; /* 단어 단위로 줄바꿈되어 가독성 상승 */
 }
 
-/* 활성화 시 위치 */
-.toast-overlay.visible .toast-content {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* 4. 내부 요소들 (공통) */
-.badge-img { width: 100px; height: 100px; margin-bottom: 16px; object-fit: contain; }
-.badge-title { font-size: 1.25rem; font-weight: 800; margin: 0 0 8px; color: #1e293b; }
-.badge-desc { font-size: 0.95rem; color: #64748b; margin-bottom: 24px; line-height: 1.5; }
-
+/* 5. 닫기 버튼 */
 .badge-close-btn {
     width: 100%;
     padding: 14px;
@@ -157,9 +101,13 @@
     font-size: 1rem;
     border-radius: 16px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
 }
 
 .badge-close-btn:hover {
     background: #e2e8f0;
+}
+
+.badge-close-btn:active {
+    transform: scale(0.98); /* 누를 때 효과 추가 */
 }
