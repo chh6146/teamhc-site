@@ -166,3 +166,23 @@ function showTab(tabId, index) {
     // 슬라이더 이동 (자기 자신의 너비 100% 만큼 옆으로 이동)
     slider.style.transform = `translateX(${index * 100}%)`;
 }
+
+// 기기 감지 (모바일 여부 확인 포함)
+document.addEventListener("DOMContentLoaded", function() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    
+    const isIos = /iphone|ipad|ipod/.test(userAgent);
+    const isAndroid = /android/.test(userAgent);
+    const isMobile = isIos || isAndroid;
+
+    // 모바일 기기일 때만 필터링 실행 (데스크탑은 통과)
+    if (isMobile) {
+        if (isIos) {
+            // iOS 사용자에겐 안드로이드(aos) 링크 숨김
+            document.querySelectorAll('.tab-button.aos').forEach(el => el.style.display = 'none');
+        } else if (isAndroid) {
+            // 안드로이드 사용자에겐 iOS 링크 숨김
+            document.querySelectorAll('.tab-button.ios').forEach(el => el.style.display = 'none');
+        }
+    }
+});
