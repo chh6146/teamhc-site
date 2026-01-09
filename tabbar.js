@@ -1,26 +1,54 @@
-// tabbar.js
 (function() {
-    // 캡처링(true)을 사용하여 games.js보다 먼저 실행되게 함
+    // 1. 초기 실행: 저장된 언어 또는 시스템 언어에 맞춰 UI 설정
+    document.addEventListener("DOMContentLoaded", () => {
+        // 개인정보처리방침 페이지(container 안의 lang-section)가 있는지 확인
+        if (!document.querySelector('.lang-section')) return;
+
+        const savedLang = localStorage.getItem('preferred-language');
+        const systemLang = navigator.language.startsWith('ko') ? 'ko' : 'en';
+        const targetLang = savedLang || systemLang;
+
+        const group = document.querySelector('.seg-group');
+        const btnKo = document.getElementById('btn-ko');
+        const btnEn = document.getElementById('btn-en');
+
+        // 초기 언어 적용
+        updateLanguageUI(targetLang === 'ko' ? btnKo : btnEn);
+    });
+
+    // 2. 클릭 이벤트 처리 (캡처링 유지)
     document.addEventListener("click", function (e) {
-        // 1. 클릭된 게 .seg-group 안의 버튼인지 확인
         const btn = e.target.closest('.seg-group button');
         if (!btn) return;
 
+        updateLanguageUI(btn);
+    }, true);
+
+    // 3. UI 및 언어 섹션 업데이트 공통 함수
+    function updateLanguageUI(btn) {
         const group = btn.closest('.seg-group');
         const buttons = Array.from(group.querySelectorAll('button'));
         const index = buttons.indexOf(btn);
+        const isEn = index !== 0;
 
-        // 2. 흰 박스 이동 클래스 처리 (부모인 .seg-group에 부여)
-        if (index === 0) {
+        // 시각적 요소 업데이트 (기존 로직)
+        if (!isEn) {
             group.classList.remove('en-active');
         } else {
             group.classList.add('en-active');
         }
-
-        // 3. 글자색 변경 (active 클래스)
         buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+
+        // 개인정보처리방침 전용: 섹션 전환 및 언어 저장
+        const langKo = document.getElementById('lang-ko');
+        const langEn = document.getElementById('lang-en');
         
-        // 주의: 정렬 기능(sortList)은 games.js가 알아서 처리하도록 둡니다.
-    }, true); 
+        if (langKo && langEn) {
+            const selectedLang = isEn ? 'en' : 'ko';
+            langKo.classList.toggle('active', !isEn);
+            langEn.classList.toggle('active', isEn);
+            localStorage.setItem('preferred-language', selectedLang);
+        }
+    }
 })();
