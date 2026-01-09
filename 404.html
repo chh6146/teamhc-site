@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지를 찾을 수 없습니다 - TeamHC</title>
+    <meta http-equiv="refresh" content="5;url=https://teamhc.net/">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 제공해주신 styles.css의 변수 반영 */
+        :root {
+            --primary-color: #33b1e8;
+            --hover-bg: #e6f9ff;
+            --text-main: #1f2937;
+            --text-sub: #4b5563;
+            --border-light: #e5e7eb;
+            --bg-gradient: linear-gradient(135deg, #e6f9ff 0%, #f7fdff 100%);
+            --transition-standard: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 480px;
+            padding: 60px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+        }
+
+        .error-code {
+            font-size: 5rem;
+            font-weight: 800;
+            margin: 0;
+            line-height: 1;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .content-box {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            margin: 0 0 16px 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .description {
+            margin-bottom: 40px;
+            color: var(--text-sub);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .timer-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--hover-bg);
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        /* 공통 버튼 스타일 반영 */
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto;
+            padding: 14px 18px;
+            background-color: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            transition: var(--transition-standard);
+        }
+
+        .link-button:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 8px 15px rgba(51, 177, 232, 0.2);
+        }
+
+        .footer {
+            margin-top: 32px;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        #seconds {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="error-code">404</div>
+        
+        <div class="content-box">
+            <h1>길을 잃으셨나요?</h1>
+            <p class="description">
+                요청하신 페이지가 존재하지 않거나,<br>
+                다른 주소로 이동되었을 수 있습니다.
+            </p>
+
+            <div class="timer-badge">
+                <span id="seconds">5</span>초 후 메인으로 돌아갑니다
+            </div>
+
+            <a href="https://teamhc.net/" class="link-button">
+                지금 메인으로 이동하기
+            </a>
+
+            <div class="footer">
+                &copy; Team HC. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 5;
+        const timerElement = document.getElementById('seconds');
+        
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+            }
+            timerElement.textContent = timeLeft;
+        }, 1000);
+    </script>
+</body>
+</html>
