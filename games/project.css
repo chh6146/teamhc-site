@@ -356,6 +356,7 @@ img.responsive {
     flex: 0 0 150px;    /* 크기가 줄어들지 않게 고정 */
     object-fit: cover;  /* 이미지가 잘리지 않고 꽉 차게 */
     border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 #characters p strong {
