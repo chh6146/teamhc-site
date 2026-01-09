@@ -1,36 +1,65 @@
-/* NEW 뱃지 스타일 */
-.new-badge {
+/* [공통] 뱃지 기본 구조 */
+.badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    
-    /* [수정] margin-left로 글자와의 간격 확보, padding 12px로 좌우 여백 넉넉히 */
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 2px 12px; 
-    
-    background: linear-gradient(135deg, #33b1e8, #1d9bd4);
+    margin: 0 10px;
+    padding: 2px 12px;
     color: #ffffff;
     font-size: 0.7rem;
     font-weight: 900;
-    border-radius: 8px; /* 여백에 맞춰 라운드도 살짝 조절 */
+    border-radius: 8px;
     vertical-align: middle;
-    box-shadow: 0 4px 10px rgba(51, 177, 232, 0.3);
-    
-    /* 애니메이션은 유지 */
-    animation: badge-glow 1.5s infinite alternate;
-    white-space: nowrap; /* 글자 줄바꿈 방지 */
+    white-space: nowrap;
+    transition: transform 0.3s ease; /* 기본 호버 효과용 */
 }
 
-/* 뱃지 반짝임 효과 */
-@keyframes badge-glow {
-    from { 
-        transform: scale(1); 
-        filter: brightness(1);
-    }
+/* [Blue] NEW 뱃지 */
+.badge.new {
+    background: linear-gradient(135deg, #33b1e8, #1d9bd4);
+    box-shadow: 0 4px 10px rgba(51, 177, 232, 0.3);
+    animation: badge-glow-blue 1.5s infinite alternate;
+}
+
+/* [Red] 개발 중 뱃지 */
+.badge.dev {
+    background: linear-gradient(135deg, #e83333, #d41d1d);
+    box-shadow: 0 4px 10px rgba(232, 51, 51, 0.3);
+    animation: badge-glow-red 1.5s infinite alternate;
+}
+
+.badge.rework {
+    background: linear-gradient(135deg, #a855f7, #7c3aed); /* 보라색 그라데이션 */
+    box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3);
+    animation: badge-glow-purple 1.5s infinite alternate;
+}
+
+/* 블루 애니메이션 */
+@keyframes badge-glow-blue {
+    from { transform: scale(1); filter: brightness(1); }
     to { 
-        transform: scale(1.08); 
-        filter: brightness(1.2);
+        transform: scale(1.05); 
+        filter: brightness(1.15);
         box-shadow: 0 0 12px rgba(51, 177, 232, 0.6);
+    }
+}
+
+/* 레드 애니메이션 */
+@keyframes badge-glow-red {
+    from { transform: scale(1); filter: brightness(1); }
+    to { 
+        transform: scale(1.05); 
+        filter: brightness(1.15);
+        box-shadow: 0 0 12px rgba(232, 51, 51, 0.6);
+    }
+}
+
+/* 퍼플 애니메이션 */
+@keyframes badge-glow-purple {
+    from { transform: scale(1); filter: brightness(1); }
+    to { 
+        transform: scale(1.05); 
+        filter: brightness(1.15);
+        box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
     }
 }

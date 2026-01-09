@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function getInfo(el) {
         const subText = el.querySelector('.game-sub')?.textContent.trim() || '';
         const nameText = el.querySelector('.game-title')?.textContent.trim() || el.textContent.trim();
-        const isNew = el.querySelector('.new-badge') !== null;
+        const isNew = el.querySelector('.badge.new') !== null;
         
         let num = parseInt(subText.match(/(\d+)/)?.[0], 10) || null;
         if (num === null && /β|beta|베타/i.test(subText)) num = 8;
