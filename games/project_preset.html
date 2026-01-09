@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="view-transition" content="same-origin" />
+    <title>프로젝트 제목 입력 - Team HC</title>
+    <link rel="icon" href="../favicon.webp" type="image/x-icon">
+    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="../tabbar.css">
+    <link rel="stylesheet" href="toast.css">
+    <style>
+    :root {
+        --accent: #012340; 
+    }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <img src="title_pj0.webp" alt="Project 0 타이틀" class="logo">
+            <div class="title-block">
+                <div class="game-sub">Project 0</div>
+                <div class="game-title">새로운 프로젝트 제목</div>
+            </div>
+        </header>
+
+        <nav class="tab-container">
+            <div class="tab-inner">
+                <div class="tab-slider"></div>
+                <button class="tab-item active" onclick="showTab('summary')">개요</button>
+                <button class="tab-item" onclick="showTab('manual')">게임 소개</button>
+                <!-- <button class="tab-item" onclick="showTab('characters')">캐릭터 소개</button> -->
+            </div>
+        </nav>
+
+        <section id="summary" class="tab-content active">
+            <div class="mid-notice" style="--bg-image: url('pj0_background.webp');">
+                <div class="notice-text">
+                    <p>여기에 게임의 메인 캐치프레이즈나</p>
+                    <p>전체적인 분위기를 설명하는 문구를 입력하세요.</p>
+                    <p class="split">중요한 강조점은 이 클래스를 사용합니다.</p>
+                    <p>마지막 줄 설명을 입력하세요.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="manual" class="tab-content">
+            <div class="card">
+                <div class="media">
+                    <img src="pj0_info_01.webp" alt="특징 소개">
+                    <div class="text">
+                        <h2>시스템 특징 제목</h2>
+                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다. 
+                           아이템 팝업이 필요하면 버튼 태그를 활용하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="characters" class="tab-content">
+            <div class="card">
+                <div class="media">
+                    <img src="pj0_ch1.webp" alt="캐릭터 이름">
+                    <div class="text">
+                        <h2>캐릭터 이름</h2>
+                        <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="bottom-tabbar">
+            <a href="../index.html" class="tab-button home">홈</a>
+            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project0" class="tab-button download aos">다운로드</a>
+        </nav>
+    </div>
+
+    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <img class="lightbox-content" id="fullImage">
+    </div>
+
+    <div id="badge-toast" class="toast-overlay">
+        <div class="toast-content">
+            <div class="badge-body">
+                <img src="" alt="아이템" class="badge-img">
+                <div class="badge-info">
+                    <h3 class="badge-title">제목</h3>
+                    <p class="badge-desc">설명 내용</p>
+                </div>
+            </div>
+            <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
+        </div>
+    </div>
+
+    <script src="project.js"></script>
+</body>
+</html>

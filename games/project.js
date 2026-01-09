@@ -140,3 +140,29 @@ window.addEventListener('click', (e) => {
         
     }, true);
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const tabInner = document.querySelector('.tab-inner');
+    const buttons = document.querySelectorAll('.tab-item');
+    
+    if (tabInner && buttons.length > 0) {
+        // [자동화 핵심] 버튼 개수를 세어서 CSS 변수(--tab-count)로 주입
+        tabInner.style.setProperty('--tab-count', buttons.length);
+    }
+});
+
+function showTab(tabId, index) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-item');
+    const slider = document.querySelector('.tab-slider');
+
+    // 활성화 상태 변경
+    tabs.forEach(tab => tab.classList.remove('active'));
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    document.getElementById(tabId).classList.add('active');
+    buttons[index].classList.add('active');
+
+    // 슬라이더 이동 (자기 자신의 너비 100% 만큼 옆으로 이동)
+    slider.style.transform = `translateX(${index * 100}%)`;
+}

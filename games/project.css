@@ -69,13 +69,12 @@ header {
    ========================================================================== */
    
 .mid-notice {
-    /* 1. 배경 설정: 글자가 잘 보이도록 어두운 오버레이 추가 */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("pj26_background.webp");
+    /* 변수 처리: 기본값으로 검은색 배경이나 기본 이미지를 설정할 수 있습니다 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), var(--bg-image);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     
-    /* 2. 레이아웃: 높이를 고정하지 않고 패딩으로 웅장함 조절 */
     padding: 60px 40px;
     display: flex;
     flex-direction: column;
@@ -83,7 +82,7 @@ header {
     align-items: center;
     
     border-radius: 15px;
-    color: #ffffff;      /* 글자색 흰색 */
+    color: #ffffff;
     text-align: center;
     overflow: hidden;
 }
@@ -155,9 +154,11 @@ img.responsive {
 
 .media img {
     width: 50%;
-    height: auto;
+    max-height: 300px;    /* 이미지 세로 길이를 300px로 고정 */
+    object-fit: cover;    /* 가로세로 비율을 유지하면서 영역을 가득 채움 (중요) */
+    object-position: center; /* 이미지의 중앙을 기준으로 보여줌 */
     border-radius: 8px;
-    flex: 0 0 180px;
+    flex: 0 0 50%;
 }
 
 .media .text {
@@ -301,7 +302,7 @@ img.responsive {
     position: absolute;
     top: 4px;
     left: 4px;
-    width: calc(33.333% - 4px); /* 버튼 3개 기준 */
+    width: calc(100% / var(--tab-count, 3) - 4px); 
     height: calc(100% - 8px);
     background: #ffffff;
     border-radius: 16px;

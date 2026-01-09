@@ -1,4 +1,6 @@
-/* 1. 디자인 변수 설정 */
+/* ==========================================
+   1. 디자인 변수 & 기본 설정 (Root & Base)
+   ========================================== */
 :root {
     --primary-color: #33b1e8;
     --hover-bg: #e6f9ff;
@@ -9,7 +11,6 @@
     --transition-standard: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. 문서 전체 기본 설정 */
 body {
     margin: 0;
     font-family: 'Noto Sans KR', sans-serif;
@@ -21,7 +22,7 @@ body {
     color: var(--text-main);
 }
 
-/* 3. 메인 레이아웃 (Container) */
+/* 메인 컨테이너 박스 */
 .container {
     width: 90%;
     max-width: 480px;
@@ -32,6 +33,9 @@ body {
     text-align: center;
 }
 
+/* ==========================================
+   2. 메인 페이지 전용 (Header & Labels)
+   ========================================== */
 h1 {
     margin: 0 0 8px 0;
     font-size: 1.8rem;
@@ -53,7 +57,20 @@ h1 {
     font-size: 0.95rem;
 }
 
-/* 4. 링크 및 버튼 스타일 (메인 리스트) */
+/* 프로젝트 하단 작은 라벨들 */
+.project-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 6px; }
+.project-label { 
+    padding: 6px 10px; 
+    background: transparent; 
+    color: var(--text-main); 
+    border-radius: 8px; 
+    border: 1px dashed rgba(0, 0, 0, 0.06); 
+    font-size: 0.85rem; 
+}
+
+/* ==========================================
+   3. 링크 버튼 공통 스타일 (Link Buttons)
+   ========================================== */
 .link-group {
     display: flex;
     flex-direction: column;
@@ -88,22 +105,18 @@ h1 {
     box-shadow: 0 4px 12px rgba(51, 177, 232, 0.12);
 }
 
-/* 버튼 내 텍스트 정렬 */
+/* 버튼 내 텍스트 정렬 (기본 span 사용 시) */
 .link-button span {
     display: inline-block;
     flex: 1 1 auto;
     text-align: right;
 }
 
-/* 5. 아이콘 및 이미지 스타일 */
-.link-button img,
-.link-button .icon-img {
-    width: 48px;
-    height: 48px;
-    margin-right: 12px;
-    padding: 4px;
-    flex-shrink: 0;
-    object-fit: cover;
+/* 버튼 내부 아이콘/이미지 스타일 */
+.link-button img, .link-button .icon-img {
+    width: 48px; height: 48px;
+    margin-right: 12px; padding: 4px;
+    flex-shrink: 0; object-fit: cover;
     background: #ffffff;
     border-radius: 12px;
     border: 2px solid rgba(51, 177, 232, 0.12);
@@ -111,136 +124,71 @@ h1 {
     transition: box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
 
-.link-button:hover img,
-.link-button:hover .icon-img {
+.link-button:hover img, .link-button:hover .icon-img {
     border-color: rgba(51, 177, 232, 0.28);
     box-shadow: 0 12px 30px rgba(51, 177, 232, 0.18);
     transform: translateY(-2px);
 }
 
-.link-button svg path, .link-button svg rect, .link-button svg circle {
-    fill: currentColor;
+/* [추가] 준비 중인 프로젝트 스타일 */
+.link-button.coming-soon {
+    pointer-events: none;   /* 클릭 완전 차단 */
+    cursor: default;
+    opacity: 0.6;           /* 흐릿하게 */
+    filter: grayscale(0.8); /* 흑백 처리 */
 }
 
-/* 6. 게임 페이지 전용 스타일 */
-.top-link { display: block; margin-bottom: 12px; text-align: left; }
-
-.home-button { 
-    display: inline-flex; 
-    align-items: center; 
-    gap: 8px; 
-    padding: 8px 10px; 
-    background: white; 
-    border: 1px solid var(--border-light);
-    border-radius: 12px; 
-    color: var(--text-main); 
-    text-decoration: none; 
-    font-weight: 600; 
-    transition: all .18s ease; 
-}
-
-.home-button:hover { 
-    color: var(--primary-color); 
-    background: var(--hover-bg); 
-    transform: translateY(-2px); 
-    border-color: var(--primary-color); 
-}
-
+/* 게임 리스트 내 2줄 텍스트 (서브제목/제목) */
 .game-info { flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
 .game-sub { font-size: 0.78rem; color: var(--text-sub); line-height: 1; }
 .game-title { font-size: 1rem; font-weight: 600; text-align: right; }
 
-/* 7. 프로젝트 라벨 리스트 */
-.project-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 6px; }
-.project-label { 
-    padding: 6px 10px; 
-    background: transparent; 
-    color: var(--text-main); 
-    border-radius: 8px; 
-    border: 1px dashed rgba(0, 0, 0, 0.06); 
-    font-size: 0.85rem; 
-}
-
-/* 8. 푸터 영역 */
-.footer {
-    margin-top: 24px;
-    font-size: 0.8rem;
-    color: #9ca3af;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 8px 0 6px;
-}
-
+/* ==========================================
+   5. 푸터 & 반응형 (Footer & Responsive)
+   ========================================== */
+.footer { margin-top: 24px; font-size: 0.8rem; color: #9ca3af; }
+.footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 8px 0 6px; }
 .footer-links a {
-    padding: 6px 10px;
-    color: var(--text-sub);
-    text-decoration: none;
-    font-size: 0.85rem;
-    border-radius: 8px;
-    transition: background-color 160ms ease, color 160ms ease;
+    padding: 6px 10px; color: var(--text-sub); text-decoration: none; font-size: 0.85rem;
+    border-radius: 8px; transition: background-color 160ms ease, color 160ms ease;
 }
+.footer-links a:hover { color: var(--primary-color); background: rgba(51, 177, 232, 0.06); }
 
-.footer-links a:hover {
-    color: var(--primary-color);
-    background: rgba(51, 177, 232, 0.06);
-}
-
-/* 9. 반응형 설정 */
 @media (max-width: 640px) {
     .container { padding: 24px 12px; }
 }
 
-/* 개발자 모드 토스트 알림 스타일 */
+/* ==========================================
+   6. 개발자 모드 & 시스템 알림 (Dev Mode & Toast)
+   ========================================== */
 .dev-toast {
-    visibility: hidden;
-    min-width: 250px;
-    background-color: rgba(51, 177, 232, 0.9); /* 테마색 활용 */
-    color: #fff;
-    text-align: center;
-    border-radius: 12px;
-    padding: 16px;
-    position: fixed;
-    z-index: 4000;
-    left: 50%;
-    bottom: 50px;
-    transform: translateX(-50%);
+    visibility: hidden; min-width: 250px;
+    background-color: rgba(51, 177, 232, 0.9);
+    color: #fff; text-align: center; border-radius: 12px;
+    padding: 16px; position: fixed; z-index: 4000;
+    left: 50%; bottom: 50px; transform: translateX(-50%);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
 
-/* 토스트가 나타날 때 애니메이션 */
 .dev-toast.show {
     visibility: visible;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@keyframes fadein {
-    from { bottom: 0; opacity: 0; }
-    to { bottom: 50px; opacity: 1; }
-}
+@keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 50px; opacity: 1; } }
+@keyframes fadeout { from { bottom: 50px; opacity: 1; } to { bottom: 0; opacity: 0; } }
 
-@keyframes fadeout {
-    from { bottom: 50px; opacity: 1; }
-    to { bottom: 0; opacity: 0; }
-}
-
-/* 처음에는 완전히 숨김 */
+/* 숨겨진 콘텐츠 (커맨드 입력 시 등장) */
 .hidden-mode {
-    display: none !important; /* 공간 자체를 차지하지 않음 */
+    display: none !important;
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.5s ease;
 }
 
-/* 개발자 모드 활성화 시 나타나는 스타일 */
 .hidden-mode.reveal {
-    display: flex !important; /* 다시 나타남 */
+    display: flex !important;
     opacity: 1;
     transform: translateY(0);
     animation: slideDown 0.5s ease forwards;
