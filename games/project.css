@@ -365,3 +365,31 @@ img.responsive {
     font-size: 0.95rem;
 }
 
+/* project.css 하단에 추가 또는 수정 */
+
+/* 1. 콘텐츠 전체가 부드럽게 나타나게 수정 */
+.tab-content.active {
+    display: block;
+    animation: slideUpFade 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. 내부 카드 이미지들에 시차 효과 주기 (선택 사항) */
+.tab-content.active img {
+    animation: imgFade 0.8s ease-out;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* 20px 아래에서 시작 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes imgFade {
+    from { opacity: 0; filter: blur(5px); }
+    to { opacity: 1; filter: blur(0); }
+}
