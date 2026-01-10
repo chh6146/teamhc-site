@@ -34,32 +34,38 @@
     animation: badge-glow-purple 1.5s infinite alternate;
 }
 
-/* 블루 애니메이션 */
+/* 블루 애니메이션 보정 */
 @keyframes badge-glow-blue {
     from { transform: scale(1); filter: brightness(1); }
     to { 
-        transform: scale(1.05); 
-        filter: brightness(1.15);
-        box-shadow: 0 0 12px rgba(51, 177, 232, 0.6);
+        transform: scale(1.03); /* 크기 변화도 살짝 줄여서 잘림 방지 */
+        filter: brightness(1.1);
+        /* 번짐(Blur)을 12px에서 6px로, 범위를 확 줄였습니다 */
+        box-shadow: 0 0 6px rgba(51, 177, 232, 0.5);
     }
 }
 
-/* 레드 애니메이션 */
+/* 레드 애니메이션 보정 */
 @keyframes badge-glow-red {
     from { transform: scale(1); filter: brightness(1); }
     to { 
-        transform: scale(1.05); 
-        filter: brightness(1.15);
-        box-shadow: 0 0 12px rgba(232, 51, 51, 0.6);
+        transform: scale(1.03); 
+        filter: brightness(1.1);
+        box-shadow: 0 0 6px rgba(232, 51, 51, 0.5);
     }
 }
 
-/* 퍼플 애니메이션 */
+/* 퍼플 애니메이션 보정 */
 @keyframes badge-glow-purple {
     from { transform: scale(1); filter: brightness(1); }
     to { 
-        transform: scale(1.05); 
-        filter: brightness(1.15);
-        box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        transform: scale(1.03); 
+        filter: brightness(1.1);
+        box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
     }
 }
+
+/* 초기 상태의 그림자도 너무 진하지 않게 살짝 조정 */
+.badge.new { box-shadow: 0 2px 5px rgba(51, 177, 232, 0.2); }
+.badge.dev { box-shadow: 0 2px 5px rgba(232, 51, 51, 0.2); }
+.badge.rework { box-shadow: 0 2px 5px rgba(168, 85, 247, 0.2); }

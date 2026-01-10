@@ -162,6 +162,7 @@ h1 {
     font-size: 0.78rem; 
     color: var(--text-sub); 
     line-height: 1; 
+    padding: 3px 0;
     
     /* 뱃지와 글자가 함께 움직이도록 트랜지션 부여 */
     transition: opacity 0.75s ease-in-out, transform 0.75s ease-in-out;
@@ -178,6 +179,7 @@ h1 {
 .badge {
     margin: 0 0 0 8px; /* 오른쪽(텍스트)과의 간격만 유지 */
     order: -1; /* 뱃지가 항상 텍스트 왼쪽에 오도록 설정 */
+    will-change: transform, box-shadow;
 }
 
 /* ==========================================
