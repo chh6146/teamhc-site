@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createItems(data) {
         listRoot.innerHTML = '';
         data.forEach(game => {
+            if (game.status === 'hidden') return;
             const a = document.createElement('a');
             a.className = 'link-button';
             a.dataset.id = Number(game.id);
