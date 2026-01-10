@@ -148,27 +148,42 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('tabchange', e => {
         const tab = e.detail.tab;
         
-        // 정렬 실행
+        // 1. 리스트 정렬 실행
         if (tab === 'latest') sortList('latest-desc');
         if (tab === 'name') sortList('name-asc');
-        if (tab === 'project') sortList('project-desc'); // 프로젝트순 대응
+        if (tab === 'project') sortList('project-desc');
 
-        // 서브 텍스트 즉시 갱신
-        Array.from(listRoot.children).forEach(a => {
+        const items = Array.from(listRoot.children);
+        items.forEach(a => {
             const subArea = a.querySelector('.game-sub');
-            if (!subArea || !a.dataset.date) return;
+            if (!subArea) return;
 
             const bHtml = a.dataset.badgeText ? `<span class="badge ${a.dataset.badgeClass}">${a.dataset.badgeText}</span>` : '';
             
-            // 최신순 탭일 때만 날짜를 먼저 보여줌 (선택 사항)
+            // 기존 타이머 무조건 정지
+            if (itemTimers.has(a)) {
+                clearInterval(itemTimers.get(a));
+                itemTimers.delete(a);
+            }
+
+            // 2. 탭별 고정 및 타이머 분기
             if (tab === 'latest') {
+                // [최신순] 날짜 고정
                 subArea.innerHTML = `${bHtml} ${formatDisplayDate(a.dataset.date)}`;
                 a.dataset.mode = "date";
-            } else {
+            } 
+            else if (tab === 'name') {
+                // [가나다순] 설명(sub) 고정
                 subArea.innerHTML = `${bHtml} ${a.dataset.sub}`;
                 a.dataset.mode = "sub";
+            } 
+            else if (tab === 'project') {
+                // [프로젝트순] 왔다갔다 (타이머 다시 시작)
+                // 초기 상태는 설명(sub)으로 설정 후 타이머 구동
+                subArea.innerHTML = `${bHtml} ${a.dataset.sub}`;
+                a.dataset.mode = "sub";
+                startItemTimer(a);
             }
-            startItemTimer(a);
         });
     });
 });
