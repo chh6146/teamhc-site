@@ -18,10 +18,10 @@
 <body>
     <div class="wrap">
         <header>
-            <img src="title_pj11.webp" alt="Project 11 타이틀" class="logo">
+            <img src="title_pj11.webp" alt="로딩 중..." class="logo" id="project-logo">
             <div class="title-block">
-                <div class="game-sub">Project 11</div>
-                <div class="game-title">미궁 ~LA MYSTIQUE~</div>
+                <div class="game-sub" id="header-sub">불러오는 중...</div>
+                <div class="game-title" id="header-title">불러오는 중...</div>
             </div>
         </header>
 
@@ -71,7 +71,7 @@
         </section>
 
         <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home">홈</a>
+            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
         </nav>
     </div>
 
@@ -92,6 +92,9 @@
         </div>
     </div>
 
+    <script>
+        const CURRENT_PROJECT_ID = 11; 
+    </script>
     <script src="project.js"></script>
 </body>
 </html>

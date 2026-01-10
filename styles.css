@@ -138,10 +138,34 @@ h1 {
     filter: grayscale(0.8); /* 흑백 처리 */
 }
 
-/* 게임 리스트 내 2줄 텍스트 (서브제목/제목) */
+/* 게임 리스트 내 2줄 텍스트 */
 .game-info { flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-.game-sub { font-size: 0.78rem; color: var(--text-sub); line-height: 1; }
-.game-title { font-size: 1rem; font-weight: 600; text-align: right; }
+
+/* 서브 영역 (뱃지 + 텍스트) 전체 스타일 */
+.game-sub { 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end; 
+    font-size: 0.78rem; 
+    color: var(--text-sub); 
+    line-height: 1; 
+    
+    /* 뱃지와 글자가 함께 움직이도록 트랜지션 부여 */
+    transition: opacity 0.75s ease-in-out, transform 0.75s ease-in-out;
+    opacity: 1;
+}
+
+/* 사라질 때 효과 (뱃지+글자 동시 적용) */
+.game-sub.fade-out {
+    opacity: 0;
+    transform: translateY(-5px); /* 위로 슥 사라짐 */
+}
+
+/* 뱃지 여백 미세 조정 */
+.badge {
+    margin: 0 0 0 8px; /* 오른쪽(텍스트)과의 간격만 유지 */
+    order: -1; /* 뱃지가 항상 텍스트 왼쪽에 오도록 설정 */
+}
 
 /* ==========================================
    5. 푸터 & 반응형 (Footer & Responsive)

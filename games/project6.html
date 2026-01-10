@@ -18,10 +18,10 @@
 <body>
     <div class="wrap">
         <header>
-            <img src="title_pj6.webp" alt="Project 6 타이틀" class="logo">
+            <img src="title_pj6.webp" alt="로딩 중..." class="logo" id="project-logo">
             <div class="title-block">
-                <div class="game-sub">Project 6</div>
-                <div class="game-title">저편 하늘을 향해</div>
+                <div class="game-sub" id="header-sub">불러오는 중...</div>
+                <div class="game-title" id="header-title">불러오는 중...</div>
             </div>
         </header>
 
@@ -91,9 +91,9 @@
         </section>
 
         <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home">홈</a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep0" class="tab-button download aos">에피소드 0</a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep1" class="tab-button download aos">에피소드 1</a>
+            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
+            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep0" class="tab-button download aos">프롤로그</a>
+            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep1" class="tab-button download aos">본편</a>
         </nav>
     </div>
 
@@ -114,6 +114,9 @@
         </div>
     </div>
 
+    <script>
+        const CURRENT_PROJECT_ID = 6; 
+    </script>
     <script src="project.js"></script>
 </body>
 </html>

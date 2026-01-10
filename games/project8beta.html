@@ -18,10 +18,10 @@
 <body>
     <div class="wrap">
         <header>
-            <img src="title_pj8beta.webp" alt="Project β 타이틀" class="logo">
+            <img src="title_pj8beta.webp" alt="로딩 중..." class="logo" id="project-logo">
             <div class="title-block">
-                <div class="game-sub">Project β</div>
-                <div class="game-title">너에게 말하는 비밀</div>
+                <div class="game-sub" id="header-sub">불러오는 중...</div>
+                <div class="game-title" id="header-title">불러오는 중...</div>
             </div>
         </header>
 
@@ -94,7 +94,7 @@
         </section>
 
         <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home">홈</a>
+            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
             <a href="https://play.google.com/store/apps/details?id=com.teamhc.projectbep1" class="tab-button download aos">상편</a>
             <a href="https://play.google.com/store/apps/details?id=com.teamhc.projectbep2" class="tab-button download aos">하편</a>
         </nav>
@@ -117,6 +117,9 @@
         </div>
     </div>
 
+    <script>
+        const CURRENT_PROJECT_ID = 8.5; 
+    </script>
     <script src="project.js"></script>
 </body>
 </html>

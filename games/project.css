@@ -322,6 +322,7 @@ img.responsive {
     padding: 12px 0;
     border: none;
     background: transparent;
+    font-size: 0.9rem;
     color: #64748b;
     font-weight: 700;
     cursor: pointer;

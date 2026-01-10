@@ -5,229 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="view-transition" content="same-origin" />
     <title>기록된 이야기 목록 - Team HC</title>
+
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- 공통 스타일 -->
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
+
+    <!-- 페이지 전용 -->
     <link rel="stylesheet" href="toast.css">
     <link rel="stylesheet" href="games.css">
-    </head>
-    <body>
-        <div class="container">
-            
+</head>
 
-            <h1>기록된 이야기 목록</h1>
-            <p class="description">Team HC에서 발매한 게임의 목록입니다. <br>게임을 선택하면 상세 페이지로 이동합니다.</p>
+<body>
+    <div class="container">
+        <h1>기록된 이야기 목록</h1>
+        <p class="description">
+            Team HC에서 발매한 게임의 목록입니다.<br>
+            게임을 선택하면 상세 페이지로 이동합니다.
+        </p>
 
-            <!-- 상단 필터(칩, FAB)는 제거됨 -->
+        <div class="link-group"></div>
 
-            <div class="link-group">
-
-                <!-- 프로젝트 순서: 26 -> ... -> 1 (내림차순) -->
-                <a href="project26.html" class="link-button">
-                    <img src="icon_pj26.webp" alt="Project 26" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub"><span class="badge new">NEW</span>프로젝트 26</div>
-                        <div class="game-title">그X그녀의 계획은 훼방X훼방</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="ALIVE 2020">
-                    <img src="icon_pj23.webp" alt="ALIVE 2020" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 23</div>
-                        <div class="game-title">ALIVE 2020</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="아스라이 커뮤니케이션">
-                    <img src="icon_pj22.webp" alt="아스라이 커뮤니케이션" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 22</div>
-                        <div class="game-title">아스라이 커뮤니케이션</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="잊혀진 숲의 아이들">
-                    <img src="icon_pj20.webp" alt="잊혀진 숲의 아이들" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 20</div>
-                        <div class="game-title">잊혀진 숲의 아이들</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon">
-                    <img src="../favicon.webp" alt="Project 18" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub"><span class="badge dev">개발중</span>프로젝트 18</div>
-                        <div class="game-title">엔트로피가 증명하는 그녀의 부재(가제)</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="아이오 프린세스">
-                    <img src="icon_pj17_side.webp" alt="아이오 프린세스" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 17</div>
-                        <div class="game-title">아이오 프린세스</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="어떻게 봐도 내 인생은 너무 불행하다 2">
-                    <img src="icon_pj17_2.webp" alt="어떻게 봐도 내 인생은 너무 불행하다" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 17</div>
-                        <div class="game-title">어떻게 봐도 내 인생은 너무 불행하다</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon">
-                    <img src="../favicon.webp" alt="Project 15" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub"><span class="badge dev">개발중</span>프로젝트 15</div>
-                        <div class="game-title">과거 재생 장치(가제)</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="우리들의 날개는 언제부턴가 사라졌다">
-                    <img src="icon_pj14.webp" alt="우리들의 날개는 언제부턴가 사라졌다" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 14</div>
-                        <div class="game-title">우리들의 날개는 언제부턴가 사라졌다</div>
-                    </div>
-                </a>
-
-                <a href="project13.html" class="link-button">
-                    <img src="icon_pj13.webp" alt="마녀와 고양이의 아스피레이션" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 13</div>
-                        <div class="game-title">마녀와 고양이의 아스피레이션</div>
-                    </div>
-                </a>
-
-                <a href="project12.html" class="link-button">
-                    <img src="icon_pj12.webp" alt="칸타빌레 레시피" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 12</div>
-                        <div class="game-title">칸타빌레 레시피</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="미궁 ~LA MYSTIQUE~">
-                    <img src="icon_pj11.webp" alt="미궁 ~LA MYSTIQUE~" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 11</div>
-                        <div class="game-title">미궁 ~LA MYSTIQUE~</div>
-                    </div>
-                </a>
-
-                <a href="project10.html" class="link-button">
-                    <img src="icon_pj10.webp" alt="나의 교육과정에 마법 과목이 추가되었다" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 10</div>
-                        <div class="game-title">나의 교육과정에 마법 과목이 추가되었다</div>
-                    </div>
-                </a>
-
-                <a href="project9.html" class="link-button">
-                    <img src="icon_pj9.webp" alt="달별 공주는 왕따당하지 않아." class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 9</div>
-                        <div class="game-title">달별 공주는 왕따당하지 않아.</div>
-                    </div>
-                </a>
-
-                <!-- 프로젝트 β (매핑: 8) -->
-                <a href="project8beta.html" class="link-button">
-                    <img src="icon_pj_beta.webp" alt="너에게 말하는 비밀" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 β</div>
-                        <div class="game-title">너에게 말하는 비밀</div>
-                    </div>
-                </a>
-
-                <a href="#" class="link-button coming-soon" data-title="단칸방의 엘도라도">
-                    <img src="icon_pj8.webp" alt="단칸방의 엘도라도" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 8</div>
-                        <div class="game-title">단칸방의 엘도라도</div>
-                    </div>
-                </a>
-
-                <a href="project7.html" class="link-button">
-                    <img src="icon_pj7.webp" alt="five colors volunteers" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 7</div>
-                        <div class="game-title">five colors volunteers</div>
-                    </div>
-                </a>
-
-                <a href="project6.html" class="link-button">
-                    <img src="icon_pj6.webp" alt="저편 하늘을 향해" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 6</div>
-                        <div class="game-title">저편 하늘을 향해</div>
-                    </div>
-                </a>
-
-                <a href="project4a.html" class="link-button">
-                    <img src="icon_pj_agatha4.webp" alt="가장 사랑스러운 너에게 축복을!" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">Agatha 프로젝트 4</div>
-                        <div class="game-title">가장 사랑스러운 너에게 축복을!</div>
-                    </div>
-                </a>
-
-                <a href="project4.html" class="link-button">
-                    <img src="icon_pj4.webp" alt="우리들의 날개는 언제부턴가 부서졌다 FC" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 4 리메이크</div>
-                        <div class="game-title">우리들의 날개는 언제부턴가 부서졌다 FC</div>
-                    </div>
-                </a>
-
-                <a href="project2.html" class="link-button">
-                    <img src="icon_pj2.webp" alt="Time Travelers" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub"><span class="badge rework">재정비 중</span>프로젝트 2</div>
-                        <div class="game-title">Time Travelers</div>
-                    </div>
-                </a>
-
-                <!-- 프로젝트 3 및 1(첫 숫자 기준: 1) -->
-                <a href="project1.html" class="link-button">
-                    <img src="icon_pj1.webp" alt="적마도사 미궁 대모험" class="icon-img">
-                    <div class="game-info">
-                        <div class="game-sub">프로젝트 1 &amp; 3 리메이크</div>
-                        <div class="game-title">적마도사 미궁 대모험</div>
-                    </div>
-                </a>
-
+        <div class="footer">
+            <div class="footer-links">
+                <a href="../contact.html">문의</a>
+                <a href="../privacy.html">개인정보처리방침</a>
             </div>
-
-            <div class="footer">
-                <div class="footer-links">
-                    <a href="../contact.html">문의</a>
-                    <a href="../privacy.html">개인정보처리방침</a>
-                </div>
-                © Team HC. All rights reserved.
-            </div>
-            
-            <nav class="bottom-tabbar" role="navigation" aria-label="하단 탭바">
-                <div class="seg-group" role="tablist" aria-label="정렬">
-                    <button class="seg-button active" data-tab="latest" aria-pressed="true">최신순</button>
-                    <button class="seg-button" data-tab="name" aria-pressed="false">가나다순</button>
-                </div>
-            </nav>
+            © Team HC. All rights reserved.
         </div>
 
-        <div id="overlay-toast" class="toast-overlay">
-            <div class="toast-content">
-                <h3 class="toast-title">준비중입니다.</h3>
-                <p>상세 페이지를 준비하고 있습니다.</p>
+        <nav class="bottom-tabbar" role="navigation" aria-label="하단 탭바">
+            <div class="seg-group">
+                <button class="active" data-tab="project">프로젝트순</button>
+                <button data-tab="latest">최신순</button>
+                <button data-tab="name">가나다순</button>
             </div>
-        </div>
+        </nav>
+    </div>
 
-        <script src="games.js"></script>
-        <script src="tabbar.js"></script>
-    </body>
-    </html>
+    <!-- 토스트 -->
+    <div id="overlay-toast" class="toast-overlay">
+        <div class="toast-content">
+            <h3 class="toast-title">준비중입니다.</h3>
+            <p>상세 페이지를 준비하고 있습니다.</p>
+        </div>
+    </div>
+
+    <!-- 스크립트 -->
+    <script src="games.js"></script>
+    <script src="../tabbar.js"></script>
+</body>
+</html>

@@ -186,3 +186,59 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+/**
+ * 프로젝트 상세 정보 자동 로더
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. 현재 페이지의 프로젝트 ID 확인 (HTML의 CURRENT_PROJECT_ID 변수 사용)
+    if (typeof CURRENT_PROJECT_ID === 'undefined') return;
+
+    const subElement = document.getElementById('header-sub');
+    const titleElement = document.getElementById('header-title');
+
+    // 2. JSON 데이터 가져오기
+    fetch('games.json')
+        .then(res => res.json())
+        .then(data => {
+            // 3. ID가 일치하는 데이터 찾기
+            const game = data.find(g => Number(g.id) === CURRENT_PROJECT_ID);
+
+            if (game) {
+                // 날짜 포맷팅 함수 (내부 사용)
+                const formatDate = (dateStr) => {
+                    if (!dateStr) return "";
+                    const parts = dateStr.split('.');
+                    const isUpcoming = dateStr.includes('.00');
+                    const suffix = isUpcoming ? '예정' : '발매';
+
+                    if (parts[1] === '00') return `${parts[0]}년 ${suffix}`;
+                    if (parts[2] === '00') return `${parts[0]}년 ${parseInt(parts[1])}월 ${suffix}`;
+                    return `${dateStr} ${suffix}`;
+                };
+
+                // 4. 데이터 반영 (프로젝트 번호 · 날짜 표시)
+                if (subElement) subElement.textContent = `${game.sub} · ${formatDate(game.date)}`;
+                if (titleElement) titleElement.textContent = game.title;
+                
+                // 로고 alt 텍스트 업데이트
+                const logoImg = document.getElementById('project-logo');
+                if (logoImg) logoImg.alt = `${game.title} 타이틀`;
+            }
+        })
+        .catch(err => console.error("데이터 로드 실패:", err));
+});
+
+function injectHomeIcon() {
+    const homeIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>`;
+    
+    const container = document.getElementById('homeIcon');
+    if (container) container.innerHTML = homeIcon;
+}
+
+// 페이지 로드 시 실행
+window.addEventListener('DOMContentLoaded', injectHomeIcon);

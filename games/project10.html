@@ -18,10 +18,10 @@
 <body>
     <div class="wrap">
         <header>
-            <img src="title_pj10.webp" alt="Project 10 타이틀" class="logo">
+            <img src="title_pj10.webp" alt="로딩 중..." class="logo" id="project-logo">
             <div class="title-block">
-                <div class="game-sub">Project 10</div>
-                <div class="game-title">나의 교육과정에 마법 과목이 추가되었다</div>
+                <div class="game-sub" id="header-sub">불러오는 중...</div>
+                <div class="game-title" id="header-title">불러오는 중...</div>
             </div>
         </header>
 
@@ -93,7 +93,7 @@
         </section>
 
         <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home">홈</a>
+            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
             <a href="https://play.google.com/store/apps/details?id=com.teamhc.project10ep1" class="tab-button download aos">다운로드</a>
         </nav>
     </div>
@@ -115,6 +115,9 @@
         </div>
     </div>
 
+    <script>
+        const CURRENT_PROJECT_ID = 10; 
+    </script>
     <script src="project.js"></script>
 </body>
 </html>

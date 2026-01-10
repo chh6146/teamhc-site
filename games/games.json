@@ -1,0 +1,204 @@
+[
+  {
+    "id": 26,
+    "url": "project26.html",
+    "icon": "icon_pj26.webp",
+    "sub": "프로젝트 26",
+    "date": "2025.02.24",
+    "title": "그X그녀의 계획은 훼방X훼방",
+    "badge": { "text": "NEW", "class": "new" },
+    "status": "released"
+  },
+  {
+    "id": 23,
+    "url": "#",
+    "icon": "icon_pj23.webp",
+    "sub": "프로젝트 23",
+    "date": "2019.12.29",
+    "title": "ALIVE 2020",
+    "status": "coming-soon"
+  },
+  {
+    "id": 22,
+    "url": "#",
+    "icon": "icon_pj22.webp",
+    "sub": "프로젝트 22",
+    "date": "2019.02.14",
+    "title": "아스라이 커뮤니케이션",
+    "status": "coming-soon"
+  },
+  {
+    "id": 20,
+    "url": "#",
+    "icon": "icon_pj20.webp",
+    "sub": "프로젝트 20",
+    "date": "2018.06.10",
+    "title": "잊혀진 숲의 아이들",
+    "status": "coming-soon"
+  },
+  {
+    "id": 18,
+    "url": "#",
+    "icon": "../favicon.webp",
+    "sub": "프로젝트 18",
+    "date": "2026.00.00",
+    "title": "엔트로피가 증명하는 그녀의 부재(가제)",
+    "badge": { "text": "개발중", "class": "dev" },
+    "status": "coming-soon"
+  },
+  {
+    "id": 17.5,
+    "url": "#",
+    "icon": "icon_pj17_side.webp",
+    "sub": "프로젝트 17",
+    "date": "2019.06.22",
+    "title": "아이오 프린세스",
+    "status": "coming-soon"
+  },
+  {
+    "id": 17,
+    "url": "#",
+    "icon": "icon_pj17_2.webp",
+    "sub": "프로젝트 17",
+    "date": "2019.06.22",
+    "title": "어떻게 봐도 내 인생은 너무 불행하다",
+    "status": "coming-soon"
+  },
+  {
+    "id": 15,
+    "url": "#",
+    "icon": "../favicon.webp",
+    "sub": "프로젝트 15",
+    "date": "2026.00.00",
+    "title": "과거 재생 장치(가제)",
+    "badge": { "text": "개발중", "class": "dev" },
+    "status": "coming-soon"
+  },
+  {
+    "id": 14,
+    "url": "#",
+    "icon": "icon_pj14.webp",
+    "sub": "프로젝트 14",
+    "date": "2017.07.16",
+    "title": "우리들의 날개는 언제부턴가 사라졌다",
+    "status": "coming-soon"
+  },
+  {
+    "id": 13,
+    "url": "project13.html",
+    "icon": "icon_pj13.webp",
+    "sub": "프로젝트 13",
+    "date": "2017.05.03",
+    "title": "마녀와 고양이의 아스피레이션",
+    "status": "released"
+  },
+  {
+    "id": 12,
+    "url": "project12.html",
+    "icon": "icon_pj12.webp",
+    "sub": "프로젝트 12",
+    "date": "2017.10.02",
+    "title": "칸타빌레 레시피",
+    "status": "released"
+  },
+  {
+    "id": 11,
+    "url": "#",
+    "icon": "icon_pj11.webp",
+    "sub": "프로젝트 11",
+    "date": "2016.06.24",
+    "title": "미궁 ~LA MYSTIQUE~",
+    "status": "coming-soon"
+  },
+  {
+    "id": 10,
+    "url": "project10.html",
+    "icon": "icon_pj10.webp",
+    "sub": "프로젝트 10",
+    "date": "2017.11.30",
+    "title": "나의 교육과정에 마법 과목이 추가되었다",
+    "status": "released"
+  },
+  {
+    "id": 9,
+    "url": "project9.html",
+    "icon": "icon_pj9.webp",
+    "sub": "프로젝트 9",
+    "date": "2016.01.28",
+    "title": "달별 공주는 왕따당하지 않아.",
+    "status": "released"
+  },
+  {
+    "id": 8.5,
+    "url": "project8beta.html",
+    "icon": "icon_pj_beta.webp",
+    "sub": "프로젝트 β",
+    "date": "2015.04.10",
+    "title": "너에게 말하는 비밀",
+    "status": "released"
+  },
+  {
+    "id": 8,
+    "url": "#",
+    "icon": "icon_pj8.webp",
+    "sub": "프로젝트 8",
+    "date": "2015.09.08",
+    "title": "단칸방의 엘도라도",
+    "status": "coming-soon"
+  },
+  {
+    "id": 7,
+    "url": "project7.html",
+    "icon": "icon_pj7.webp",
+    "sub": "프로젝트 7",
+    "date": "2014.12.20",
+    "title": "five colors volunteers",
+    "status": "released"
+  },
+  {
+    "id": 6,
+    "url": "project6.html",
+    "icon": "icon_pj6.webp",
+    "sub": "프로젝트 6",
+    "date": "2015.01.24",
+    "title": "저편 하늘을 향해",
+    "status": "released"
+  },
+  {
+    "id": 4.5,
+    "url": "project4a.html",
+    "icon": "icon_pj_agatha4.webp",
+    "sub": "Agatha 프로젝트 4",
+    "date": "2016.12.23",
+    "title": "가장 사랑스러운 너에게 축복을!",
+    "status": "released"
+  },
+  {
+    "id": 4,
+    "url": "project4.html",
+    "icon": "icon_pj4.webp",
+    "sub": "프로젝트 4 리메이크",
+    "date": "2012.04.05",
+    "title": "우리들의 날개는 언제부턴가 부서졌다 FC",
+    "status": "released"
+  },
+  {
+    "id": 2,
+    "url": "project2.html",
+    "icon": "icon_pj2.webp",
+    "sub": "프로젝트 2",
+    "date": "2017.01.31",
+    "title": "Time Travelers",
+    "badge": { "text": "재정비 중", "class": "rework" },
+    "status": "released"
+  },
+  {
+    "id": 1,
+    "url": "project1.html",
+    "icon": "icon_pj1.webp",
+    "sub": "프로젝트 1 & 3 리메이크",
+    "date": "2011.05.31",
+    "title": "적마도사 미궁 대모험",
+    "status": "released"
+  }
+]
