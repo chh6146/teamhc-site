@@ -11,6 +11,12 @@
     --transition-standard: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+html {
+    background-color: #e6f9ff;
+    background: var(--bg-gradient);
+    min-height: 100%;
+}
+
 body {
     margin: 0;
     font-family: 'Noto Sans KR', sans-serif;
@@ -18,9 +24,13 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    min-height: 100dvh;
+    background-color: #e6f9ff;
     background: var(--bg-gradient);
     color: var(--text-main);
     padding: 40px 16px;
+    padding-top: max(40px, env(safe-area-inset-top));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
     box-sizing: border-box;
 }
 
