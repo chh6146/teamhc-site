@@ -1,50 +1,54 @@
 /* 1. 바닥 여백 */
 body { padding-bottom: 100px !important; }
 
-/* 2. 탭바 컨테이너 (유리 효과 테두리) */
+/* 2. 리퀴드 글래스(Liquid Glass) 탭바 컨테이너 */
 .bottom-tabbar { 
     position: fixed; 
     left: 50%; 
-    bottom: calc(20px + env(safe-area-inset-bottom));
+    bottom: calc(24px + env(safe-area-inset-bottom));
     transform: translateX(-50%); 
     z-index: 2000;
 
     display: flex; 
     width: fit-content; 
     align-items: center; 
-    gap: 6px; /* 홈/세그먼트/다운로드 사이의 간격 */
-    padding: 4px; 
-    border-radius: 20px;
+    gap: 8px; /* 홈/세그먼트/다운로드 사이 간격 */
+    padding: 6px; 
+    border-radius: 9999px; /* 부드러운 유선형 캡슐 라운딩 */
 
-    background: rgba(255, 255, 255, 0.7); 
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.4); 
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.5) 100%); 
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.8); 
+    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.12),
+                0 4px 16px rgba(51, 177, 232, 0.08),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.03);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 3. [핵심 수정] 세그먼트 그룹 배경 (이게 있어야 버튼 영역이 티가 남) */
+/* 3. 세그먼트 그룹 배경 */
 .bottom-tabbar .seg-group {
     display: flex;
     position: relative;
-    padding: 2px; /* 내부 버튼과 테두리 사이의 미세한 여백 */
-    background: rgba(0, 0, 0, 0.05); /* 카테고리 탭과 동일한 연회색 배경 */
-    border-radius: 14px; /* 전체 테두리보다 살짝 작은 곡률 */
+    padding: 3px; 
+    background: rgba(0, 0, 0, 0.04); 
+    border-radius: 9999px; 
     isolation: isolate;
 }
 
-/* 움직이는 흰색 배경 (인디케이터) */
+/* 움직이는 흰색 리퀴드 캡슐 인디케이터 */
 .bottom-tabbar .seg-indicator {
     position: absolute;
-    top: 2px;
-    bottom: 2px;
+    top: 3px;
+    bottom: 3px;
     left: 0;
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
     z-index: 0;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* 4. 버튼 공통 스타일 */
@@ -53,39 +57,46 @@ body { padding-bottom: 100px !important; }
     flex: 0 0 auto;
     position: relative;
     z-index: 1;
-    height: 38px; /* 카테고리 탭 느낌의 컴팩트한 높이 */
-    padding: 0 16px;
+    height: 36px; 
+    padding: 0 18px;
     border: none;
     background: transparent !important;
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     color: #64748b;
     font-weight: 700;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.25s ease, transform 0.15s ease;
     white-space: nowrap;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 9999px;
 }
 
-/* 5. 개별 버튼 포인트 */
+.bottom-tabbar .seg-group button:hover {
+    color: #334155;
+}
+
+.bottom-tabbar .seg-group button:active {
+    transform: scale(0.96);
+}
 
 /* 홈 버튼 (배경 없이 아이콘만) */
 .bottom-tabbar .tab-button.home {
-    padding: 0 10px;
+    padding: 0 12px;
     color: #1e293b;
 }
 
-/* 다운로드 버튼 (초록 배경 고정) */
+/* 다운로드 버튼 (초록 그라데이션 고정) */
 .bottom-tabbar .tab-button.download.aos {
-    background: #3DDC84 !important;
+    background: linear-gradient(135deg, #3DDC84, #2ebd6f) !important;
     color: #ffffff !important;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(61, 220, 132, 0.2);
+    border-radius: 9999px;
+    box-shadow: 0 4px 14px rgba(61, 220, 132, 0.35);
 }
 
 /* 세그먼트 활성 텍스트 */
 .bottom-tabbar .seg-group button.active {
-    color: #1e293b;
+    color: #0f172a;
 }

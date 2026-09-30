@@ -69,7 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
             a.className = 'link-button';
             a.dataset.id = Number(game.id);
             a.dataset.title = game.title;
-            a.dataset.new = (game.badge && game.badge.text === "NEW") ? 1 : 0;
+            
+            // "NEW" 및 "개발중" 배지에 우선순위 핀 점수 부여
+            let pin = 0;
+            if (game.badge) {
+                if (game.badge.class === 'new' || game.badge.text === 'NEW') pin = 2;
+                else if (game.badge.class === 'dev' || game.badge.text === '개발중') pin = 1;
+            }
+            a.dataset.pin = pin;
+
             a.dataset.date = game.date || "";
             a.dataset.sub = game.sub || "";
             a.dataset.status = game.status || "released";
@@ -103,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(el => rects.set(el, el.getBoundingClientRect()));
 
         items.sort((a, b) => {
-            // "NEW" 배지는 어떤 정렬에서도 최상단 유지
-            const newA = Number(a.dataset.new);
-            const newB = Number(b.dataset.new);
-            if (newA !== newB) return newB - newA;
+            // "NEW" 및 "개발중" 배지는 어떤 정렬에서도 최상단 유지
+            const pinA = Number(a.dataset.pin || 0);
+            const pinB = Number(b.dataset.pin || 0);
+            if (pinA !== pinB) return pinB - pinA;
 
             // 1. 최신순 (날짜 기반)
             if (mode === 'latest-desc') {
@@ -188,3 +196,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+

@@ -8,7 +8,7 @@
     --text-sub: #4b5563;
     --border-light: #e5e7eb;
     --bg-gradient: linear-gradient(135deg, #e6f9ff 0%, #f7fdff 100%);
-    --transition-standard: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-standard: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -20,17 +20,22 @@ body {
     min-height: 100vh;
     background: var(--bg-gradient);
     color: var(--text-main);
+    padding: 40px 16px;
+    box-sizing: border-box;
 }
 
 /* 메인 컨테이너 박스 */
 .container {
-    width: 90%;
-    max-width: 480px;
-    padding: 40px 24px;
+    width: 100%;
+    max-width: 440px;
+    padding: 36px 28px;
     background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 24px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 20px 30px -10px rgba(51, 177, 232, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
     text-align: center;
+    box-sizing: border-box;
 }
 
 /* ==========================================
@@ -45,16 +50,18 @@ h1 {
 
 .logo {
     display: block;
-    width: 220px;
-    max-width: 92%;
+    width: 190px;
+    max-width: 75%;
     height: auto;
-    margin: 0 auto 14px;
+    margin: 0 auto 16px;
 }
 
 .description {
-    margin-bottom: 32px;
+    margin-top: 0;
+    margin-bottom: 28px;
     color: var(--text-sub);
     font-size: 0.95rem;
+    letter-spacing: -0.2px;
 }
 
 /* 프로젝트 하단 작은 라벨들 */
@@ -76,18 +83,19 @@ h1 {
     flex-direction: column;
     gap: 14px;
     align-items: center;
+    width: 100%;
 }
 
 .link-button {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 88%;
-    max-width: 420px;
+    width: 100%;
     margin: 0 auto;
-    padding: 14px 18px;
-    gap: 12px;
-    background-color: white;
+    padding: 16px 20px;
+    min-height: 64px;
+    gap: 14px;
+    background-color: #ffffff;
     color: var(--text-main);
     text-decoration: none;
     font-weight: 600;
@@ -98,11 +106,11 @@ h1 {
 }
 
 .link-button:hover {
-    transform: scale(1.02);
+    transform: translateY(-2px);
     border-color: var(--primary-color);
     background-color: var(--hover-bg);
     color: var(--primary-color);
-    box-shadow: 0 4px 12px rgba(51, 177, 232, 0.12);
+    box-shadow: 0 6px 16px rgba(51, 177, 232, 0.15);
 }
 
 /* 버튼 내 텍스트 정렬 (기본 span 사용 시) */
@@ -114,20 +122,23 @@ h1 {
 
 /* 버튼 내부 아이콘/이미지 스타일 */
 .link-button img, .link-button .icon-img {
-    width: 48px; height: 48px;
-    margin-right: 12px; padding: 4px;
-    flex-shrink: 0; object-fit: cover;
+    width: 44px;
+    height: 44px;
+    margin-right: 4px;
+    padding: 3px;
+    flex-shrink: 0;
+    object-fit: cover;
     background: #ffffff;
-    border-radius: 12px;
-    border: 2px solid rgba(51, 177, 232, 0.12);
-    box-shadow: 0 8px 22px rgba(51, 177, 232, 0.12);
-    transition: box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+    border-radius: 10px;
+    border: 1.5px solid rgba(51, 177, 232, 0.15);
+    box-shadow: 0 4px 12px rgba(51, 177, 232, 0.08);
+    transition: var(--transition-standard);
 }
 
 .link-button:hover img, .link-button:hover .icon-img {
-    border-color: rgba(51, 177, 232, 0.28);
-    box-shadow: 0 12px 30px rgba(51, 177, 232, 0.18);
-    transform: translateY(-2px);
+    border-color: rgba(51, 177, 232, 0.35);
+    box-shadow: 0 6px 16px rgba(51, 177, 232, 0.18);
+    transform: scale(1.03);
 }
 
 /* [추가] 준비 중인 프로젝트 스타일 */
@@ -163,9 +174,7 @@ h1 {
     color: var(--text-sub); 
     line-height: 1; 
     padding: 3px 0;
-    
-    /* 뱃지와 글자가 함께 움직이도록 트랜지션 부여 */
-    transition: opacity 0.75s ease-in-out, transform 0.75s ease-in-out;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     opacity: 1;
 }
 
@@ -179,22 +188,91 @@ h1 {
 .badge {
     margin: 0 0 0 8px; /* 오른쪽(텍스트)과의 간격만 유지 */
     order: -1; /* 뱃지가 항상 텍스트 왼쪽에 오도록 설정 */
-    will-change: transform, box-shadow;
 }
 
 /* ==========================================
    5. 푸터 & 반응형 (Footer & Responsive)
    ========================================== */
-.footer { margin-top: 24px; font-size: 0.8rem; color: #9ca3af; }
-.footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 8px 0 6px; }
-.footer-links a {
-    padding: 6px 10px; color: var(--text-sub); text-decoration: none; font-size: 0.85rem;
-    border-radius: 8px; transition: background-color 160ms ease, color 160ms ease;
+.footer { 
+    margin-top: 32px; 
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 0.78rem; 
+    color: #9ca3af; 
+    line-height: 1.6;
 }
-.footer-links a:hover { color: var(--primary-color); background: rgba(51, 177, 232, 0.06); }
+
+.footer-links { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-wrap: wrap; 
+    margin: 0 0 10px; 
+}
+
+.footer-links a {
+    position: relative;
+    padding: 4px 12px; 
+    color: var(--text-sub); 
+    text-decoration: none; 
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-radius: 6px; 
+    transition: color 160ms ease, background-color 160ms ease;
+}
+
+.footer-links a:hover { 
+    color: var(--primary-color); 
+    background-color: rgba(51, 177, 232, 0.08); 
+}
+
+/* 링크 간 세로 구분선 (HTML에 직접 | 를 적지 않아도 CSS로 깔끔하게 생성) */
+.footer-links a:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 10px;
+    background-color: #d1d5db;
+}
 
 @media (max-width: 640px) {
-    .container { padding: 24px 12px; }
+    body {
+        padding: 24px 16px;
+    }
+
+    .container {
+        padding: 28px 18px;
+        border-radius: 20px;
+    }
+
+    .logo {
+        width: 140px;
+        max-width: 65%;
+        margin-bottom: 12px;
+    }
+
+    .description {
+        margin-bottom: 22px;
+        font-size: 0.9rem;
+    }
+
+    .link-group {
+        gap: 14px;
+    }
+
+    .link-button {
+        padding: 16px 18px;
+        min-height: 64px;
+        border-radius: 16px;
+    }
+
+    .link-button img, .link-button .icon-img {
+        width: 44px;
+        height: 44px;
+    }
 }
 
 /* ==========================================
