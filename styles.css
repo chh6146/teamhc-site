@@ -265,6 +265,26 @@ h1 {
     background-color: #d1d5db;
 }
 
+.footer-social {
+    margin-bottom: 16px;
+}
+
+.x-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;       /* 원형, 6px로 바꾸면 둥근 사각형 */
+    background-color: #000;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.x-button:hover {
+    opacity: 0.75;
+}
+
 @media (max-width: 640px) {
     body {
         padding: 24px 16px;
