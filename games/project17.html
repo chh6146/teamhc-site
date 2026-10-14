@@ -10,7 +10,6 @@
 
     <meta name="view-transition" content="same-origin" />
 
-    <!-- FOUC 방지 -->
     <script>
         (function () {
             var saved = localStorage.getItem('theme');
@@ -20,103 +19,180 @@
         })();
     </script>
 
-    <title>프로젝트 제목 - Team HC</title>
+    <title>어떻게 봐도 내 인생은 너무 불행하다 - Team HC</title>
 
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- 공통 -->
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
-
-    <!-- 페이지 전용 -->
     <link rel="stylesheet" href="project.css">
 
-    <!-- 게임별 개성 색상 -->
     <style>
-        :root { --accent: #012340; }
+        :root { --accent: #7a0244; }
     </style>
 </head>
 <body>
 
-    <!-- Top Bar (뒤로가기 + 테마 토글) -->
-    <div class="top-bar">
-        <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"/>
-            </svg>
-        </button>
-        <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-            </svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-        </button>
-    </div>
-
     <div class="wrap">
-        <header>
-            <img src="title_pj13.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" data-tab="summary">개요</button>
-                <button class="tab-item" data-tab="manual">게임 소개</button>
-                <button class="tab-item" data-tab="characters">캐릭터 소개</button>
-            </div>
-        </nav>
+        <section class="hero" style="--hero-bg: url('pj17_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 17 · 2019.06.22 발매</p>
+                <h1 class="hero-title">어떻게 봐도 내 인생은 너무 불행하다</h1>
+                <p class="hero-tagline">
+                    위험한 사이트 HCer를 둘러싼 의혹.<br>
+                    피에르와 함께 사용자를 찾아 나서는데—
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj13_background.webp');">
-                <div class="notice-text">
-                    <p>여기에 게임의 메인 캐치프레이즈나</p>
-                    <p>전체적인 분위기를 설명하는 문구를 입력하세요.</p>
-                    <p class="split">중요한 강조점은 이 클래스를 사용합니다.</p>
-                    <p>마지막 줄 설명을 입력하세요.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_info_01.webp" alt="특징 소개">
-                    <div class="text">
-                        <h2>시스템 특징 제목</h2>
-                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다.</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project17"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
-                        <p>캐릭터 설명을 입력합니다.</p>
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                어느 날, 체육 창고에 숨어 있던 전학생 피에르.
+                그녀가 처음 던진 질문은 낯선 이름이었다.
+                <strong>"이 학교에 HCer 가입한 사람 있어?"</strong>
+                사용자를 찾아 개도하기 위한 주인공의 추적이 시작된다.
+            </p>
+        </section>
+
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                위험한 사이트를 둘러싼 의혹을 파해지는 이야기. 본래 에피소드 1/2로 나뉘어져서 발매될 예정이었지만, 에피소드 1의 내용이 산불과 관련된 내용이였기에 발매가 연기되었고, 에피소드 2만 발매 되게 되었습니다.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="pj17_info_01.webp" alt="HCer">
+                    <div class="feature-body">
+                        <h3>HCer</h3>
+                        <p>10대에서 20대가 주류인 숨겨진 커뮤니티. 위법적인 내용이 오간다. 마리아나 웹에서 파생된 사이트로 노드를 뛰어넘어 쉽게 차단되지 않는다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj17_info_02.webp" alt="개도">
+                    <div class="feature-body">
+                        <h3>개도</h3>
+                        <p>피에르의 목적은 HCer 사용자를 찾아 그만두게 만드는 것. 약물 사용자는 종아리나 팔뚝에 멍이나 털을 민 흔적을 가진 특이한 사람이 있다면 반드시 피에르에게 먼저 알려야 한다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj17_info_03.webp" alt="평범한 일상 속 균열">
+                    <div class="feature-body">
+                        <h3>평범한 일상 속 균열</h3>
+                        <p>다정한 여동생 석류, 상냥한 NC 선배, 츤데레 아이오. 평범한 학교 생활 속에 HCer라는 그림자가 드리운다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project13" class="tab-button download aos">다운로드</a>
-        </nav>
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj17_ch2.webp" alt="아이오">
+                    <div class="character-body">
+                        <h3>아이오</h3>
+                        <p>주인공과 같은 반 친구. 석류와 만나면 항상 으르렁거린다. 주인공을 사이에 두고 신경전을 벌인다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj17_ch3.webp" alt="NC 선배">
+                    <div class="character-body">
+                        <h3>NC 선배</h3>
+                        <p>주인공이 존경하는 선배. 상냥하고 다정하며, 힘들어 보이는 주인공을 자주 안아준다. 항상 안전을 강조한다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj17_ch4.webp" alt="석류">
+                    <div class="character-body">
+                        <h3>석류</h3>
+                        <p>주인공의 여동생. 중학생이지만 요리 솜씨가 뛰어나다. 오빠를 무릎 베개로 재워주는 등 다정한 성격.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj17_ch5.webp" alt="피에르">
+                    <div class="character-body">
+                        <h3>피에르</h3>
+                        <p>전학생. 체육 창고에 숨어 있다가 주인공과 아이오에게 발견된다. 밝은 성격으로 첫 등장부터 반 전체를 정적에 빠뜨린다. HCer라는 위험한 사이트를 아는 유일한 인물이며, 사용자를 찾아 개도하려 한다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>평범한 일상에 스며든 균열, 당신의 선택은?</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project17"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <div id="imageLightbox" class="lightbox-overlay">
@@ -137,7 +213,7 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 13;
+        const CURRENT_PROJECT_ID = 17;
     </script>
     <script src="../theme.js"></script>
     <script src="project.js"></script>

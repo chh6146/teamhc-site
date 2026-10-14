@@ -10,7 +10,6 @@
 
     <meta name="view-transition" content="same-origin" />
 
-    <!-- FOUC 방지 -->
     <script>
         (function () {
             var saved = localStorage.getItem('theme');
@@ -20,103 +19,166 @@
         })();
     </script>
 
-    <title>프로젝트 제목 - Team HC</title>
+    <title>아이오 프린세스 - Team HC</title>
 
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- 공통 -->
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
-
-    <!-- 페이지 전용 -->
     <link rel="stylesheet" href="project.css">
 
-    <!-- 게임별 개성 색상 -->
     <style>
-        :root { --accent: #012340; }
+        :root { --accent: #c16288; }
     </style>
 </head>
 <body>
 
-    <!-- Top Bar (뒤로가기 + 테마 토글) -->
-    <div class="top-bar">
-        <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"/>
-            </svg>
-        </button>
-        <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-            </svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-        </button>
-    </div>
-
     <div class="wrap">
-        <header>
-            <img src="title_pj13.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" data-tab="summary">개요</button>
-                <button class="tab-item" data-tab="manual">게임 소개</button>
-                <button class="tab-item" data-tab="characters">캐릭터 소개</button>
-            </div>
-        </nav>
+        <section class="hero" style="--hero-bg: url('pj17_5_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 17.5 · 2019.06.22 발매</p>
+                <h1 class="hero-title">아이오 프린세스</h1>
+                <p class="hero-tagline">
+                    10일간의 육성 시뮬레이션.<br>
+                    아이오의 마음을 얻기 위한 주인공의 도전.
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj13_background.webp');">
-                <div class="notice-text">
-                    <p>여기에 게임의 메인 캐치프레이즈나</p>
-                    <p>전체적인 분위기를 설명하는 문구를 입력하세요.</p>
-                    <p class="split">중요한 강조점은 이 클래스를 사용합니다.</p>
-                    <p>마지막 줄 설명을 입력하세요.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_info_01.webp" alt="특징 소개">
-                    <div class="text">
-                        <h2>시스템 특징 제목</h2>
-                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다.</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project17_5"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
-                        <p>캐릭터 설명을 입력합니다.</p>
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                주인공은 연애를 할 줄 모른다.
+                알았으면 이미 했겠죠...
+                연애가 하고 싶다고는 하지만 결국 못 할 것이다. 이번 생에서도 글렀다.
+                <strong>그러니까 지금 이 게임을 플레이하는 당신이 주인공을 구제해주세요.</strong>
+                5월 8일부터 18일까지, 단 10일간의 육성.
+                아침·점심·저녁·밤의 선택이 아이오의 호감도를 바꿀 수 있다!
+            </p>
+        </section>
+
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                10일간의 육성 시뮬레이션.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="pj17_5_info_01.webp" alt="아침·점심·저녁·밤">
+                    <div class="feature-body">
+                        <h3>아침·점심·저녁·밤</h3>
+                        <p>하루가 네 개의 시간대로 나뉩니다. 각 시간대마다 주인공의 행동을 선택할 수 있으며, 선택에 따라 능력치와 호감도가 변화합니다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj17_5_info_02.webp" alt="능력치와 호감도">
+                    <div class="feature-body">
+                        <h3>능력치와 호감도</h3>
+                        <p>매력·체력·화술·스트레스·자본의 다섯 가지 능력치가 있습니다. 특정 능력치가 일정 수치 이상이어야 선택할 수 있는 선택지도 존재합니다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj17_5_info_03.webp" alt="자유로운 스케줄">
+                    <div class="feature-body">
+                        <h3>자유로운 스케줄</h3>
+                        <p>아르바이트로 돈을 벌거나, 외출로 스트레스를 풀거나, 아이오와 함께 시간을 보냅니다. 어떤 하루를 쌓아 올리느냐에 따라 결말이 달라집니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project13" class="tab-button download aos">다운로드</a>
-        </nav>
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj17_5_ch1.webp" alt="주인공">
+                    <div class="character-body">
+                        <h3>주인공</h3>
+                        <p>연애를 할 줄 모르는 주인공. 세계가 재구성될 때마다 연애를 시도하지만 번번이 실패한다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj17_5_ch2.webp" alt="아이오">
+                    <div class="character-body">
+                        <h3>아이오</h3>
+                        <p>주인공이 공략 대상으로 삼은 인물. 자기 자신만 생각하고 남의 의견은 듣지 않는 독불장군 같은 성격.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>10일간의 선택이 아이오의 마음을 바꿉니다.</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project17_5"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <div id="imageLightbox" class="lightbox-overlay">
@@ -137,7 +199,7 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 13;
+        const CURRENT_PROJECT_ID = 17.5;
     </script>
     <script src="../theme.js"></script>
     <script src="project.js"></script>
