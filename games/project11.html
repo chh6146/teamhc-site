@@ -20,7 +20,7 @@
         })();
     </script>
 
-    <title>로딩 중... - Team HC</title>
+    <title>미궁 ~LA MYSTIQUE~ - Team HC</title>
 
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,6 @@
             <nav class="anchor-tabs" aria-label="섹션 이동">
                 <button type="button" data-target="overview" class="active">개요</button>
                 <button type="button" data-target="system">게임 소개</button>
-                <button type="button" data-target="characters">캐릭터</button>
             </nav>
 
             <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
@@ -71,11 +70,24 @@
                 <p class="hero-sub">프로젝트 11 · 2016.06.24 발매</p>
                 <h1 class="hero-title">미궁 ~LA MYSTIQUE~</h1>
                 <p class="hero-tagline">
-                    여기에 게임의 메인 캐치프레이즈나<br>
-                    전체적인 분위기를 설명하는 문구를 입력하세요.
+                    혼자서는 풀 수 없는 문제.<br>
+                    여러 사람이 머리를 맞대야 열리는 진실.
                 </p>
 
-                <!-- 다운로드 링크 없음 (coming-soon 상태) -->
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project11"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -83,9 +95,11 @@
         <section id="overview" class="section">
             <h2 class="section-title">개요</h2>
             <p class="section-lead">
-                여기에 게임의 메인 캐치프레이즈나 전체적인 분위기를 설명하는 문구를 입력하세요.
-                중요한 강조점은 이 클래스를 사용합니다.
-                마지막 줄 설명을 입력하세요.
+                미궁은 여러 사람이 머리를 맞대야 재미있는 게임입니다.
+                한 가지에 능통하다고 해서 해결할 수 있는 문제들이 아니기에,
+                서로의 힌트와 공략을 나누며 진실에 다가가세요.
+                혼자서는 풀 수 없는 문제, 함께라면 열리는 길.
+                그 끝에서 당신은 무엇을 마주하게 될까요.
             </p>
         </section>
 
@@ -93,42 +107,55 @@
         <section id="system" class="section">
             <h2 class="section-title">게임 소개</h2>
             <p class="section-lead">
-                게임의 주요 시스템이나 특징을 소개합니다.
+                시즌제로 업데이트되는 미궁. 함께 풀어가는 추리 게임.
             </p>
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj11_info_01.webp" alt="특징 소개">
+                    <img src="pj11_info_01.webp" alt="시즌제 챕터 시스템">
                     <div class="feature-body">
-                        <h3>시스템 특징 제목</h3>
-                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다. 아이템 팝업이 필요하면 버튼 태그를 활용하세요.</p>
+                        <h3>시즌제 챕터 업데이트 (종료됨)</h3>
+                        <p>계속해서 챕터가 업데이트됩니다. 챕터를 클리어한 사람은 먼저 메일을 보내는 선착순으로 등수가 매겨져 공식 홈페이지에 게재됩니다. 인원이 꽉 차면 더 이상 메일을 받지 않습니다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj11_info_02.webp" alt="함께 푸는 난이도">
+                    <div class="feature-body">
+                        <h3>혼자서는 풀 수 없는 난이도</h3>
+                        <p>미궁은 여러 사람이서 머리를 맞대야 재미있다고 생각합니다. 한 가지에 능통하다고 해서 해결할 수 있는 문제들이 아니기 때문에 커뮤니티에서 여러분들이 해결한 만큼 글을 올리고 해답을 찾아보세요.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj11_info_03.webp" alt="무료와 후원">
+                    <div class="feature-body">
+                        <h3>무료로 제공되는 미궁</h3>
+                        <p>미궁은 그냥 제공하고 싶었습니다. 재미있게 즐겨주세요. 후원을 해도 따로 기록이 되거나 보상이 있거나 하지 않습니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 캐릭터 -->
-        <section id="characters" class="section">
-            <h2 class="section-title">캐릭터</h2>
-            <p class="section-lead">
-                이야기를 이끌어가는 인물들.
-            </p>
-
-            <div class="character-grid">
-                <div class="character-card">
-                    <img src="pj11_ch1.webp" alt="캐릭터 1">
-                    <div class="character-body">
-                        <h3>캐릭터 이름</h3>
-                        <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 다운로드 CTA (coming-soon이라 링크 없음) -->
+        <!-- 다운로드 CTA -->
         <section id="download" class="cta-section">
-            <h2>출시 준비 중</h2>
-            <p>미궁 ~LA MYSTIQUE~는 현재 준비 중입니다. 곧 만나보실 수 있습니다.</p>
+            <h2>지금 플레이하세요</h2>
+            <p>호환성 문제로 곧 서비스가 종료될 예정입니다.</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project11"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </section>
 
     </div><!-- /.wrap -->
