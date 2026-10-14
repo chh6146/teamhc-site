@@ -1069,4 +1069,17 @@ body {
 .character-card img {
     display: block;
     width: 100%;
-   
+    min-height: 180px;
+    object-fit: cover;
+
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E"),
+        radial-gradient(at 20% 20%, color-mix(in srgb, var(--accent) 80%, white) 0%, transparent 50%),
+        radial-gradient(at 80% 80%, color-mix(in srgb, var(--accent) 60%, black) 0%, transparent 60%),
+        var(--accent);
+
+    color: transparent;
+    font-size: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
