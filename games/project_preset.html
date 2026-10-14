@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- [1] 필수 메타 -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
-
     <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
-
     <meta name="view-transition" content="same-origin" />
 
-    <!-- FOUC 방지 -->
+    <!-- [2] FOUC 방지 (필수) -->
     <script>
         (function () {
             var saved = localStorage.getItem('theme');
@@ -20,124 +19,190 @@
         })();
     </script>
 
-    <title>프로젝트 제목 - Team HC</title>
+    <!-- [3] 타이틀: "{게임제목} - Team HC" -->
+    <title>{게임제목} - Team HC</title>
 
+    <!-- [4] 파비콘 -->
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
+
+    <!-- [5] 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- 공통 -->
+    <!-- [6] 공통 스타일 -->
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
-
-    <!-- 페이지 전용 -->
     <link rel="stylesheet" href="project.css">
 
-    <!-- 게임별 개성 색상 -->
+    <!-- [7] 프로젝트 강조색 (필수) -->
     <style>
-        :root { --accent: #012340; }
+        :root { --accent: {강조색상코드}; }
     </style>
 </head>
 <body>
 
-    <!-- Top Bar (뒤로가기 + 테마 토글) -->
-    <div class="top-bar">
-        <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"/>
-            </svg>
-        </button>
-        <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-            </svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-        </button>
-    </div>
-
     <div class="wrap">
-        <header>
-            <img src="title_pj13.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <!-- [A] 사이트 헤더 -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" data-tab="summary">개요</button>
-                <button class="tab-item" data-tab="manual">게임 소개</button>
-                <button class="tab-item" data-tab="characters">캐릭터 소개</button>
-            </div>
-        </nav>
+        <!-- [B] Hero (상단 대표 이미지) -->
+        <!-- --hero-bg: url('pj{번호}_background.webp') -->
+        <section class="hero" style="--hero-bg: url('pj{번호}_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 {번호} · {발매일}</p>
+                <h1 class="hero-title">{게임제목}</h1>
+                <p class="hero-tagline">
+                    {태그라인 1줄}<br>
+                    {태그라인 2줄}
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj13_background.webp');">
-                <div class="notice-text">
-                    <p>여기에 게임의 메인 캐치프레이즈나</p>
-                    <p>전체적인 분위기를 설명하는 문구를 입력하세요.</p>
-                    <p class="split">중요한 강조점은 이 클래스를 사용합니다.</p>
-                    <p>마지막 줄 설명을 입력하세요.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_info_01.webp" alt="특징 소개">
-                    <div class="text">
-                        <h2>시스템 특징 제목</h2>
-                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다.</p>
+                <!-- 개발중이면 이 블록 삭제 -->
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id={스토어ID}"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
-                        <p>캐릭터 설명을 입력합니다.</p>
+        <!-- [C] 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                {개요 문단}
+                <strong>{강조 문구}</strong>
+                {마무리 문구}
+            </p>
+        </section>
+
+        <!-- [D] 게임 소개 (카드 N개) -->
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                {게임 소개 한 줄}
+            </p>
+
+            <div class="feature-grid">
+                <!-- 카드 1 -->
+                <div class="feature-card">
+                    <img src="pj{번호}_info_01.webp" alt="{카드1 제목}">
+                    <div class="feature-body">
+                        <h3>{카드1 제목}</h3>
+                        <p>{카드1 설명}</p>
                     </div>
+                </div>
+                <!-- 카드 2 -->
+                <div class="feature-card">
+                    <img src="pj{번호}_info_02.webp" alt="{카드2 제목}">
+                    <div class="feature-body">
+                        <h3>{카드2 제목}</h3>
+                        <p>{카드2 설명}</p>
+                    </div>
+                </div>
+                <!-- 카드 N... -->
+            </div>
+        </section>
+
+        <!-- [E] 캐릭터 (카드 N개) -->
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                {캐릭터 섹션 한 줄}
+            </p>
+
+            <div class="character-grid">
+                <!-- 캐릭터 1 -->
+                <div class="character-card">
+                    <img src="pj{번호}_ch{태그번호}.webp" alt="{캐릭터명}">
+                    <div class="character-body">
+                        <h3>{캐릭터명}</h3>
+                        <p>{캐릭터 설명}</p>
+                    </div>
+                </div>
+                <!-- 캐릭터 N... -->
+            </div>
+        </section>
+
+        <!-- [F] 하단 CTA -->
+        <section id="download" class="cta-section">
+            <h2>{CTA 제목}</h2>
+            <p>{CTA 설명}</p>
+
+            <!-- 개발중이면 이 블록 삭제 -->
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id={스토어ID}"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project13" class="tab-button download aos">다운로드</a>
-        </nav>
     </div>
 
+    <!-- [G] 라이트박스 (필수, 수정 X) -->
     <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
+    <!-- [H] 아이템 토스트 (필수, 수정 X) -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어간다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
         </div>
     </div>
 
+    <!-- [I] 프로젝트 ID + 스크립트 (필수) -->
     <script>
-        const CURRENT_PROJECT_ID = 13;
+        const CURRENT_PROJECT_ID = {번호};
     </script>
     <script src="../theme.js"></script>
     <script src="project.js"></script>

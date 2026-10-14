@@ -10,7 +10,6 @@
 
     <meta name="view-transition" content="same-origin" />
 
-    <!-- FOUC 방지 -->
     <script>
         (function () {
             var saved = localStorage.getItem('theme');
@@ -20,103 +19,183 @@
         })();
     </script>
 
-    <title>프로젝트 제목 - Team HC</title>
+    <title>프로젝트 20 - Team HC</title>
 
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- 공통 -->
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
-
-    <!-- 페이지 전용 -->
     <link rel="stylesheet" href="project.css">
 
-    <!-- 게임별 개성 색상 -->
     <style>
-        :root { --accent: #012340; }
+        :root { --accent: #27581e; }
     </style>
 </head>
 <body>
 
-    <!-- Top Bar (뒤로가기 + 테마 토글) -->
-    <div class="top-bar">
-        <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"/>
-            </svg>
-        </button>
-        <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-            </svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-        </button>
-    </div>
-
     <div class="wrap">
-        <header>
-            <img src="title_pj13.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" data-tab="summary">개요</button>
-                <button class="tab-item" data-tab="manual">게임 소개</button>
-                <button class="tab-item" data-tab="characters">캐릭터 소개</button>
-            </div>
-        </nav>
+        <section class="hero" style="--hero-bg: url('pj20_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 20 · 발매일 미정</p>
+                <h1 class="hero-title">프로젝트 20</h1>
+                <p class="hero-tagline">
+                    요정들이 살아가는 숲속 이야기.<br>
+                    사탕수수 하나에서 시작된 작은 모험.
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj13_background.webp');">
-                <div class="notice-text">
-                    <p>여기에 게임의 메인 캐치프레이즈나</p>
-                    <p>전체적인 분위기를 설명하는 문구를 입력하세요.</p>
-                    <p class="split">중요한 강조점은 이 클래스를 사용합니다.</p>
-                    <p>마지막 줄 설명을 입력하세요.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_info_01.webp" alt="특징 소개">
-                    <div class="text">
-                        <h2>시스템 특징 제목</h2>
-                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다.</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project20"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj13_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
-                        <p>캐릭터 설명을 입력합니다.</p>
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                날개는 별빛처럼 빛나며, 눈망울은 새벽의 이슬보다 반짝이는 요정들.
+                세상은 그들을 요정이라 부른다.
+                어디에나 존재하며 모두가 조화를 이룰 수 있게 만드는 존재.
+                그런데 지금, 세 명의 요정이 사탕수수 하나를 놓고 싸우고 있다.
+                <strong>사탕수수 하나에서 시작된 작은 모험.</strong>
+                기지를 만들고, 야생 사탕수수를 찾아 떠나고, 거미를 잡으러 거미굴까지.
+                먹보 수와 고지식한 에요, 그리고 리더인 하요가 만들어가는 숲속 이야기.
+            </p>
+        </section>
+
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                요정들의 좌충우돌 모험담이 지금 시작됩니다. 메인화면은 플레이 시각에 따라 변화하는 특징이 있습니다.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="pj20_info_01.webp" alt="사탕수수 정제">
+                    <div class="feature-body">
+                        <h3>사탕수수 정제</h3>
+                        <p>사탕수수는 빨리 변질되기 때문에 오래 보관할 수 있는 설탕으로 정제한다. 장작과 사탕수수, 그리고 레몬이 필요하다. 끓이고, 저어주고, 식히는 것까지. 설탕 하나 만드는 데도 많은 노력이 든다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj20_info_02.webp" alt="기지 건설">
+                    <div class="feature-body">
+                        <h3>기지 건설</h3>
+                        <p>흙으로 만들까, 나무로 만들까. 풀로 꾸밀까. 기지를 만드는 방법은 다양하다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj20_info_03.webp" alt="야생 사탕수수">
+                    <div class="feature-body">
+                        <h3>야생 사탕수수</h3>
+                        <p>야생 사탕수수는 자기가 나고 싶은 곳에서 난다. 재배 사탕수수보다 당도가 높지만 찾기 어렵다. 오목눈이 군락지에서는 오목눈이에게 사탕수수를 빼앗기지 않기 위해 거미와 교환해야 한다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj20_info_04.webp" alt="상자씨">
+                    <div class="feature-body">
+                        <h3>상자씨</h3>
+                        <p>어디에서 굴러왔는지 모르는 상자. 눈과 입이 달려 있고, 잘 굴러다닌다. 곤란한 요정을 도와주는 존재. 처음에는 말투가 이상했지만 나중에는 유창해진다. 만능 채집기를 팔기도 한다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project13" class="tab-button download aos">다운로드</a>
-        </nav>
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj20_ch1.webp" alt="하요">
+                    <div class="character-body">
+                        <h3>하요</h3>
+                        <p>사탕수수를 정제하기 위해 기지를 만들고, 야생 사탕수수를 찾아 나선다. 예요에게 특이하다는 이야기를 듣는다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj20_ch2.webp" alt="수">
+                    <div class="character-body">
+                        <h3>수</h3>
+                        <p>음식에 욕심이 많은 요정. 이름은 자주 쓰는 "~수 없어"에서 따왔다는 이야기가 있지만 원래는 으뜸을 의미한다고 한다. 사탕수수 하나를 놓고 하요와 싸울 정도로 음식에 진심이다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj20_ch3.webp" alt="에요">
+                    <div class="character-body">
+                        <h3>에요</h3>
+                        <p>고지식한 성격의 요정. "~인 거에요"라는 특유의 말투를 쓴다. 사탕수수는 기호품일 뿐이라며 초콜릿을 더 좋아한다. 요정은 조화를 이뤄야 한다는 신념을 가지고 있다. 설탕 정제 방법을 알고 있는 지식인.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>사탕수수 하나에서 시작된 요정들의 작은 모험.</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project20ep1"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <div id="imageLightbox" class="lightbox-overlay">
@@ -129,7 +208,7 @@
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어간다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
@@ -137,7 +216,7 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 13;
+        const CURRENT_PROJECT_ID = 20;
     </script>
     <script src="../theme.js"></script>
     <script src="project.js"></script>
