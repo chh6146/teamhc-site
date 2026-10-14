@@ -77,7 +77,7 @@ body {
 }
 
 .wrap {
-    width: 100%;              /* ← 추가! */
+    width: 100%;
     max-width: 980px;
     margin: 0 auto;
     padding: 0 20px;
@@ -169,7 +169,7 @@ body {
     justify-content: center;
     gap: 4px;
     flex: 0 1 auto;
-    min-width: fit-content;   /* ← auto → fit-content */
+    min-width: fit-content;
     max-width: 100%;
     overflow-x: auto;
     scrollbar-width: none;
@@ -616,7 +616,7 @@ body {
 }
 
 /* ==========================================================================
-   9. Store Bar (지금 다운로드 + 아이콘)
+   9. Store Bar (지금 다운로드 + 링크)
    ========================================================================== */
 .store-bar {
     display: inline-flex;
@@ -627,6 +627,11 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 9999px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+    /* 유동형: 좁은 화면에서 자연스럽게 wrap */
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .store-bar .store-label {
@@ -640,37 +645,59 @@ body {
 .store-bar .store-icons {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
+/* === 버튼: 아이콘 전용 원형 → 텍스트 대응 알약형 === */
 .store-bar .store-icon-btn {
-    width: 40px;
-    height: 40px;
+    /* 원형 고정 해제 */
+    width: auto;
+    height: auto;
+    min-height: 40px;
+    padding: 0 18px;              /* ← 좌우 여백이 버튼 폭을 결정 */
+    border-radius: 9999px;        /* ← 알약 형태 */
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    gap: 6px;
+
     background: var(--accent);
     color: #ffffff;
     text-decoration: none;
-    transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    white-space: nowrap;          /* 텍스트 줄바꿈 방지 */
+
+    transition: transform 0.2s var(--ease),
+                filter 0.2s var(--ease),
+                background 0.2s var(--ease),
+                color 0.2s var(--ease);
 }
 
 .store-bar .store-icon-btn:hover {
     filter: brightness(1.15);
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .store-bar .store-icon-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.97);
 }
 
+/* 아이콘을 같이 쓸 경우 (지금은 텍스트만) */
 .store-bar .store-icon-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     display: block;
+    flex-shrink: 0;
 }
 
+/* === Hero(어두운 배경) 위 텍스트 버튼 보정 === */
 .store-bar-hero {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(140%);
@@ -754,11 +781,13 @@ body {
 .cta-section .store-bar .store-icon-btn {
     background: var(--accent);
     color: #ffffff;
+    min-height: 42px;
+    padding: 0 20px;
 }
 
 .cta-section .store-bar .store-icon-btn:hover {
     filter: brightness(1.15);
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 /* ==========================================================================
@@ -890,24 +919,43 @@ body {
 
 @media (max-width: 480px) {
     .store-bar {
-        padding: 8px 10px 8px 18px;
+        padding: 8px 12px 8px 16px;
         gap: 10px;
     }
     .store-bar .store-label {
-        font-size: 0.88rem;
+        font-size: 0.85rem;
     }
     .store-bar .store-icon-btn {
-        width: 36px;
-        height: 36px;
+        min-height: 36px;
+        padding: 0 14px;
+        font-size: 0.82rem;
     }
     .store-bar .store-icon-btn svg {
-        width: 18px;
-        height: 18px;
+        width: 14px;
+        height: 14px;
+    }
+    .cta-section .store-bar .store-icon-btn {
+        min-height: 38px;
+        padding: 0 16px;
     }
 }
 
 @media (max-width: 380px) {
     .character-grid { grid-template-columns: 1fr; }
+
+    /* 아주 좁은 화면: 라벨과 버튼 세로 배치 */
+    .store-bar {
+        flex-direction: column;
+        border-radius: 24px;
+        padding: 14px 18px;
+    }
+    .store-bar .store-icons {
+        width: 100%;
+    }
+    .store-bar .store-icon-btn {
+        flex: 1;
+        padding: 0 12px;
+    }
 }
 
 /* ==========================================================================
