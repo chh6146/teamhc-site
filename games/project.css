@@ -1,247 +1,791 @@
 /* ==========================================================================
-   1. CSS Variables & Reset
+   Project Detail Page — 미연시 게임 소개
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Base
    ========================================================================== */
 :root {
     --accent: #33b1e8;
-    --bg: #f7fdff;
-    --card: #ffffff;
-    --text: #0f172a;
-    --text-muted: #64748b;
-    --border-light: rgba(15, 23, 42, 0.03);
+
+    --accent-soft: color-mix(in srgb, var(--accent) 8%, #ffffff);
+    --accent-tint: color-mix(in srgb, var(--accent) 16%, #ffffff);
+    --accent-line: color-mix(in srgb, var(--accent) 30%, #ffffff);
+
+    --section-gap: 80px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
 }
 
-html, body {
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
+/* 다크모드: accent 파생 색상 어둡게 */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --accent-soft: color-mix(in srgb, var(--accent) 14%, #0a1017);
+        --accent-tint: color-mix(in srgb, var(--accent) 22%, #0a1017);
+        --accent-line: color-mix(in srgb, var(--accent) 40%, #0a1017);
+    }
+}
+:root[data-theme="dark"] {
+    --accent-soft: color-mix(in srgb, var(--accent) 14%, #0a1017);
+    --accent-tint: color-mix(in srgb, var(--accent) 22%, #0a1017);
+    --accent-line: color-mix(in srgb, var(--accent) 40%, #0a1017);
+}
+
+html {
     scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        var(--accent-soft) 0%,
+        #ffffff 60%,
+        var(--accent-tint) 100%
+    );
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    transition: color var(--t-base), background 0.5s var(--ease);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body {
+        background: linear-gradient(
+            135deg,
+            var(--accent-soft) 0%,
+            #0a1017 60%,
+            var(--accent-tint) 100%
+        );
+        background-attachment: fixed;
+    }
+}
+:root[data-theme="dark"] body {
+    background: linear-gradient(
+        135deg,
+        var(--accent-soft) 0%,
+        #0a1017 60%,
+        var(--accent-tint) 100%
+    );
+    background-attachment: fixed;
 }
 
 .wrap {
+    width: 100%;              /* ← 추가! */
     max-width: 980px;
-    margin: 10px auto; /* 28px에서 10px로 줄여서 상단 여백 밀착 */
-    padding: 0 20px;   /* 상하 패딩을 0으로 만들고 좌우만 남김 */
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-bottom: max(60px, env(safe-area-inset-bottom));
 }
 
 /* ==========================================================================
-   2. Header & Top Navigation
+   2. Sticky Header
    ========================================================================== */
-header {
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 12px;
+    gap: 12px;
+    padding: 12px 0;
+    padding-top: max(12px, env(safe-area-inset-top));
+    margin-bottom: 8px;
+    transition: background 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
 }
 
-.title-block {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.site-header.is-scrolled {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border-bottom: 1px solid var(--border-light);
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.game-sub {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin: 0 0 2px;
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid var(--surface-border);
+    color: var(--text-sub);
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    transition: color var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
 }
 
-.game-title {
-    font-size: 1.4rem;
-    font-weight: 800;
+.icon-btn:hover {
     color: var(--accent);
-    margin: 0;
+    border-color: var(--accent);
+    transform: scale(1.05);
 }
 
-.logo {
-    width: 240px;
-    height: auto;
-    border-radius: 8px;
+.icon-btn:active { transform: scale(0.92); }
+
+.icon-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
-.meta {
-    color: #475569;
-    font-size: 0.95rem;
-    margin-bottom: 18px;
+.icon-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.icon-btn[hidden] { display: none; }
+
+.theme-btn .icon-moon { display: none; }
+.theme-btn .icon-sun  { display: block; }
+
+:root[data-theme="dark"] .theme-btn .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-btn .icon-moon { display: block; }
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-btn .icon-sun { display: none; }
+    :root:not([data-theme="light"]) .theme-btn .icon-moon { display: block; }
+}
+
+/* 앵커 탭 */
+.anchor-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    flex: 0 1 auto;
+    min-width: fit-content;   /* ← auto → fit-content */
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px;
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid var(--surface-border);
+    border-radius: 9999px;
+}
+
+.anchor-tabs::-webkit-scrollbar { display: none; }
+
+.anchor-tabs button {
+    padding: 8px 14px;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.2s var(--ease), background 0.2s var(--ease);
+    letter-spacing: -0.01em;
+}
+
+.anchor-tabs button:hover {
+    color: var(--text-main);
+}
+
+.anchor-tabs button.active {
+    background: var(--accent);
+    color: #ffffff;
 }
 
 /* ==========================================================================
-   3. Content Cards & Media
+   3. Hero
    ========================================================================== */
-   
-.mid-notice {
-    /* 변수 처리: 기본값으로 검은색 배경이나 기본 이미지를 설정할 수 있습니다 */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), var(--bg-image);
+.hero {
+    position: relative;
+    margin: 0 -20px 40px;
+    min-height: 60vh;
+    min-height: 60dvh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 60px 24px;
+    overflow: hidden;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+
+    background-image:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 0.85) 100%
+        ),
+        var(--hero-bg, linear-gradient(135deg, var(--accent), #000));
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    
-    padding: 60px 40px;
+    color: #ffffff;
+}
+
+.hero-content {
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    animation: heroIn 900ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes heroIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-sub {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin: 0 0 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-title {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.9rem, 6vw, 3.2rem);
+    margin: 0 0 16px;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    text-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.65),
+        0 0 60px rgba(0, 0, 0, 0.4);
+    word-break: keep-all;
+}
+
+.hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    font-style: italic;
+    margin: 0 0 28px;
+    opacity: 0.95;
+    line-height: 1.7;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   4. Section 공통
+   ========================================================================== */
+.section {
+    margin-bottom: var(--section-gap);
+    scroll-margin-top: 80px;
+}
+
+.section-title {
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+    display: inline-block;
+    position: relative;
+}
+
+.section-title::before { display: none; }
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-top: 8px;
+}
+
+.section-lead {
+    font-size: 0.95rem;
+    color: var(--text-sub);
+    margin: 0 0 32px;
+    line-height: 1.8;
+    max-width: 720px;
+    letter-spacing: -0.01em;
+    white-space: pre-line;
+}
+
+.section-lead strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   5. Feature Grid
+   ========================================================================== */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-    border-radius: 15px;
-    color: #ffffff;
-    text-align: center;
-    overflow: hidden;
 }
 
-.notice-text {
-    font-style: italic;  /* 모든 문구 이탤릭 적용 */
-    line-height: 2.8;    /* 줄 간격 넉넉하게 */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .feature-card {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+}
+:root[data-theme="dark"] .feature-card {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-.notice-text p {
-    margin: 0;
-    font-size: 1.15rem;
-    color: #ffffff !important; /* root의 검은색 텍스트 무시 */
-    /* 글자 그림자를 진하게 주어 가독성 확보 */
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); 
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px var(--accent-line);
 }
 
-/* 3문장과 2문장 사이의 간격 */
-.notice-text p.split {
-    margin-bottom: 40px; 
-    margin-top: 40px; 
-}
-
-.card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 18px;
-    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
-    border: 1px solid var(--border-light);
-
-    /* 추가: 모든 카드가 최대 800px를 넘지 않게 함 */
-    max-width: 800px; 
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.card .text {
-    text-align: left;             /* 부모의 center 속성을 무시하고 왼쪽 정렬 */
-    width: 100%;                  /* 영역을 꽉 채워야 정렬이 눈에 보임 */
-    display: flex;
-    flex-direction: column;       /* 내용을 위아래로 배치 */
-    align-items: flex-start;      /* [핵심] Flex 자식 요소들을 왼쪽으로 밀착 */
-}
-
-h2 {
-    font-size: 1.05rem;
-    margin: 0 0 6px;
-}
-
-p {
-    color: #344154;
-    margin: 0;
-}
-
-img.responsive {
+.feature-card img {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 12px 0;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+    transition: transform 0.5s var(--ease);
 }
 
-.media {
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    gap: 32px;
-    align-items: center;
-}
+.feature-card:hover img { transform: scale(1.03); }
 
-.media img {
-    width: 50%;
-    max-height: 300px;    /* 이미지 세로 길이를 300px로 고정 */
-    object-fit: cover;    /* 가로세로 비율을 유지하면서 영역을 가득 채움 (중요) */
-    object-position: center; /* 이미지의 중앙을 기준으로 보여줌 */
-    border-radius: 8px;
-    flex: 0 0 50%;
-}
-
-.media .text {
+.feature-card .feature-body {
+    padding: 18px 20px 20px;
     flex: 1;
 }
 
-.media .text h2 {
-    margin: 0 0 6px;
+.feature-card h3 {
+    font-size: 1.02rem;
+    font-weight: 700;
+    margin: 0 0 8px;
     color: var(--accent);
-    font-size: 1.05rem;
+    letter-spacing: -0.01em;
 }
+
+.feature-card p {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    margin: 0;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+}
+
+.item-btn {
+    padding: 3px 10px;
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    vertical-align: baseline;
+    margin: 0 2px;
+    letter-spacing: -0.01em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.item-btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+.item-btn:active { transform: translateY(0); }
 
 /* ==========================================================================
-   5. Responsive Design (Media Queries)
+   6. Character Grid
    ========================================================================== */
-
-/* 모바일 뷰 (640px 이하) */
-@media (max-width: 640px) {
-    header {
-        gap: 10px; /* 간격을 조금 좁힘 */
-    }
-
-    /* 로고 1 : 글자 1.5 비율을 위해 로고를 확 줄임 */
-    .logo {
-        width: 80px;  /* 로고 크기를 대폭 축소 */
-    }
-
-    .game-sub {
-        font-size: 0.75rem;
-    }
-
-    .game-title {
-        font-size: 1.2rem; /* 로고 대비 1.5배 정도 느껴지도록 설정 */
-        line-height: 1.2;
-    }
-
-    .media {
-        flex-direction: column;
-        align-items: center;
-    }
-    .media img {
-        width: 100%;
-        flex: auto;
-    }
-    .wrap {
-        padding: 16px;
-    }
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
 }
 
-/* 데스크탑 뷰 (900px 이상) */
-@media (min-width: 900px) {
-    header h1 {
-        font-size: 2rem;
-    }
+.character-card {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+    display: flex;
+    flex-direction: column;
 }
 
-/* ==========================================================================
-   라이트 박스
-   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .character-card {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+}
+:root[data-theme="dark"] .character-card {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
 
-/* 라이트박스 전체 배경 */
-.lightbox-overlay {
-    display: none; /* 기본은 숨김 */
-    position: fixed;
-    z-index: 3000; /* 탭바(2000)보다 높게 설정 */
-    left: 0;
-    top: 0;
+.character-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px var(--accent-line);
+}
+
+.character-card img {
     width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); /* 밝은 테마 Toast 느낌 */
-    
-    /* [핵심] 배경 블러 처리 */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+    background: var(--accent-soft);
+    transition: transform 0.5s var(--ease);
+}
+
+.character-card:hover img { transform: scale(1.03); }
+
+.character-body {
+    padding: 16px 18px 18px;
+    flex: 1;
+}
+
+.character-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+}
+
+.character-card p {
+    font-size: 0.86rem;
+    color: var(--text-sub);
+    margin: 0;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   7. Screenshot Grid
+   ========================================================================== */
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.screenshot-grid img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    cursor: zoom-in;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+    transition: transform var(--t-base), box-shadow var(--t-base);
+}
+
+.screenshot-grid img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px var(--accent-line);
+}
+
+/* ==========================================================================
+   8. Devlog (개발일지)
+   ========================================================================== */
+.devlog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.devlog-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "meta arrow"
+        "title arrow";
+    row-gap: 4px;
+    column-gap: 16px;
+    align-items: center;
+    padding: 18px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-main);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .devlog-item {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+}
+:root[data-theme="dark"] .devlog-item {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.devlog-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px var(--accent-line);
+}
+
+.devlog-meta {
+    grid-area: meta;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: -0.01em;
+}
+
+.devlog-episode {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 9px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: -0.01em;
+}
+
+.devlog-title {
+    grid-area: title;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+    word-break: keep-all;
+    line-height: 1.5;
+}
+
+.devlog-arrow {
+    grid-area: arrow;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform var(--t-fast), background var(--t-fast), color var(--t-fast);
+}
+
+.devlog-item:hover .devlog-arrow {
+    background: var(--accent);
+    color: #ffffff;
+    transform: translate(2px, -2px);
+}
+
+.devlog-arrow svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+/* ==========================================================================
+   9. Store Bar (지금 다운로드 + 아이콘)
+   ========================================================================== */
+.store-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px 10px 22px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 9999px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.store-bar .store-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.store-bar .store-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.store-bar .store-icon-btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
+}
+
+.store-bar .store-icon-btn:hover {
+    filter: brightness(1.15);
+    transform: scale(1.08);
+}
+
+.store-bar .store-icon-btn:active {
+    transform: scale(0.95);
+}
+
+.store-bar .store-icon-btn svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.store-bar-hero {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin-top: 8px;
+}
+
+.store-bar-hero .store-label {
+    color: #ffffff;
+}
+
+.store-bar-hero .store-icon-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.store-bar-hero .store-icon-btn:hover {
+    background: #ffffff;
+    color: var(--accent);
+    filter: none;
+}
+
+/* ==========================================================================
+   10. Download CTA
+   ========================================================================== */
+.cta-section {
+    margin: var(--section-gap) 0 40px;
+    padding: 48px 32px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        135deg,
+        var(--accent),
+        color-mix(in srgb, var(--accent) 60%, #000)
+    );
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 20px 50px -12px color-mix(in srgb, var(--accent) 40%, transparent);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.15), transparent 60%);
+    pointer-events: none;
+}
+
+.cta-section h2 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+    position: relative;
+    color: #ffffff;
+}
+
+.cta-section p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin: 0 0 24px;
+    position: relative;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+}
+
+.cta-section .store-bar {
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.cta-section .store-bar .store-label {
+    color: #1f2937;
+}
+
+.cta-section .store-bar .store-icon-btn {
+    background: var(--accent);
+    color: #ffffff;
+}
+
+.cta-section .store-bar .store-icon-btn:hover {
+    filter: brightness(1.15);
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   11. Lightbox
+   ========================================================================== */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background-color: rgba(255, 255, 255, 0.7);
     -webkit-backdrop-filter: blur(15px) saturate(180%);
     backdrop-filter: blur(15px) saturate(180%);
-    
     cursor: zoom-out;
     animation: fadeIn 0.3s ease;
 }
 
-/* 이미지 스타일 */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .lightbox-overlay {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+}
+:root[data-theme="dark"] .lightbox-overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
 .lightbox-content {
-    margin: auto;
     display: block;
     max-width: 90%;
     max-height: 80%;
@@ -252,148 +796,128 @@ img.responsive {
     left: 50%;
     transform: translate(-50%, -50%);
     animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s ease;
 }
 
-/* 애니메이션 */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes zoomIn { from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
-
-/* ==========================================================================
-   아이템 버튼 스타일
-   ========================================================================== */
-.item-btn {
-    padding: 8px 12px;
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.item-btn:hover {
-    background-color: #357abd;
-    transform: translateY(-2px); /* 살짝 위로 뜸 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.item-btn:active {
-    transform: translateY(0); /* 클릭 시 다시 내려옴 */
+@keyframes zoomIn {
+    from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+    to   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
 /* ==========================================================================
-   7. 카테고리 탭 스타일
+   12. Responsive
    ========================================================================== */
-.tab-inner {
-    position: relative;
-    display: flex;
-    background: #f1f5f9;
-    padding: 4px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 400px;
-    margin: 30px auto 40px;
-    overflow: hidden; /* 슬라이더가 삐져나가지 않게 */
-}
+@media (max-width: 720px) {
+    :root { --section-gap: 56px; }
 
-/* 움직이는 배경 박스 */
-.tab-slider {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: calc(100% / var(--tab-count, 3) - 4px); 
-    height: calc(100% - 8px);
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    
-    /* 애니메이션 설정 */
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 0; 
-    pointer-events: none; /* 클릭 방해 금지 */
-}
-
-.tab-item {
-    flex: 1;
-    position: relative; /* 슬라이더보다 위에 올라오게 */
-    z-index: 1;
-    padding: 12px 0;
-    border: none;
-    background: transparent;
-    font-size: 0.9rem;
-    color: #64748b;
-    font-weight: 700;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.tab-item.active {
-    color: #1e293b;
-}
-
-/* 탭 콘텐츠 기본 숨김 */
-.tab-content {
-    display: none; 
-}
-
-/* active 클래스가 붙은 섹션만 보여줌 */
-.tab-content.active {
-    display: block;
-    animation: fadeIn 0.3s ease-out; /* 나타날 때 부드럽게 */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ==========================================================================
-   8. 캐릭터 섹션 스타일
-   ========================================================================== */
-/* 캐릭터 섹션 전용 스타일 */
-#characters .media img {
-    width: 150px;       /* 캐릭터 이미지는 적당한 크기로 고정 */
-    height: 150px;
-    flex: 0 0 150px;    /* 크기가 줄어들지 않게 고정 */
-    object-fit: cover;  /* 이미지가 잘리지 않고 꽉 차게 */
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-#characters p strong {
-    color: var(--accent); /* 대사나 강조 포인트에 강조색 적용 */
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.95rem;
-}
-
-/* project.css 하단에 추가 또는 수정 */
-
-/* 1. 콘텐츠 전체가 부드럽게 나타나게 수정 */
-.tab-content.active {
-    display: block;
-    animation: slideUpFade 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 2. 내부 카드 이미지들에 시차 효과 주기 (선택 사항) */
-.tab-content.active img {
-    animation: imgFade 0.8s ease-out;
-}
-
-@keyframes slideUpFade {
-    from {
-        opacity: 0;
-        transform: translateY(20px); /* 20px 아래에서 시작 */
+    .wrap {
+        padding: 0 16px;
+        padding-bottom: max(60px, env(safe-area-inset-bottom));
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        padding-top: max(12px, env(safe-area-inset-top));
+        margin-bottom: 8px;
+        transition: background 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+    }
+
+    .back-btn { margin-right: auto; }
+    .theme-btn { margin-left: auto; }
+    .anchor-tabs {
+        grid-area: tabs;
+        justify-self: stretch;
+        justify-content: flex-start;
+    }
+
+    .site-header.is-scrolled {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero {
+        margin: 0 -16px 32px;
+        min-height: 55vh;
+        min-height: 55dvh;
+        padding: 40px 20px;
+    }
+
+    .feature-grid,
+    .screenshot-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .character-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .character-body {
+        padding: 12px 14px 14px;
+    }
+
+    .character-card h3 { font-size: 0.95rem; }
+    .character-card p { font-size: 0.8rem; }
+
+    .cta-section {
+        padding: 36px 24px;
+        margin-left: -16px;
+        margin-right: -16px;
+        border-radius: 0;
+    }
+
+    .devlog-item {
+        padding: 16px 18px;
+    }
+    .devlog-title {
+        font-size: 0.9rem;
+    }
+    .devlog-arrow {
+        width: 32px;
+        height: 32px;
     }
 }
 
-@keyframes imgFade {
-    from { opacity: 0; filter: blur(5px); }
-    to { opacity: 1; filter: blur(0); }
+@media (max-width: 480px) {
+    .store-bar {
+        padding: 8px 10px 8px 18px;
+        gap: 10px;
+    }
+    .store-bar .store-label {
+        font-size: 0.88rem;
+    }
+    .store-bar .store-icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+    .store-bar .store-icon-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 380px) {
+    .character-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   13. Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

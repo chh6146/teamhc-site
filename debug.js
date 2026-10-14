@@ -4,40 +4,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const devToast = document.getElementById("devToast");
     const devLink = document.getElementById("devLink");
 
-    // [1] 페이지 로드 시 무조건 초기화 (혹시 남아있을 클래스 제거)
-    if (devLink) {
-        devLink.classList.remove("reveal");
-    }
-    if (devToast) {
-        devToast.classList.remove("show");
-    }
+    if (!mainLogo || !devLink) return;
 
-    if (mainLogo) {
-        mainLogo.addEventListener("click", () => {
-            // 이미 활성화된 상태라면 더 이상 카운트하지 않음
-            if (devLink && devLink.classList.contains("reveal")) return;
+    // 초기화
+    devLink.classList.remove("reveal");
+    if (devToast) devToast.classList.remove("show");
 
-            logoClickCount++;
+    mainLogo.addEventListener("click", () => {
+        // 이미 활성화된 상태면 카운트 중단
+        if (devLink.classList.contains("reveal")) return;
 
-            if (logoClickCount === 10) {
-                // [2] 토스트 알림 표시
-                if (devToast) {
-                    devToast.classList.add("show");
-                    
-                    // 3초 후 토스트만 자동으로 사라짐
-                    setTimeout(() => {
-                        devToast.classList.remove("show");
-                    }, 3000);
-                }
+        logoClickCount++;
 
-                // [3] 숨겨진 버튼 등장
-                if (devLink) {
-                    devLink.classList.add("reveal");
-                }
-
-                // 카운트 초기화
-                logoClickCount = 0;
+        if (logoClickCount === 10) {
+            // 토스트
+            if (devToast) {
+                devToast.classList.add("show");
+                setTimeout(() => devToast.classList.remove("show"), 3000);
             }
-        });
-    }
+
+            // reveal 애니메이션 재실행 트릭
+            devLink.classList.remove("reveal");
+            void devLink.offsetWidth;
+            devLink.classList.add("reveal");
+
+            logoClickCount = 0;
+        }
+    });
 });

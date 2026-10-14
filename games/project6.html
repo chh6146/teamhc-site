@@ -2,112 +2,217 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
-    <title>저편 하늘을 향해 - Team HC</title>
+
+    <!-- FOUC 방지 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="project.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
     <style>
-    :root {
-        --accent: #1880ba; 
-    }
+        :root { --accent: #1880ba; }
     </style>
 </head>
 <body>
+
     <div class="wrap">
-        <header>
-            <img src="title_pj6.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <!-- Sticky Header -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" onclick="showTab('summary')">개요</button>
-                <button class="tab-item" onclick="showTab('manual')">게임 소개</button>
-                <!-- <button class="tab-item" onclick="showTab('characters')">캐릭터 소개</button> -->
-            </div>
-        </nav>
+        <!-- Hero -->
+        <section class="hero" style="--hero-bg: url('pj6_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 6 · 2015.01.24 발매</p>
+                <h1 class="hero-title">저편 하늘을 향해</h1>
+                <p class="hero-tagline">
+                    어느 날 갑자기 증발해버린 사람들, 그리고 남겨진 흔적.<br>
+                    수많은 선택의 갈림길, 당신이 고른 그 길이 과연 정답일까?
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj6_background.webp');">
-                <div class="notice-text">
-                    <p>어느 날 갑자기 증발해버린 사람들, 그리고 남겨진 흔적</p>
-                    <p>감춰진 진실을 풀기 위해 나선 주인공 일행.</p>
-
-                    <p class="split">수많은 선택의 갈림길, 당신이 고른 그 길이 과연 정답일까?</p>
-
-                    <p>그리고...</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep0"
+                           class="store-icon-btn"
+                           aria-label="프롤로그"
+                           title="프롤로그"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep1"
+                           class="store-icon-btn"
+                           aria-label="본편"
+                           title="본편"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj6_info_01.webp" alt="저하해 발매 정보">
-                    <div class="text">
-                        <h2>다시 비상하는 이야기</h2>
+        <!-- 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                어느 날 갑자기 증발해버린 사람들, 그리고 남겨진 흔적.
+                감춰진 진실을 풀기 위해 나선 주인공 일행.
+                수많은 선택의 갈림길, 당신이 고른 그 길이 과연 정답일까?
+                그리고...
+            </p>
+        </section>
+
+        <!-- 게임 소개 -->
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                '우리들의 날개는 언제부턴가 부서졌다' 그 이후의 이야기.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="pj6_info_01.webp" alt="다시 비상하는 이야기">
+                    <div class="feature-body">
+                        <h3>다시 비상하는 이야기</h3>
                         <p>'우리들의 날개는 언제부턴가 부서졌다' 그 이후의 이야기를 담은 정식 후속작이 찾아옵니다. 순차적으로 공개되는 서사, 모든 에피소드를 통해 끝나지 않은 이야기를 확인하세요.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
-                    <img src="pj6_info_02.webp" alt="저하해 시놉시스">
-                    <div class="text">
-                        <h2>은빛 공원에서 시작되는 의혹</h2>
+
+                <div class="feature-card">
+                    <img src="pj6_info_02.webp" alt="은빛 공원에서 시작되는 의혹">
+                    <div class="feature-body">
+                        <h3>은빛 공원에서 시작되는 의혹</h3>
                         <p>'그' 사건으로부터 1년 뒤. 연구원이 된 노랑이에게 전해 들은 기묘한 이야기, 나래가 은빛 공원에 나타난다는 정보. 하서는 직감적인 이질감을 느끼며 진실을 쫓지만, 사건은 좀처럼 연관점을 드러내지 않는다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
-                    <img src="pj6_info_03.webp" alt="LI001의 귀환">
-                    <div class="text">
-                        <h2>금기의 물건, LI001</h2>
+
+                <div class="feature-card">
+                    <img src="pj6_info_03.webp" alt="금기의 물건, LI001">
+                    <div class="feature-body">
+                        <h3>금기의 물건, LI001</h3>
                         <p>단서가 보이지 않는 막막함 속에서 다시 한번 손에 쥐게 된 'LI001'. 과거와 현재를 관통하는 이 물건은 과연 하서에게 해답을 줄 것인가, 아니면 또 다른 비극의 시작이 될 것인가?</p>
                     </div>
                 </div>
             </div>
-
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj6_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
+        <!-- 캐릭터 -->
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj6_ch1.webp" alt="캐릭터 1">
+                    <div class="character-body">
+                        <h3>캐릭터 이름</h3>
                         <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep0" class="tab-button download aos">프롤로그</a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep1" class="tab-button download aos">본편</a>
-        </nav>
-    </div>
+        <!-- 다운로드 CTA -->
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>프롤로그와 본편으로 나뉘어 펼쳐지는 이야기, 끝나지 않은 서사가 기다립니다.</p>
 
-    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+            <div class="store-bar">
+                <span class="store-label">프롤로그 / 본편</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep0"
+                       class="store-icon-btn"
+                       aria-label="프롤로그 다운로드"
+                       title="프롤로그"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project6ep1"
+                       class="store-icon-btn"
+                       aria-label="본편 다운로드"
+                       title="본편"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /.wrap -->
+
+    <!-- 라이트박스 -->
+    <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
+    <!-- 뱃지 토스트 -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
@@ -115,8 +220,9 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 6; 
+        const CURRENT_PROJECT_ID = 6;
     </script>
+    <script src="../theme.js"></script>
     <script src="project.js"></script>
 </body>
 </html>

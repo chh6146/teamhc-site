@@ -4,39 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
-    <meta name="theme-color" content="#e6f9ff">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
+
+    <!-- FOUC 방지: CSS 로드 전에 테마 세팅 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
     <title>Team HC</title>
+    <meta name="description" content="Team HC 공식 사이트 및 서비스 바로가기">
+
+    <meta property="og:title" content="Team HC">
+    <meta property="og:description" content="공식 사이트 및 서비스 바로가기">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="teamhc_33b1e8.webp">
+
     <link rel="icon" href="favicon.webp" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
+
+        <div class="top-bar">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+
         <img src="teamhc_33b1e8.webp" alt="Team HC 로고" class="logo" id="mainLogo">
         <p class="description">공식 사이트 및 서비스 바로가기</p>
-        
+
         <div class="link-group">
             <a href="https://site.teamhc.net/" class="link-button hidden-mode" id="devLink">
-                <img src="button_teamhc.webp" alt="Team HC" class="icon-img">
+                <img src="button_teamhc.webp" alt="" class="icon-img" aria-hidden="true">
                 <span>임시 홈페이지</span>
             </a>
 
             <a href="https://blog.teamhc.net" class="link-button">
-                <img src="button_teamhc.webp" alt="새로운 소식" class="icon-img">
+                <img src="button_teamhc.webp" alt="" class="icon-img" aria-hidden="true">
                 <span>새로운 소식</span>
             </a>
 
             <a href="games/games.html" class="link-button">
-                <img src="icon_recent.webp" alt="Team HC" class="icon-img">
+                <img src="icon_recent.webp" alt="" class="icon-img" aria-hidden="true">
                 <span>기록된 이야기</span>
             </a>
-
-            <!-- <a href="https://cafe.naver.com/indieteamhc" class="link-button">
-                <img src="button_navercafe.webp" alt="네이버 카페" class="icon-img">
-                <span>네이버 카페</span>
-            </a> -->
-
         </div>
 
         <div class="footer">
@@ -45,19 +82,42 @@
                 <a href="privacy.html">개인정보처리방침</a>
                 <a href="https://donation.teamhc.net">후원</a>
             </div>
+
             <div class="footer-social">
-                <a href="https://x.com/teamhc_official" class="x-button" aria-label="X" target="_blank" rel="noopener">
+                <a href="https://x.com/teamhc_official"
+                   class="x-button"
+                   aria-label="X (트위터)"
+                   target="_blank"
+                   rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff" aria-hidden="true">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                 </a>
             </div>
+
             <div>팀에이치씨(Team HC) | 사업자 등록번호: 634-29-00240</div>
             <div>© Team HC. All rights reserved.</div>
         </div>
-
     </div>
-    <div id="devToast" class="dev-toast">개발자 모드가 활성화 되었습니다!</div>
+
+    <div id="devToast" class="dev-toast" role="status" aria-live="polite">
+        개발자 모드가 활성화 되었습니다!
+    </div>
+
+    <script>
+        (function () {
+            const buttons = document.querySelectorAll('.link-button');
+            buttons.forEach(btn => {
+                btn.addEventListener('pointermove', e => {
+                    const r = btn.getBoundingClientRect();
+                    btn.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                    btn.style.setProperty('--my', (e.clientY - r.top) + 'px');
+                });
+            });
+        })();
+    </script>
+
+    <script src="theme.js"></script>
     <script src="debug.js"></script>
 </body>
 </html>

@@ -2,165 +2,265 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
-    <title>그x그녀의 계획은 훼방x훼방 - Team HC</title>
+
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="project.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
     <style>
-    :root {
-        --accent: #012340; 
-    }
+        :root { --accent: #012340; }
     </style>
 </head>
 <body>
+
     <div class="wrap">
-        <header>
-            <img src="title_pj26.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <!-- Sticky Header -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">시스템</button>
+                <button type="button" data-target="characters">캐릭터</button>
+                <button type="button" data-target="screenshots">스크린샷</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" onclick="showTab('summary')">개요</button>
-                <button class="tab-item" onclick="showTab('manual')">게임 소개</button>
-                <button class="tab-item" onclick="showTab('characters')">캐릭터 소개</button>
-            </div>
-        </nav>
+        <!-- Hero -->
+        <section class="hero" style="--hero-bg: url('pj26_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 26 · 2025.02.24 발매</p>
+                <h1 class="hero-title">그X그녀의 계획은 훼방X훼방</h1>
+                <p class="hero-tagline">
+                    학생회장 선거는 다가오고, 미휘월은 혼란에 빠진다.<br>
+                    선택은 당신에게 달렸다.
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj26_background.webp');">
-                <div class="notice-text">
-                    <p>학생회장 선거는 다가오고, 미휘월은 혼란에 빠진다.</p>
-                    <p>누군가는 상대를 끌어내리려 하고, 누군가는 그 손을 잡는다.</p>
-                    <p class="split">그리고, 모든 것을 지켜보는 또 한 사람—</p>
-                    <p>진실을 밝혀낼 것인가, 아니면 같은 거짓 선동을 할 것인가?</p>
-                    <p>선택은 당신에게 달렸다.</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project26"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
+        <!-- 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                학생회장 선거를 앞둔 미휘월 심화 학교. 누군가는 상대를 끌어내리려 하고,
+                누군가는 그 손을 잡는다. 그리고 모든 것을 지켜보는 또 한 사람—
+                진실을 밝혀낼 것인가, 아니면 같은 거짓 선동을 할 것인가?
+                선택은 당신에게 달렸다.
+            </p>
+        </section>
+
+        <!-- 시스템 -->
+        <section id="system" class="section">
+            <h2 class="section-title">시스템</h2>
+            <p class="section-lead">
+                미연시의 기본기를 다지면서, 학교를 탐색하고 증거를 모아 사건을 해결해 나갑니다.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
                     <img src="pj26_info_01.webp" alt="선택지는 기본">
-                    <div class="text">
-                        <h2>선택지는 기본</h2>
+                    <div class="feature-body">
+                        <h3>선택지는 기본</h3>
                         <p>일반적으로 여러분이 알고 있는 비주얼 노벨처럼 미휘월 심화 학교에 발생한 일에 대해 알아봅니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj26_info_02.webp" alt="강화된 선택지">
-                    <div class="text">
-                        <h2>강화된 선택지</h2>
-                        <p>하지만 학교에서 벌어진 일을 선택지로만 해결할 수 없습니다. 학교를 탐색하며 획득한 증거품과, 지식으로 학생들과 대화해서 상황을 좀 더 해결해 나갑니다.</p>
+                    <div class="feature-body">
+                        <h3>강화된 선택지</h3>
+                        <p>하지만 학교에서 벌어진 일을 선택지로만 해결할 수 없습니다. 학교를 탐색하며 획득한 증거품과 지식으로 학생들과 대화해서 상황을 좀 더 해결해 나갑니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj26_info_03.webp" alt="상대방의 마음">
-                    <div class="text">
-                        <h2>상대방의 마음이 움직인다</h2>
+                    <div class="feature-body">
+                        <h3>상대방의 마음이 움직인다</h3>
                         <p>상대방과 대화를 하며 곤란한 상대방의 의견을 듣고 도와주거나, 학교에서 소외된 학생을 도와줌으로서 사건을 해결해나갑니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj26_info_04.webp" alt="학교를 돌아다닌다">
-                    <div class="text">
-                        <h2>학교를 돌아다닌다</h2>
+                    <div class="feature-body">
+                        <h3>학교를 돌아다닌다</h3>
                         <p>학교를 돌아다니며, 어쩌다 얻게 된
-                            <button class="item-btn" onclick="openItem('선도부 뱃지', '선도부 활동에 참여한 사람에게 주어지는 특별한 뱃지. 이 뱃지를 소지하면 점심시간에 학교를 나가는 것도 가능하다. 학교 밖으로 나가고 싶을 때 유용하다.', 'pj26_badge.webp')">선도부 뱃지</button>
-                            를 이용해서 야외로도 돌아다닙니다. 생각지도 못한 행동을 통해 숨겨진 결말을 발견하게 될지도 모릅니다.</p>
+                            <button class="item-btn"
+                                    onclick="openItem('선도부 뱃지', '선도부 활동에 참여한 사람에게 주어지는 특별한 뱃지. 이 뱃지를 소지하면 점심시간에 학교를 나가는 것도 가능하다. 학교 밖으로 나가고 싶을 때 유용하다.', 'pj26_badge.webp')">
+                                선도부 뱃지
+                            </button>
+                            를 이용해서 야외로도 돌아다닙니다. 생각지도 못한 행동을 통해 숨겨진 결말을 발견하게 될지도 모릅니다.
+                        </p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj26_info_05.webp" alt="호감도로 숨겨진 루트">
-                    <div class="text">
-                        <h2>호감도로 숨겨진 루트</h2>
+                    <div class="feature-body">
+                        <h3>호감도로 숨겨진 루트</h3>
                         <p>호감도를 상승 시키면 특별한 루트를 발견할 지도 모릅니다. 숨겨진 루트에서 특별한 시나리오를 감상해보세요.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
-                    <img src="pj26_info_06.webp" alt="다운로드">
-                    <div class="text">
-                        <h2>발매일</h2>
-                        <p>Android 발매일 : 2025년 2월 24일</p>
+
+                <div class="feature-card">
+                    <img src="pj26_info_06.webp" alt="다양한 결말">
+                    <div class="feature-body">
+                        <h3>다양한 결말</h3>
+                        <p>당신의 선택에 따라 각기 다른 결말이 기다립니다. 모든 루트를 발견해 진실에 다가가 보세요.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
+
+        <!-- 캐릭터 -->
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                미휘월 심화 학교를 둘러싼 인물들. 각자 사연을 품고 있다.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
                     <img src="pj0_ch0.webp" alt="주인공">
-                    <div class="text">
-                        <h2>주인공 (플레이어)</h2>
+                    <div class="character-body">
+                        <h3>주인공 (플레이어)</h3>
                         <p>정의감보다는 자신의 감을 우선시하는 성격. 평범했던 그의 일상에 인생 최대의 제압 기회가 찾아온다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="character-card">
                     <img src="pj26_ch2.webp" alt="이랑">
-                    <div class="text">
-                        <h2>이랑</h2>
+                    <div class="character-body">
+                        <h3>이랑</h3>
                         <p>푸른색 펌 헤어에 실크 셔츠를 즐겨 입는 여리여리한 소녀. 어린 시절 본 드라마의 충격으로 대인기피증이 있으며, 물 공포증 때문에 얼음을 즐겨 먹는다. 가방 속 프릴 달린 양산은 그녀만의 방어기제다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="character-card">
                     <img src="pj26_ch3.webp" alt="도희">
-                    <div class="text">
-                        <h2>도희</h2>
+                    <div class="character-body">
+                        <h3>도희</h3>
                         <p>단정한 벌룬펌에 붉은 입술이 매력적인 똑부러지는 성격. 건강미 넘치는 모습이지만 검은색 액세서리에 집착하는 고집이 있다. 학교 규칙마저 무시하며 자신만의 스타일을 고수하는 강단 있는 인물.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="character-card">
                     <img src="pj26_ch4.webp" alt="N">
-                    <div class="text">
-                        <h2>N</h2>
+                    <div class="character-body">
+                        <h3>N</h3>
                         <p>노란 트윈테일에 작지만 위압적인 분위기를 풍기는 수수께끼의 선배. 졸업반이라 학생회장 자리에 무관심하지만, 주인공의 특이한 행동에 호기심을 느껴 뒤에서 도움을 주는 관찰자적 인물.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="character-card">
                     <img src="pj0_ch0.webp" alt="료">
-                    <div class="text">
-                        <h2>료</h2>
+                    <div class="character-body">
+                        <h3>료</h3>
                         <p>주황색 긴 생머리로 과거를 숨긴 채 살아가는 소녀. 부정 입학과 흡연 사실이 폭로될 위기에 처하자, 권력을 쥐어 모든 것을 덮기 위해 수단과 방법을 가리지 않고 학생회장 자리를 노린다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project26" class="tab-button download aos">다운로드</a>
-        </nav>
-    </div> <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <!-- 스크린샷 -->
+        <section id="screenshots" class="section">
+            <h2 class="section-title">스크린샷</h2>
+            <p class="section-lead">
+                실제 플레이 화면을 확인해 보세요.
+            </p>
+
+            <div class="screenshot-grid">
+                <img src="pj26_ss_01.webp" alt="스크린샷 1">
+                <img src="pj26_ss_02.webp" alt="스크린샷 2">
+                <img src="pj26_ss_03.webp" alt="스크린샷 3">
+                <img src="pj26_ss_04.webp" alt="스크린샷 4">
+            </div>
+        </section>
+
+        <!-- 다운로드 CTA -->
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>미휘월 심화 학교에서 벌어지는 이야기, 당신의 선택이 결말을 바꿉니다.</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project26"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /.wrap -->
+
+    <!-- 라이트박스 -->
+    <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
+    <!-- 뱃지 토스트 -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
@@ -175,8 +275,9 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 26; 
+        const CURRENT_PROJECT_ID = 26;
     </script>
+    <script src="../theme.js"></script>
     <script src="project.js"></script>
 </body>
 </html>

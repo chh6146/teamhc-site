@@ -1,30 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
     const listRoot = document.querySelector('.link-group');
-    const overlay = document.getElementById('overlay-toast');
-    let toastTimer = null;
-    const itemTimers = new Map();
 
-    function showToast() {
-        overlay.classList.add('visible');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => {
-            overlay.classList.remove('visible');
-        }, 1500);
-    }
-
+    /* ✅ coming-soon 카드 클릭 시 이동만 막기 (토스트 없음) */
     document.addEventListener('click', e => {
         const soon = e.target.closest('.coming-soon');
         if (!soon) return;
         e.preventDefault();
-        showToast();
     });
 
     fetch('games.json')
         .then(res => res.json())
         .then(data => {
-            createItems(data);
-            sortList('project-desc'); // 초기 정렬
+            const sorted = sortData(data, 'project-desc');
+            createItems(sorted);
+        })
+        .catch(err => console.error('games.json 로드 실패:', err));
+
+    function sortData(data, mode) {
+        const visible = data.filter(g => g.status !== 'hidden');
+
+        const withPin = visible.map(g => {
+            let pin = 0;
+            if (g.badge) {
+                if (g.badge.class === 'new' || g.badge.text === 'NEW') pin = 2;
+                else if (g.badge.class === 'dev' || g.badge.text === '개발중') pin = 1;
+            }
+            return { ...g, pin };
         });
+
+        return withPin.sort((a, b) => {
+            if (a.pin !== b.pin) return b.pin - a.pin;
+
+            if (mode === 'latest-desc') {
+                const da = a.date ? parseInt(a.date.replace(/\./g, '')) : 0;
+                const db = b.date ? parseInt(b.date.replace(/\./g, '')) : 0;
+                return db - da || Number(b.id) - Number(a.id);
+            }
+            if (mode === 'name-asc') {
+                return a.title.localeCompare(b.title, 'ko');
+            }
+            if (mode === 'project-desc') {
+                return Number(b.id) - Number(a.id);
+            }
+            return 0;
+        });
+    }
 
     function formatDisplayDate(dateStr) {
         if (!dateStr) return "";
@@ -37,51 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${dateStr} ${suffix}`;
     }
 
-    function startItemTimer(a) {
-        if (!a.dataset.date || a.dataset.date.trim() === "") return;
-        if (itemTimers.has(a)) clearInterval(itemTimers.get(a));
-
-        const subArea = a.querySelector('.game-sub');
-        const timerId = setInterval(() => {
-            subArea.classList.add('fade-out'); 
-            setTimeout(() => {
-                const isCurrentlyDate = a.dataset.mode === "date";
-                const bHtml = a.dataset.badgeText ? `<span class="badge ${a.dataset.badgeClass}">${a.dataset.badgeText}</span>` : '';
-                
-                if (isCurrentlyDate) {
-                    subArea.innerHTML = `${bHtml} ${a.dataset.sub}`;
-                    a.dataset.mode = "sub";
-                } else {
-                    subArea.innerHTML = `${bHtml} ${formatDisplayDate(a.dataset.date)}`;
-                    a.dataset.mode = "date";
-                }
-                subArea.classList.remove('fade-out'); 
-            }, 500); 
-        }, 5000);
-        itemTimers.set(a, timerId);
-    }
-
     function createItems(data) {
         listRoot.innerHTML = '';
-        data.forEach(game => {
-            if (game.status === 'hidden') return;
+
+        data.forEach((game, idx) => {
             const a = document.createElement('a');
             a.className = 'link-button';
             a.dataset.id = Number(game.id);
             a.dataset.title = game.title;
-            
-            // "NEW" 및 "개발중" 배지에 우선순위 핀 점수 부여
-            let pin = 0;
-            if (game.badge) {
-                if (game.badge.class === 'new' || game.badge.text === 'NEW') pin = 2;
-                else if (game.badge.class === 'dev' || game.badge.text === '개발중') pin = 1;
-            }
-            a.dataset.pin = pin;
-
+            a.dataset.pin = game.pin ?? 0;
             a.dataset.date = game.date || "";
             a.dataset.sub = game.sub || "";
             a.dataset.status = game.status || "released";
-            a.dataset.mode = "sub";
             a.dataset.badgeText = game.badge ? game.badge.text : "";
             a.dataset.badgeClass = game.badge ? game.badge.class : "";
 
@@ -92,16 +79,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 a.href = game.url;
             }
 
-            const badgeHtml = a.dataset.badgeText ? `<span class="badge ${a.dataset.badgeClass}">${a.dataset.badgeText}</span>` : '';
+            const badgeHtml = a.dataset.badgeText
+                ? `<span class="badge ${a.dataset.badgeClass}">${a.dataset.badgeText}</span>`
+                : '';
+
+            const dateStr = game.date ? formatDisplayDate(game.date) : '';
+
             a.innerHTML = `
-                <img src="${game.icon}" class="icon-img">
+                <img src="${game.icon}" class="icon-img" alt="" aria-hidden="true">
                 <div class="game-info">
                     <div class="game-sub">${badgeHtml} ${game.sub}</div>
+                    ${dateStr ? `<div class="game-extra">${dateStr}</div>` : ''}
                     <div class="game-title">${game.title}</div>
                 </div>
             `;
+
+            a.style.animationDelay = `${Math.min(150 + idx * 60, 700)}ms`;
+
             listRoot.appendChild(a);
-            startItemTimer(a);
         });
     }
 
@@ -111,34 +106,26 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(el => rects.set(el, el.getBoundingClientRect()));
 
         items.sort((a, b) => {
-            // "NEW" 및 "개발중" 배지는 어떤 정렬에서도 최상단 유지
             const pinA = Number(a.dataset.pin || 0);
             const pinB = Number(b.dataset.pin || 0);
             if (pinA !== pinB) return pinB - pinA;
 
-            // 1. 최신순 (날짜 기반)
             if (mode === 'latest-desc') {
                 const dateA = a.dataset.date ? parseInt(a.dataset.date.replace(/\./g, '')) : 0;
                 const dateB = b.dataset.date ? parseInt(b.dataset.date.replace(/\./g, '')) : 0;
                 return dateB - dateA || Number(b.dataset.id) - Number(a.dataset.id);
             }
-
-            // 2. 가나다순 (제목 기반)
             if (mode === 'name-asc') {
                 return a.dataset.title.localeCompare(b.dataset.title, 'ko');
             }
-
-            // 3. 프로젝트순 (ID 기반 내림차순)
             if (mode === 'project-desc') {
                 return Number(b.dataset.id) - Number(a.dataset.id);
             }
-
             return 0;
         });
 
         items.forEach(el => listRoot.appendChild(el));
-        
-        // 애니메이션 효과
+
         items.forEach(el => {
             const first = rects.get(el);
             const last = el.getBoundingClientRect();
@@ -153,47 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ✅ 탭 변경 이벤트 수신부 수정
     document.addEventListener('tabchange', e => {
         const tab = e.detail.tab;
-        
-        // 1. 리스트 정렬 실행
         if (tab === 'latest') sortList('latest-desc');
         if (tab === 'name') sortList('name-asc');
         if (tab === 'project') sortList('project-desc');
-
-        const items = Array.from(listRoot.children);
-        items.forEach(a => {
-            const subArea = a.querySelector('.game-sub');
-            if (!subArea) return;
-
-            const bHtml = a.dataset.badgeText ? `<span class="badge ${a.dataset.badgeClass}">${a.dataset.badgeText}</span>` : '';
-            
-            // 기존 타이머 무조건 정지
-            if (itemTimers.has(a)) {
-                clearInterval(itemTimers.get(a));
-                itemTimers.delete(a);
-            }
-
-            // 2. 탭별 고정 및 타이머 분기
-            if (tab === 'latest') {
-                // [최신순] 날짜 고정
-                subArea.innerHTML = `${bHtml} ${formatDisplayDate(a.dataset.date)}`;
-                a.dataset.mode = "date";
-            } 
-            else if (tab === 'name') {
-                // [가나다순] 설명(sub) 고정
-                subArea.innerHTML = `${bHtml} ${a.dataset.sub}`;
-                a.dataset.mode = "sub";
-            } 
-            else if (tab === 'project') {
-                // [프로젝트순] 왔다갔다 (타이머 다시 시작)
-                // 초기 상태는 설명(sub)으로 설정 후 타이머 구동
-                subArea.innerHTML = `${bHtml} ${a.dataset.sub}`;
-                a.dataset.mode = "sub";
-                startItemTimer(a);
-            }
-        });
     });
 });
-

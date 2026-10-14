@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
+    <meta name="view-transition" content="same-origin" />
+
+    <!-- FOUC 방지 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
+    <link rel="icon" href="../favicon.webp" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../tabbar.css">
+    <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
+    <style>
+        :root { --accent: #2c5f7c; }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+
+        <!-- Sticky Header -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+                <button type="button" data-target="devlog">개발일지</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero" style="--hero-bg: url('pj18_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 18 · 2026년 예정</p>
+                <h1 class="hero-title">표류하는 이탈자는 궤적이 없다</h1>
+                <p class="hero-tagline">
+                    여기에 게임의 메인 캐치프레이즈나<br>
+                    전체적인 분위기를 설명하는 문구를 입력하세요.
+                </p>
+
+                <!-- 개발중: 다운로드 링크 없음 -->
+            </div>
+        </section>
+
+        <!-- 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                여기에 게임의 메인 캐치프레이즈나 전체적인 분위기를 설명하는 문구를 입력하세요.
+                중요한 강조점은 이 클래스를 사용합니다.
+                마지막 줄 설명을 입력하세요.
+            </p>
+        </section>
+
+        <!-- 게임 소개 -->
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                게임의 주요 시스템이나 특징을 소개합니다.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="../favicon.webp" alt="특징 소개">
+                    <div class="feature-body">
+                        <h3>시스템 특징 제목</h3>
+                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 캐릭터 -->
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="../favicon.webp" alt="캐릭터 1">
+                    <div class="character-body">
+                        <h3>캐릭터 이름</h3>
+                        <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 개발일지 -->
+        <section id="devlog" class="section">
+            <h2 class="section-title">개발일지</h2>
+            <p class="section-lead">
+                게임 개발 과정을 기록합니다.
+            </p>
+
+            <div class="devlog-list">
+                <a href="https://blog.teamhc.net/2026년/표류하는-이탈자는-궤적이-없다---개발일지-1편"
+                   class="devlog-item"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <div class="devlog-meta">
+                        <span class="devlog-episode">개발일지 1편</span>
+                    </div>
+                    <div class="devlog-title">표류하는 이탈자는 궤적이 없다 - 개발일지 1편</div>
+                    <div class="devlog-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"/>
+                            <polyline points="7 7 17 7 17 17"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 다운로드 CTA (개발중) -->
+        <section id="download" class="cta-section">
+            <h2>개발 중</h2>
+            <p>표류하는 이탈자는 궤적이 없다는 현재 개발 중입니다. 2026년 출시 예정입니다.</p>
+        </section>
+
+    </div><!-- /.wrap -->
+
+    <!-- 라이트박스 -->
+    <div id="imageLightbox" class="lightbox-overlay">
+        <img class="lightbox-content" id="fullImage">
+    </div>
+
+    <!-- 뱃지 토스트 -->
+    <div id="badge-toast" class="toast-overlay">
+        <div class="toast-content">
+            <div class="badge-body">
+                <img src="" alt="아이템" class="badge-img">
+                <div class="badge-info">
+                    <h3 class="badge-title">제목</h3>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
+                </div>
+            </div>
+            <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        const CURRENT_PROJECT_ID = 18;
+    </script>
+    <script src="../theme.js"></script>
+    <script src="project.js"></script>
+</body>
+</html>

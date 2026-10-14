@@ -2,111 +2,195 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
-    <title>가장 사랑스러운 너에게 축복을! - Team HC</title>
+
+    <!-- FOUC 방지 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="project.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
     <style>
-    :root {
-        --accent: #e4257c; 
-    }
+        :root { --accent: #e4257c; }
     </style>
 </head>
 <body>
+
     <div class="wrap">
-        <header>
-            <img src="title_pj4a.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <!-- Sticky Header -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <!-- <button type="button" data-target="characters">캐릭터</button> -->
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" onclick="showTab('summary')">개요</button>
-                <button class="tab-item" onclick="showTab('manual')">게임 소개</button>
-                <!-- <button class="tab-item" onclick="showTab('characters')">캐릭터 소개</button> -->
-            </div>
-        </nav>
+        <!-- Hero -->
+        <section class="hero" style="--hero-bg: url('pj4a_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">Agatha 프로젝트 4 · 2016.12.23 발매</p>
+                <h1 class="hero-title">가장 사랑스러운 너에게 축복을!</h1>
+                <p class="hero-tagline">
+                    특별함을 갈망하던 내게 찾아온 기묘한 능력, '시간 지연'.<br>
+                    능력이 탄로 난 순간 이야기는 급변하기 시작한다.
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj4a_background.webp');">
-                <div class="notice-text">
-                    <p>특별함을 갈망하던 내게 찾아온 기묘한 능력, '시간 지연'.</p>
-                    <p>성적이 곧 돈이 되는 비정상적인 학원에서 이 능력은 최고의 무기가 된다.</p>
-                    
-                    <p class="split">찰나를 훔치는 완벽한 컨닝, 그것은 내 인생의 필수불가결한 생존 전략.</p>
-                    
-                    <p>하지만 정적을 깨고 나타난 전학생은 내 비밀을 꿰뚫어 보았다.</p>
-                    <p>능력이 탄로 난 순간, 뒤틀린 입시 전쟁의 이야기는 급변하기 시작한다.</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.agathasoft.project4ep1"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
+        <!-- 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                특별함을 갈망하던 내게 찾아온 기묘한 능력, '시간 지연'.
+                성적이 곧 돈이 되는 비정상적인 학원에서 이 능력은 최고의 무기가 된다.
+                찰나를 훔치는 완벽한 컨닝, 그것은 내 인생의 필수불가결한 생존 전략.
+                하지만 정적을 깨고 나타난 전학생은 내 비밀을 꿰뚫어 보았다.
+            </p>
+        </section>
+
+        <!-- 게임 소개 -->
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                동경에서 시작된 이야기, 그리고 여섯 가지 엔딩.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
                     <img src="pj4a_info_01.webp" alt="가너축 컨셉">
-                    <div class="text">
-                        <h2>동경</h2>
+                    <div class="feature-body">
+                        <h3>동경</h3>
                         <p>청소년의 풋풋하고 아름다운 사랑을 동경하는 사람들이 모여 개발했습니다. 현실에서 볼 수 없는 그 찬란한 이야기들을 가상에서라도 마주하고 싶어 하는 건 조금은 애처롭네요.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj4a_info_02.webp" alt="시스템 특징">
-                    <div class="text">
-                        <h2>풍성해진 선택지와 애니메이션</h2>
+                    <div class="feature-body">
+                        <h3>풍성해진 선택지와 애니메이션</h3>
                         <p>기존 공개된 게임보다 늘어난 선택지를 제공합니다. 당신의 선택에 따라 히로인의 변화를 확인하실 수 있습니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj4a_info_03.webp" alt="사건의 전말">
-                    <div class="text">
-                        <h2>모든 엔딩 끝에 기다리는 진실</h2>
+                    <div class="feature-body">
+                        <h3>모든 엔딩 끝에 기다리는 진실</h3>
                         <p>준비된 총 여섯 가지의 엔딩을 모두 확인하세요. 모든 엔딩을 거쳐 비로소 이 게임이 숨기고 있는 '전말'을 완벽히 이해할 수 있습니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj4a_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
+        <!-- 캐릭터 -->
+        <!-- <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj4a_ch1.webp" alt="캐릭터 1">
+                    <div class="character-body">
+                        <h3>캐릭터 이름</h3>
                         <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
                     </div>
                 </div>
             </div>
+        </section> -->
+
+        <!-- 다운로드 CTA -->
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>여섯 가지 엔딩 끝에 기다리는 진실, 당신이 확인할 차례입니다.</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.agathasoft.project4ep1"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.agathasoft.project4ep1" class="tab-button download aos">다운로드</a>
-        </nav>
-    </div>
+    </div><!-- /.wrap -->
 
-    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+    <!-- 라이트박스 -->
+    <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
+    <!-- 뱃지 토스트 -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
@@ -114,8 +198,9 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 4.5; 
+        const CURRENT_PROJECT_ID = 4.5;
     </script>
+    <script src="../theme.js"></script>
     <script src="project.js"></script>
 </body>
 </html>

@@ -1,3 +1,7 @@
+/* ==========================================
+   뱃지 (Badge)
+   ========================================== */
+
 /* [공통] 뱃지 기본 구조 */
 .badge {
     display: inline-flex;
@@ -5,68 +9,124 @@
     justify-content: center;
     margin: 0 6px 0 0;
     padding: 2px 9px;
-    color: #ffffff;
     font-size: 0.72rem !important;
     font-weight: 700;
     line-height: 1.2;
     border-radius: 8px;
     vertical-align: middle;
     white-space: nowrap;
-    transition: transform 0.3s ease; /* 기본 호버 효과용 */
+    transition: transform 0.3s ease;
 }
 
-/* [Blue] NEW 뱃지 */
+/* ---------- [Blue] NEW 뱃지 ---------- */
 .badge.new {
     background: linear-gradient(135deg, #33b1e8, #1d9bd4);
-    box-shadow: 0 4px 10px rgba(51, 177, 232, 0.3);
+    color: #f0faff;
+    box-shadow: 0 2px 5px rgba(51, 177, 232, 0.25);
     animation: badge-glow-blue 1.5s infinite alternate;
 }
 
-/* [Red] 개발 중 뱃지 */
-.badge.dev {
-    background: linear-gradient(135deg, #e83333, #d41d1d);
-    box-shadow: 0 4px 10px rgba(232, 51, 51, 0.3);
-    animation: badge-glow-red 1.5s infinite alternate;
-}
-
-.badge.rework {
-    background: linear-gradient(135deg, #a855f7, #7c3aed); /* 보라색 그라데이션 */
-    box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3);
-    animation: badge-glow-purple 1.5s infinite alternate;
-}
-
-/* 블루 애니메이션 보정 */
 @keyframes badge-glow-blue {
     from { transform: scale(1); filter: brightness(1); }
-    to { 
-        transform: scale(1.03); /* 크기 변화도 살짝 줄여서 잘림 방지 */
+    to {
+        transform: scale(1.03);
         filter: brightness(1.1);
-        /* 번짐(Blur)을 12px에서 6px로, 범위를 확 줄였습니다 */
         box-shadow: 0 0 6px rgba(51, 177, 232, 0.5);
     }
 }
 
-/* 레드 애니메이션 보정 */
+/* ---------- [Red] 개발 중 뱃지 ---------- */
+.badge.dev {
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    color: #fff5f5;
+    box-shadow: 0 2px 5px rgba(239, 68, 68, 0.25);
+    animation: badge-glow-red 1.5s infinite alternate;
+}
+
 @keyframes badge-glow-red {
     from { transform: scale(1); filter: brightness(1); }
-    to { 
-        transform: scale(1.03); 
+    to {
+        transform: scale(1.03);
         filter: brightness(1.1);
-        box-shadow: 0 0 6px rgba(232, 51, 51, 0.5);
+        box-shadow: 0 0 6px rgba(239, 68, 68, 0.5);
     }
 }
 
-/* 퍼플 애니메이션 보정 */
+/* ---------- [Purple] 재작업 뱃지 ---------- */
+.badge.rework {
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    color: #f5f0ff;
+    box-shadow: 0 2px 5px rgba(168, 85, 247, 0.25);
+    animation: badge-glow-purple 1.5s infinite alternate;
+}
+
 @keyframes badge-glow-purple {
     from { transform: scale(1); filter: brightness(1); }
-    to { 
-        transform: scale(1.03); 
+    to {
+        transform: scale(1.03);
         filter: brightness(1.1);
         box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
     }
 }
 
-/* 초기 상태의 그림자도 너무 진하지 않게 살짝 조정 */
-.badge.new { box-shadow: 0 2px 5px rgba(51, 177, 232, 0.2); }
-.badge.dev { box-shadow: 0 2px 5px rgba(232, 51, 51, 0.2); }
-.badge.rework { box-shadow: 0 2px 5px rgba(168, 85, 247, 0.2); }
+/* ==========================================
+   coming-soon 부모의 흐림/색상 상속 차단
+   ========================================== */
+.link-button.coming-soon .game-sub .badge,
+.link-button.coming-soon .badge {
+    opacity: 1 !important;
+}
+
+.link-button.coming-soon .badge.new    { color: #f0faff !important; }
+.link-button.coming-soon .badge.dev    { color: #fff5f5 !important; }
+.link-button.coming-soon .badge.rework { color: #f5f0ff !important; }
+
+/* ==========================================
+   다크모드 대응
+   ========================================== */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .badge.new {
+        background: linear-gradient(135deg, #3a9dd1, #2a82b8);
+        color: #e6f6ff;
+        box-shadow: 0 2px 5px rgba(51, 177, 232, 0.2);
+    }
+
+    :root:not([data-theme="light"]) .badge.dev {
+        background: linear-gradient(135deg, #b84444, #9b3535);
+        color: #ffdede;
+        box-shadow: 0 2px 5px rgba(155, 53, 53, 0.3);
+    }
+
+    :root:not([data-theme="light"]) .badge.rework {
+        background: linear-gradient(135deg, #8b45d4, #6b2eb8);
+        color: #ede0ff;
+        box-shadow: 0 2px 5px rgba(139, 69, 212, 0.3);
+    }
+
+    :root:not([data-theme="light"]) .link-button.coming-soon .badge.new    { color: #e6f6ff !important; }
+    :root:not([data-theme="light"]) .link-button.coming-soon .badge.dev    { color: #ffdede !important; }
+    :root:not([data-theme="light"]) .link-button.coming-soon .badge.rework { color: #ede0ff !important; }
+}
+
+/* 수동 다크 */
+:root[data-theme="dark"] .badge.new {
+    background: linear-gradient(135deg, #3a9dd1, #2a82b8);
+    color: #e6f6ff;
+    box-shadow: 0 2px 5px rgba(51, 177, 232, 0.2);
+}
+
+:root[data-theme="dark"] .badge.dev {
+    background: linear-gradient(135deg, #b84444, #9b3535);
+    color: #ffdede;
+    box-shadow: 0 2px 5px rgba(155, 53, 53, 0.3);
+}
+
+:root[data-theme="dark"] .badge.rework {
+    background: linear-gradient(135deg, #8b45d4, #6b2eb8);
+    color: #ede0ff;
+    box-shadow: 0 2px 5px rgba(139, 69, 212, 0.3);
+}
+
+:root[data-theme="dark"] .link-button.coming-soon .badge.new    { color: #e6f6ff !important; }
+:root[data-theme="dark"] .link-button.coming-soon .badge.dev    { color: #ffdede !important; }
+:root[data-theme="dark"] .link-button.coming-soon .badge.rework { color: #ede0ff !important; }

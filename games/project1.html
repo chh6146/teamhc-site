@@ -2,113 +2,197 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
-    <title>적마도사 미궁 대모험 - Team HC</title>
+
+    <!-- FOUC 방지 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="project.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
     <style>
-    :root {
-        --accent: #bd1f36; 
-    }
+        :root { --accent: #bd1f36; }
     </style>
 </head>
 <body>
+
     <div class="wrap">
-        <header>
-            <img src="title_pj1.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <!-- Sticky Header -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <!-- <button type="button" data-target="characters">캐릭터</button> -->
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" onclick="showTab('summary')">개요</button>
-                <button class="tab-item" onclick="showTab('manual')">게임 소개</button>
-                <!-- <button class="tab-item" onclick="showTab('characters')">캐릭터 소개</button> -->
-            </div>
-        </nav>
+        <!-- Hero -->
+        <section class="hero" style="--hero-bg: url('pj1_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 1 & 3 리메이크 · 2011.05.31 발매</p>
+                <h1 class="hero-title">적마도사 미궁 대모험</h1>
+                <p class="hero-tagline">
+                    흑마도사도 아니고, 백마도사도 아닌—<br>
+                    지금, 우리들의 진짜 이야기가 시작된다.
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj1_background.webp');">
-                <div class="notice-text">
-                    <p>흑마도사도 아니고, 백마도사도 아닌—</p>
-                    <p>어느 쪽도 선택하지 못한 어정쩡한 '적마도사'인 나.</p>
-                    <p>하지만 이 모험의 끝에서 마주할 진실은</p>
-                    <p>오직 나만이 찾아낼 수 있는 것</p>
-                    
-                    <p class="split"><strong>모험을 통해 만나는 소중한 동료,</strong></p>
-                    
-                    <p>그리고 하나씩 풀려가는 의문의 사건들.</p>
-                    <p>지금, 우리들의 진짜 이야기가 시작된다.</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project1remake"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
+        <!-- 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                흑마도사도 아니고, 백마도사도 아닌—
+                어느 쪽도 선택하지 못한 어정쩡한 <strong>적마도사인 나.</strong>
+                모험을 통해 만나는 소중한 동료,
+                그리고 하나씩 풀려가는 의문의 사건들.
+                지금, 우리들의 진짜 이야기가 시작된다.
+            </p>
+        </section>
+
+        <!-- 게임 소개 -->
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                추억의 미궁, 그리고 Team HC의 시작점이 되는 게임입니다.
+                처음 안드로이드 플랫폼으로 제작했던 게임으로, 당시의 추억을 되살리며 Ren'py 엔진으로 새롭게 리메이크 되었습니다.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
                     <img src="pj1_info_01.webp" alt="미궁 게임">
-                    <div class="text">
-                        <h2>추억의 미궁, 모바일로의 귀환</h2>
-                        <p>과거 인터넷을 뜨겁게 달구었던 '미궁 게임'의 형식을 이제 모바일에서 언제 어디서든 즐길 수 있습니다. 화면 너머에 숨겨진 정답을 찾아보세요.</p>
+                    <div class="feature-body">
+                        <h3>장르는 미궁</h3>
+                        <p>과거 인터넷을 뜨겁게 달구었던 '미궁 게임'의 형식을 모바일로 즐길 수 있게 만들었습니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj1_info_02.webp" alt="Team HC 시초">
-                    <div class="text">
-                        <h2>Team HC의 시작점</h2>
-                        <p>이 게임은 Team HC라는 이름을 세상에 내놓은 가장 첫 번째 발걸음입니다. 과거 나아가고 싶었던 적마도사의 긴 여정의 시작을 함께 확인해보세요.</p>
+                    <div class="feature-body">
+                        <h3>Team HC의 시작점</h3>
+                        <p>이 게임은 Team HC라는 이름을 처음으로 사용하게 된 게임입니다. 적마도사의 긴 여정의 시작을 여러분이 직접 움직여주세요.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj1_info_03.webp" alt="매운맛 퍼즐">
-                    <div class="text">
-                        <h2>죄송합니다.</h2>
-                        <p>그 시절 우리를 괴롭혔던 다소(?) 억지스러운 퍼즐들이 기다리고 있습니다. 논리와 직관을 총동원해 고통스러운 퍼즐을 풀어내는 쾌감을 느껴보세요.</p>
+                    <div class="feature-body">
+                        <h3>다소 어려운 퍼즐</h3>
+                        <p>그 시절 우리를 괴롭혔던 퍼즐이 기다리고 있습니다. 논리와 직관을 총동원해 퍼즐을 풀어보세요.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj1_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
+        <!-- 캐릭터 -->
+        <!-- <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj1_ch1.webp" alt="캐릭터 1">
+                    <div class="character-body">
+                        <h3>캐릭터 이름</h3>
                         <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
                     </div>
                 </div>
             </div>
+        </section> -->
+
+        <!-- 다운로드 CTA -->
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>Team HC의 시작점, 적마도사의 긴 여정이 지금 다시 펼쳐집니다.</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project1remake"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project1remake" class="tab-button download aos">다운로드</a>
-        </nav>
-    </div>
+    </div><!-- /.wrap -->
 
-    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+    <!-- 라이트박스 -->
+    <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
+    <!-- 뱃지 토스트 -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
@@ -116,8 +200,9 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 1; 
+        const CURRENT_PROJECT_ID = 1;
     </script>
+    <script src="../theme.js"></script>
     <script src="project.js"></script>
 </body>
 </html>

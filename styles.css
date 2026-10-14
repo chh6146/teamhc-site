@@ -1,64 +1,231 @@
 /* ==========================================
-   1. 디자인 변수 & 기본 설정 (Root & Base)
+   0. 디자인 토큰 (Design Tokens)
    ========================================== */
 :root {
     --primary-color: #33b1e8;
-    --hover-bg: #e6f9ff;
+    --primary-soft: rgba(51, 177, 232, 0.08);
+    --primary-border: rgba(51, 177, 232, 0.4);
+    --primary-glow: rgba(51, 177, 232, 0.22);
+
     --text-main: #1f2937;
     --text-sub: #4b5563;
+    --text-muted: #94a3b8;
+
+    --surface: #ffffff;
+    --surface-glass: rgba(255, 255, 255, 0.78);
+    --surface-border: rgba(255, 255, 255, 0.85);
     --border-light: rgba(15, 23, 42, 0.08);
-    --bg-gradient: linear-gradient(135deg, #e6f9ff 0%, #f7fdff 100%);
-    --transition-standard: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --divider: rgba(15, 23, 42, 0.06);
+
+    --bg-start: #e6f9ff;
+    --bg-end: #f7fdff;
+
+    --hover-bg: #e6f9ff;
+
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --t-fast: 160ms var(--ease);
+    --t-base: 250ms var(--ease);
+    --t-slow: 500ms var(--ease);
+
+    --radius-card: 24px;
+    --radius-button: 16px;
+    --radius-icon: 12px;
+    --container-max: 440px;
+}
+
+/* ==========================================
+   1. 테마 (라이트 기본 + 다크 자동/수동)
+   ========================================== */
+
+/* 시스템이 다크일 때 (수동으로 light 지정 안 했을 때만) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --text-main: #e5eef5;
+        --text-sub: #a8b6c4;
+        --text-muted: #64748b;
+
+        --surface: #131a22;
+        --surface-glass: rgba(22, 30, 40, 0.78);
+        --surface-border: rgba(255, 255, 255, 0.06);
+        --border-light: rgba(255, 255, 255, 0.08);
+        --divider: rgba(255, 255, 255, 0.06);
+
+        --bg-start: #0a1017;
+        --bg-end: #0f1922;
+
+        --hover-bg: rgba(51, 177, 232, 0.12);
+        --primary-soft: rgba(51, 177, 232, 0.16);
+    }
+}
+
+/* 수동 다크 지정 (시스템 무관) */
+:root[data-theme="dark"] {
+    --text-main: #e5eef5;
+    --text-sub: #a8b6c4;
+    --text-muted: #64748b;
+
+    --surface: #131a22;
+    --surface-glass: rgba(22, 30, 40, 0.78);
+    --surface-border: rgba(255, 255, 255, 0.06);
+    --border-light: rgba(255, 255, 255, 0.08);
+    --divider: rgba(255, 255, 255, 0.06);
+
+    --bg-start: #0a1017;
+    --bg-end: #0f1922;
+
+    --hover-bg: rgba(51, 177, 232, 0.12);
+    --primary-soft: rgba(51, 177, 232, 0.16);
+}
+
+/* ==========================================
+   2. 기본 (Base)
+   ========================================== */
+* {
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
-    background-color: #e6f9ff;
-    background: var(--bg-gradient);
     min-height: 100%;
     scroll-behavior: smooth;
+    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    background-attachment: fixed;
 }
 
 body {
     margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     min-height: 100dvh;
-    background-color: #e6f9ff;
-    background: var(--bg-gradient);
     color: var(--text-main);
     padding: 40px 16px;
     padding-top: max(40px, env(safe-area-inset-top));
     padding-bottom: max(40px, env(safe-area-inset-bottom));
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
-}
-
-/* 메인 컨테이너 박스 */
-.container {
-    width: 100%;
-    max-width: 440px;
-    padding: 36px 28px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    border-radius: 24px;
-    box-shadow: 0 20px 40px -12px rgba(51, 177, 232, 0.15), 
-                0 8px 16px -6px rgba(0, 0, 0, 0.03),
-                inset 0 1px 1px rgba(255, 255, 255, 0.9);
-    text-align: center;
-    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    transition: color var(--t-base);
 }
 
 /* ==========================================
-   2. 메인 페이지 전용 (Header & Labels)
+   3. 메인 컨테이너
+   ========================================== */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: var(--container-max);
+    padding: 36px 28px;
+    padding-top: 60px;   /* top-bar 공간 확보 */
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-card);
+    box-shadow:
+        0 20px 40px -12px rgba(51, 177, 232, 0.15),
+        0 8px 16px -6px rgba(0, 0, 0, 0.03),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    text-align: center;
+    box-sizing: border-box;
+    transition: background var(--t-base), border-color var(--t-base);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .container {
+        box-shadow:
+            0 20px 40px -12px rgba(0, 0, 0, 0.6),
+            0 8px 16px -6px rgba(0, 0, 0, 0.3),
+            inset 0 1px 1px rgba(255, 255, 255, 0.04);
+    }
+}
+
+:root[data-theme="dark"] .container {
+    box-shadow:
+        0 20px 40px -12px rgba(0, 0, 0, 0.6),
+        0 8px 16px -6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.04);
+}
+
+/* ==========================================
+   3-1. 상단 바 (뒤로가기 + 다크모드 토글)
+   ========================================== */
+.top-bar {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.top-bar .icon-btn {
+    pointer-events: auto;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-sub);
+    cursor: pointer;
+    padding: 0;
+    transition:
+        color var(--t-fast),
+        background-color var(--t-fast),
+        border-color var(--t-fast),
+        transform var(--t-fast);
+}
+
+.top-bar .icon-btn:hover {
+    color: var(--primary-color);
+    background: var(--primary-soft);
+    border-color: var(--primary-border);
+}
+
+.top-bar .icon-btn:active {
+    transform: scale(0.92);
+}
+
+.top-bar .icon-btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.top-bar .icon-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.top-bar .icon-btn[hidden] {
+    display: none;
+}
+
+/* 아이콘 전환 */
+.top-bar .theme-btn .icon-moon { display: none; }
+.top-bar .theme-btn .icon-sun  { display: block; }
+
+:root[data-theme="dark"] .theme-btn .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-btn .icon-moon { display: block; }
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-btn .icon-sun { display: none; }
+    :root:not([data-theme="light"]) .theme-btn .icon-moon { display: block; }
+}
+
+/* ==========================================
+   4. 로고 & 설명 & h1
    ========================================== */
 h1 {
     margin: 0 0 8px 0;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
     letter-spacing: -0.02em;
@@ -70,35 +237,42 @@ h1 {
     max-width: 75%;
     height: auto;
     margin: 0 auto 16px;
+    animation: logoIn 700ms var(--ease) both;
+    filter: drop-shadow(0 4px 20px rgba(51, 177, 232, 0.15));
+    transition: transform var(--t-base);
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+@keyframes logoIn {
+    from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
 
 .description {
-    margin-top: 0;
-    margin-bottom: 28px;
+    margin: 0 0 28px;
     color: var(--text-sub);
     font-size: 0.95rem;
     letter-spacing: -0.02em;
+    line-height: 1.6;
+    animation: fadeInUp 600ms var(--ease) 100ms both;
 }
 
-/* 프로젝트 하단 작은 라벨들 */
-.project-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0 6px; }
-.project-label { 
-    padding: 6px 10px; 
-    background: transparent; 
-    color: var(--text-main); 
-    border-radius: 8px; 
-    border: 1px dashed rgba(0, 0, 0, 0.06); 
-    font-size: 0.85rem; 
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================================
-   3. 링크 버튼 공통 스타일 (Link Buttons)
+   5. 링크 버튼
    ========================================== */
 .link-group {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
 }
 
@@ -107,162 +281,327 @@ h1 {
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    margin: 0 auto;
     padding: 16px 20px;
     min-height: 64px;
     gap: 14px;
-    background-color: #ffffff;
+    background-color: var(--surface);
     color: var(--text-main);
     text-decoration: none;
     font-weight: 600;
     border: 1px solid var(--border-light);
-    border-radius: 16px;
+    border-radius: var(--radius-button);
     box-sizing: border-box;
-    transition: var(--transition-standard);
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform var(--t-base),
+        background-color var(--t-base),
+        border-color var(--t-base),
+        box-shadow var(--t-base),
+        color var(--t-base);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+
+    opacity: 0;
+    animation: buttonIn 500ms var(--ease) forwards;
+}
+
+.link-group .link-button:nth-child(1) { animation-delay: 150ms; }
+.link-group .link-button:nth-child(2) { animation-delay: 230ms; }
+.link-group .link-button:nth-child(3) { animation-delay: 310ms; }
+.link-group .link-button:nth-child(4) { animation-delay: 390ms; }
+
+@keyframes buttonIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.link-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+                var(--primary-soft) 0%,
+                transparent 60%);
+    opacity: 0;
+    transition: opacity var(--t-base);
+    pointer-events: none;
+}
+
+.link-button:hover::before {
+    opacity: 1;
 }
 
 .link-button:hover {
     transform: translateY(-2px);
-    border-color: rgba(51, 177, 232, 0.6);
+    border-color: var(--primary-border);
     background-color: var(--hover-bg);
     color: var(--primary-color);
-    box-shadow: 0 8px 20px rgba(51, 177, 232, 0.16);
+    box-shadow: 0 8px 20px var(--primary-glow);
 }
 
 .link-button:active {
     transform: scale(0.985);
+    transition-duration: 100ms;
 }
 
-/* 버튼 내 텍스트 정렬 (기본 span 사용 시) */
+.link-button:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
 .link-button span {
     display: inline-block;
     flex: 1 1 auto;
     text-align: right;
     font-size: 0.96rem;
+    position: relative;
+    z-index: 1;
 }
 
-/* 버튼 내부 아이콘/이미지 스타일 */
-.link-button img, .link-button .icon-img {
+.link-button .game-info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.link-button img,
+.link-button .icon-img {
     width: 44px;
     height: 44px;
-    margin-right: 2px;
     padding: 2px;
     flex-shrink: 0;
     object-fit: cover;
-    background: #ffffff;
-    border-radius: 12px;
-    border: 1.5px solid rgba(51, 177, 232, 0.16);
+    background: var(--surface);
+    border-radius: var(--radius-icon);
+    border: 1.5px solid var(--primary-soft);
     box-shadow: 0 4px 10px rgba(51, 177, 232, 0.1);
-    transition: var(--transition-standard);
+    transition:
+        width 300ms var(--ease),
+        height 300ms var(--ease),
+        border-color var(--t-base),
+        box-shadow var(--t-base),
+        transform var(--t-base);
+    position: relative;
+    z-index: 1;
 }
 
-.link-button:hover img, .link-button:hover .icon-img {
-    border-color: rgba(51, 177, 232, 0.4);
-    box-shadow: 0 6px 16px rgba(51, 177, 232, 0.2);
-    transform: scale(1.03);
+.link-button:hover img,
+.link-button:hover .icon-img {
+    border-color: var(--primary-border);
+    box-shadow: 0 6px 16px var(--primary-glow);
 }
 
-/* [추가] 준비 중인 프로젝트 스타일 */
+/* ==========================================
+   준비 중 (coming-soon)
+   ========================================== */
 .link-button.coming-soon {
-    pointer-events: none;   /* 클릭 완전 차단 */
-    cursor: default;
-    opacity: 0.6;           /* 흐릿하게 */
-    filter: grayscale(0.8); /* 흑백 처리 */
+    cursor: not-allowed;
+    background-color: rgba(148, 163, 184, 0.06);
+    border: 1px dashed var(--border-light);
+    box-shadow: none;
 }
 
-/* 게임 리스트 내 2줄 텍스트 */
-.game-info { 
-    flex: 1 1 auto; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: flex-end; 
-    gap: 4px; 
-    width: 100%;
-    overflow: hidden;
+.link-button.coming-soon .icon-img,
+.link-button.coming-soon img {
+    filter: grayscale(1) brightness(0.92);
+    opacity: 0.75;
+    border-color: rgba(148, 163, 184, 0.3) !important;
+    box-shadow: none !important;
+    transform: none !important;
 }
 
-/* 2. 제목이 길어져도 중앙으로 안 가고 우측에 붙게 강제 */
+.link-button.coming-soon span,
+.link-button.coming-soon .game-title {
+    color: var(--text-muted);
+}
+
+.link-button.coming-soon .game-sub {
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+/* 뱃지는 흐려지지 않게 */
+.link-button.coming-soon .game-sub .badge {
+    opacity: 1;
+    /* color는 games.css의 .badge.dev 등에서 지정한 값 유지 */
+}
+
+.link-button.coming-soon:hover {
+    transform: none;
+    background-color: rgba(148, 163, 184, 0.06);
+    border-color: var(--border-light);
+    color: var(--text-muted);
+    box-shadow: none;
+}
+
+.link-button.coming-soon:hover::before {
+    opacity: 0;
+}
+
+/* ==========================================
+   6. 게임 리스트
+   ========================================== */
 .game-title {
     width: 100%;
     text-align: right;
     word-break: keep-all;
     font-size: 0.95rem;
     font-weight: 700;
+    transition: font-size 300ms var(--ease);
 }
 
-/* 서브 영역 (뱃지 + 텍스트) 전체 스타일 */
-.game-sub { 
-    display: flex; 
-    align-items: center; 
-    justify-content: flex-end; 
-    font-size: 0.76rem; 
-    color: var(--text-sub); 
-    line-height: 1; 
+.game-sub {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 0.76rem;
+    color: var(--text-sub);
+    line-height: 1;
     padding: 2px 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     opacity: 1;
 }
 
-/* 사라질 때 효과 (뱃지+글자 동시 적용) */
 .game-sub.fade-out {
     opacity: 0;
     transform: translateY(-5px);
 }
 
-/* 뱃지 여백 미세 조정 */
 .badge {
     margin: 0 6px 0 0;
     order: -1;
     font-size: 0.72rem !important;
 }
 
+/* hover 확장용 (발매일) — game-sub과 동일 톤 */
+.game-extra {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 0.76rem;
+    color: var(--text-sub);
+    line-height: 1;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+        max-height 350ms var(--ease),
+        opacity 250ms var(--ease) 80ms,
+        padding 350ms var(--ease);
+}
+
+.extra-date {
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+/* 프로젝트 라벨 */
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 18px 0 6px;
+}
+
+.project-label {
+    padding: 6px 10px;
+    background: transparent;
+    color: var(--text-main);
+    border-radius: 8px;
+    border: 1px dashed var(--divider);
+    font-size: 0.85rem;
+}
+
 /* ==========================================
-   5. 푸터 & 반응형 (Footer & Responsive)
+   게임 카드 hover 확장 (마우스 환경만)
    ========================================== */
-.footer { 
-    margin-top: 32px; 
+@media (hover: hover) and (pointer: fine) {
+    .link-button:hover {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    .link-button:hover .game-extra {
+        max-height: 24px;
+        opacity: 1;
+        padding: 4px 0;
+    }
+
+    .link-button:hover img,
+    .link-button:hover .icon-img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .link-button:hover .game-title {
+        font-size: 1.02rem;
+    }
+
+    .link-button.coming-soon:hover img,
+    .link-button.coming-soon:hover .icon-img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .link-button.coming-soon:hover .game-title {
+        font-size: 0.95rem;
+    }
+}
+
+/* ==========================================
+   7. 푸터
+   ========================================== */
+.footer {
+    margin-top: 32px;
     padding-top: 20px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 0.76rem; 
-    color: #94a3b8; 
+    border-top: 1px solid var(--divider);
+    font-size: 0.76rem;
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
-.footer-links { 
-    display: flex; 
-    justify-content: center; 
+.footer-links {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap; 
-    margin: 0 0 10px; 
+    flex-wrap: wrap;
+    gap: 4px 0;
+    margin: 0 0 14px;
 }
 
 .footer-links a {
     position: relative;
-    padding: 4px 12px; 
-    color: var(--text-sub); 
-    text-decoration: none; 
+    padding: 4px 14px;
+    color: var(--text-sub);
+    text-decoration: none;
     font-size: 0.82rem;
     font-weight: 500;
-    border-radius: 6px; 
-    transition: color 160ms ease, background-color 160ms ease;
+    border-radius: 6px;
+    transition: color var(--t-fast);
 }
 
-.footer-links a:hover { 
-    color: var(--primary-color); 
-    background-color: rgba(51, 177, 232, 0.08); 
-}
-
-/* 링크 간 세로 구분선 (HTML에 직접 | 를 적지 않아도 CSS로 깔끔하게 생성) */
-.footer-links a:not(:last-child)::after {
+.footer-links a + a::before {
     content: "";
     position: absolute;
-    right: 0;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     width: 1px;
     height: 10px;
-    background-color: #d1d5db;
+    background-color: var(--divider);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
 }
 
 .footer-social {
@@ -273,26 +612,102 @@ h1 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;       /* 원형, 6px로 바꾸면 둥근 사각형 */
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     background-color: #000;
     text-decoration: none;
-    transition: opacity 0.2s;
+    transition: transform var(--t-fast), opacity var(--t-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .x-button {
+        background-color: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+:root[data-theme="dark"] .x-button {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .x-button:hover {
-    opacity: 0.75;
+    opacity: 0.85;
+    transform: scale(1.08);
 }
 
+.x-button:active {
+    transform: scale(0.96);
+}
+
+/* ==========================================
+   8. 개발자 모드 & 토스트
+   ========================================== */
+.dev-toast {
+    visibility: hidden;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    background-color: rgba(15, 23, 42, 0.9);
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 9999px;
+    padding: 14px 24px;
+    position: fixed;
+    z-index: 4000;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: opacity 400ms var(--ease), transform 400ms var(--ease), visibility 0s 400ms;
+    pointer-events: none;
+}
+
+.dev-toast.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 400ms var(--ease), transform 400ms var(--ease), visibility 0s;
+}
+
+.hidden-mode {
+    display: none !important;
+}
+
+.hidden-mode.reveal {
+    display: flex !important;
+    animation: slideDown 500ms var(--ease);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   9. 반응형 (Responsive)
+   ========================================== */
 @media (max-width: 640px) {
     body {
         padding: 24px 16px;
+        padding-top: max(24px, env(safe-area-inset-top));
+        padding-bottom: max(24px, env(safe-area-inset-bottom));
     }
 
     .container {
         padding: 28px 18px;
+        padding-top: 56px;
         border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 1.3rem;
     }
 
     .logo {
@@ -307,70 +722,92 @@ h1 {
     }
 
     .link-group {
-        gap: 14px;
+        gap: 12px;
     }
 
     .link-button {
-        padding: 16px 18px;
-        min-height: 64px;
-        border-radius: 16px;
+        padding: 14px 16px;
+        min-height: 60px;
+        border-radius: 14px;
+        gap: 12px;
     }
 
-    .link-button img, .link-button .icon-img {
-        width: 44px;
-        height: 44px;
+    .link-button img,
+    .link-button .icon-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .link-button span {
+        font-size: 0.92rem;
+    }
+
+    .footer-links {
+        gap: 4px 0;
+    }
+
+    .footer-links a {
+        padding: 4px 10px;
+        font-size: 0.78rem;
+    }
+
+    .top-bar {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .top-bar .icon-btn {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 22px 14px;
+        padding-top: 52px;
+    }
+
+    .link-button img,
+    .link-button .icon-img {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+    body {
+        padding: 16px;
+    }
+    .container {
+        padding: 22px 20px;
+        padding-top: 52px;
+    }
+    .logo {
+        width: 110px;
+        margin-bottom: 8px;
+    }
+    .description {
+        margin-bottom: 16px;
+    }
+    .link-group {
+        gap: 10px;
+    }
+    .link-button {
+        min-height: 54px;
+        padding: 12px 16px;
     }
 }
 
 /* ==========================================
-   6. 개발자 모드 & 시스템 알림 (Dev Mode & Toast)
+   10. 접근성 (Reduced Motion)
    ========================================== */
-.dev-toast {
-    visibility: hidden; 
-    min-width: 250px;
-    background-color: rgba(15, 23, 42, 0.88);
-    color: #ffffff; 
-    font-size: 0.88rem;
-    font-weight: 600;
-    text-align: center; 
-    border-radius: 9999px;
-    padding: 14px 24px; 
-    position: fixed; 
-    z-index: 4000;
-    left: 50%; 
-    bottom: 50px; 
-    transform: translateX(-50%);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.dev-toast.show {
-    visibility: visible;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 50px; opacity: 1; } }
-@keyframes fadeout { from { bottom: 50px; opacity: 1; } to { bottom: 0; opacity: 0; } }
-
-/* 숨겨진 콘텐츠 (커맨드 입력 시 등장) */
-.hidden-mode {
-    display: none !important;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.5s ease;
-}
-
-/* 탭 클릭 시 리플 애니메이션 */
-.hidden-mode.reveal {
-    display: flex !important;
-    opacity: 1;
-    transform: translateY(0);
-    animation: slideDown 0.5s ease forwards;
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

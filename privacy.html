@@ -3,48 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#e6f9ff">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
+
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
     <title>개인정보처리방침 - Team HC</title>
+    <meta name="description" content="Team HC 개인정보처리방침">
+
     <link rel="icon" href="favicon.webp" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="tabbar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
     <style>
-        /* 2. 기존 개인정보처리방침 고유 스타일 (유지) */
-        :root{--primary-color:#33b1e8;--bg-gradient:linear-gradient(135deg,#e6f9ff 0%,#f7fdff 100%);--text-main:#1f2937}
-        
-        body{
-            font-family:'Noto Sans KR',sans-serif;
-            min-height:100vh;
-            margin:0;
-            display:flex;
-            /* 탭바 공간을 위해 하단 패딩 추가 및 정렬 보정 */
-            padding-bottom: 100px; 
-            align-items: flex-start; 
-            padding-top: 40px;
-            justify-content:center;
-            background:var(--bg-gradient);
-            color:var(--text-main);
+        /* ==========================================
+           개인정보처리방침 전용
+           ========================================== */
+        .container {
+            text-align: left;
+            max-width: 620px;
+            padding: 36px 32px;
+            padding-top: 68px;   /* top-bar 공간 */
         }
 
-        .container{background:rgba(255,255,255,0.98);padding:28px;border-radius:18px;max-width:800px;width:94%;box-shadow:0 20px 40px rgba(15,23,42,0.06);border:1px solid rgba(51,177,232,0.06)}
-        h1{margin:0 0 12px;font-size:1.4rem;color:var(--primary-color)}
-        h2{margin-top:18px;margin-bottom:6px;font-size:1.05rem;font-weight:700;color:#0f172a}
-        p{margin:10px 0;color:#374151;line-height:1.6}
-        
-        .lang-toggle{display:flex;gap:8px;margin-bottom:14px}
-        .lang-toggle button{background:transparent;border:1px solid rgba(15,23,42,0.06);padding:8px 12px;border-radius:10px;cursor:pointer;color:#0f172a}
-        .lang-toggle button.active{background:var(--primary-color);color:#fff;border-color:rgba(51,177,232,0.15);box-shadow:0 6px 18px rgba(51,177,232,0.08)}
-        .lang-section{display:none}
-        .lang-section.active{display:block}
-        a.button{display:inline-block;margin-top:18px;padding:10px 14px;background:var(--primary-color);color:#fff;border-radius:10px;text-decoration:none;box-shadow:0 6px 18px rgba(51,177,232,0.10)}
+        .lang-toggle {
+            display: inline-flex;
+            padding: 3px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 9999px;
+            gap: 2px;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .lang-toggle {
+                background: rgba(255, 255, 255, 0.05);
+            }
+        }
+        :root[data-theme="dark"] .lang-toggle {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lang-toggle button {
+            position: relative;
+            z-index: 1;
+            height: 28px;
+            padding: 0 14px;
+            border: none;
+            background: transparent;
+            border-radius: 9999px;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.25s var(--ease), background 0.25s var(--ease);
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+
+        .lang-toggle button:hover {
+            color: var(--text-sub);
+        }
+
+        .lang-toggle button.active {
+            background: var(--surface);
+            color: var(--primary-color);
+            box-shadow: 0 2px 6px rgba(51, 177, 232, 0.15);
+        }
+
+        .doc-title {
+            margin: 0 0 24px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        .lang-section {
+            display: none;
+        }
+
+        .lang-section.active {
+            display: block;
+            animation: fadeInUp 400ms var(--ease);
+        }
+
+        .lang-section h2,
+        .lang-section h3 {
+            margin: 24px 0 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+        }
+
+        .lang-section p {
+            margin: 10px 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            line-height: 1.75;
+            letter-spacing: -0.01em;
+        }
+
+        .lang-section p:last-child {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--divider);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        #privacy-email,
+        #privacy-email-en {
+            color: var(--text-main);
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 28px 20px;
+                padding-top: 62px;
+            }
+
+            .doc-title {
+                font-size: 1.25rem;
+            }
+
+            .lang-section h2,
+            .lang-section h3 {
+                font-size: 0.95rem;
+            }
+
+            .lang-section p {
+                font-size: 0.86rem;
+                line-height: 1.7;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+
+        <div class="top-bar">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <div class="lang-toggle" role="tablist" aria-label="언어 선택">
+                <button id="btn-ko" data-lang="ko" role="tab" aria-selected="true" class="active">한국어</button>
+                <button id="btn-en" data-lang="en" role="tab" aria-selected="false">English</button>
+            </div>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+
         <div id="lang-ko" class="lang-section active" role="region" aria-labelledby="btn-ko">
-            <h1>개인정보처리방침</h1>
+            <h1 class="doc-title">개인정보처리방침</h1>
             <p>본 개인정보처리방침은 Team HC가 모바일 기기용으로 제작한 Team HC 앱(이하 "앱")에 적용되며, Team HC(이하 "서비스 제공자")가 무료로 제공하는 서비스입니다. 본 서비스는 "있는 그대로" 사용되도록 제공됩니다.</p>
 
             <h2>앱은 어떤 정보를 수집하며, 어떻게 사용되나요?</h2>
@@ -73,7 +215,7 @@
         </div>
 
         <div id="lang-en" class="lang-section" role="region" aria-labelledby="btn-en">
-            <h1>Privacy Policy</h1>
+            <h1 class="doc-title">Privacy Policy</h1>
             <p>This privacy policy applies to the Team HC app (hereby referred to as "Application") for mobile devices that was created by Team HC (hereby referred to as "Service Provider") as a Free service. This service is intended for use "AS IS".</p>
 
             <h3>What information does the Application obtain and how is it used?</h3>
@@ -102,13 +244,8 @@
         </div>
     </div>
 
-    <nav class="bottom-tabbar">
-        <div class="seg-group" role="tablist" aria-label="언어 선택">
-            <button id="btn-ko" class="active" role="tab">한국어</button>
-            <button id="btn-en" role="tab">English</button>
-        </div>
-    </nav>
-</body>
-    <script src="tabbar.js"></script>
+    <script src="theme.js"></script>
+    <script src="privacy.js"></script>
     <script src="security.js"></script>
+</body>
 </html>

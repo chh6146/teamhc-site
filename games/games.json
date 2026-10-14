@@ -11,7 +11,7 @@
   },
   {
     "id": 23,
-    "url": "#",
+    "url": "project23.html",
     "icon": "icon_pj23.webp",
     "sub": "프로젝트 23",
     "date": "2019.12.29",
@@ -20,7 +20,7 @@
   },
   {
     "id": 22,
-    "url": "#",
+    "url": "project22.html",
     "icon": "icon_pj22.webp",
     "sub": "프로젝트 22",
     "date": "2019.02.14",
@@ -29,7 +29,7 @@
   },
   {
     "id": 20,
-    "url": "#",
+    "url": "project20.html",
     "icon": "icon_pj20.webp",
     "sub": "프로젝트 20",
     "date": "2018.06.10",
@@ -38,17 +38,17 @@
   },
   {
     "id": 18,
-    "url": "#",
+    "url": "project18.html",
     "icon": "../favicon.webp",
     "sub": "프로젝트 18",
     "date": "2026.00.00",
     "title": "표류하는 이탈자는 궤적이 없다",
     "badge": { "text": "개발중", "class": "dev" },
-    "status": "coming-soon"
+    "status": "released"
   },
   {
     "id": 17.5,
-    "url": "#",
+    "url": "project17_5.html",
     "icon": "icon_pj17_side.webp",
     "sub": "프로젝트 17",
     "date": "2019.06.22",
@@ -57,7 +57,7 @@
   },
   {
     "id": 17,
-    "url": "#",
+    "url": "project17.html",
     "icon": "icon_pj17_2.webp",
     "sub": "프로젝트 17",
     "date": "2019.06.22",
@@ -66,17 +66,17 @@
   },
   {
     "id": 15,
-    "url": "#",
+    "url": "project15.html",
     "icon": "../favicon.webp",
     "sub": "프로젝트 15",
-    "date": "2026.00.00",
+    "date": "2027.00.00",
     "title": "상자 속에 갇힌 그녀(가제)",
     "badge": { "text": "개발중", "class": "dev" },
     "status": "coming-soon"
   },
   {
     "id": 14,
-    "url": "#",
+    "url": "project14.html",
     "icon": "icon_pj14.webp",
     "sub": "프로젝트 14",
     "date": "2017.07.16",
@@ -103,7 +103,7 @@
   },
   {
     "id": 11,
-    "url": "#",
+    "url": "project11.html",
     "icon": "icon_pj11.webp",
     "sub": "프로젝트 11",
     "date": "2016.06.24",
@@ -139,7 +139,7 @@
   },
   {
     "id": 8,
-    "url": "#",
+    "url": "project8.html",
     "icon": "icon_pj8.webp",
     "sub": "프로젝트 8",
     "date": "2015.09.08",

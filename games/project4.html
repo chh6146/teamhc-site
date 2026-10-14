@@ -2,113 +2,196 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
-    <title>우리들의 날개는 언제부턴가 부서졌다 - Team HC</title>
+
+    <!-- FOUC 방지 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="project.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
     <style>
-    :root {
-        --accent: #2e8aef; 
-    }
+        :root { --accent: #2e8aef; }
     </style>
 </head>
 <body>
+
     <div class="wrap">
-        <header>
-            <img src="title_pj4.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <!-- Sticky Header -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <!-- <button type="button" data-target="characters">캐릭터</button> -->
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" onclick="showTab('summary')">개요</button>
-                <button class="tab-item" onclick="showTab('manual')">게임 소개</button>
-                <!-- <button class="tab-item" onclick="showTab('characters')">캐릭터 소개</button> -->
-            </div>
-        </nav>
+        <!-- Hero -->
+        <section class="hero" style="--hero-bg: url('pj4_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 4 리메이크 · 2012.04.05 발매</p>
+                <h1 class="hero-title">우리들의 날개는 언제부턴가 부서졌다</h1>
+                <p class="hero-tagline">
+                    겨울 방학이 끝난 후 모두가 '성장'했지만, 나는 그저 게임에 몸을 던질 뿐.<br>
+                    방관할 것인가, 아니면 정의의 편에 설 것인가.
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj4_background.webp');">
-                <div class="notice-text">
-                    <p>겨울 방학이 끝난 후 모두가 '성장'했지만, 나는 그저 게임에 몸을 던질 뿐.</p>
-                    
-                    <p>하지만 타의로 일그러진 그들의 미소</p>
-                    <p>그리고 감춰진 진실</p>
-                    
-                    <p class="split"><strong>방관할 것인가, 아니면 정의의 편에 설 것인가.</strong></p>
-                    
-                    <p>부서진 날개의 끝에서 펼쳐지는 선택의 잔혹함.</p>
-                    <p>그 마지막 결과는 누구의 것인가?</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project4remakecollectersedition"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
+        <!-- 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                겨울 방학이 끝난 후 모두가 '성장'했지만, 나는 그저 게임에 몸을 던질 뿐.
+                하지만 타의로 일그러진 그들의 미소, 그리고 감춰진 진실.
+                <strong>방관할 것인가, 아니면 정의의 편에 설 것인가.</strong>
+                부서진 날개의 끝에서 펼쳐지는 선택의 잔혹함.
+                마지막 결과는 누구의 책임인가?
+            </p>
+        </section>
+
+        <!-- 게임 소개 -->
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                20만 명이 즐겨주었던 과거의 게임, 이제 Ren'Py로 완성되어 호환성을 최대한 높였습니다.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
                     <img src="pj4_info_01.webp" alt="현실적인 스토리">
-                    <div class="text">
-                        <h2>사랑 이야기? 그런 거 없다</h2>
+                    <div class="feature-body">
+                        <h3>사랑 이야기? 그런 거 없다</h3>
                         <p>주인공에게 무작정 달려드는 풋풋한 사랑 이야기는 존재하지 않습니다. '리얼충'은 그저 폭발했으면 좋겠고, 학생이라면 누구나 한 번쯤 마주했을 법한 심도 깊고 현실적인 고민과 갈등도 존재하지 않습니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj4_info_02.webp" alt="총집편 리메이크">
-                    <div class="text">
-                        <h2>20만명이 즐겨주었던 과거의 게임</h2>
-                        <p>2012년, 수많은 이들이 재미있게 즐겨주었던 비주얼 노벨. 원작의 감동은 물론, 'Fragments'의 내용까지 모두 포함된 완전판 총집편입니다. 계속해서 수정 되어버린 서사를 지금 바로 확인해보세요.</p>
+                    <div class="feature-body">
+                        <h3>20만명이 즐겨주었던 과거의 게임</h3>
+                        <p>2012년, 수많은 이들이 재미있게 즐겨주었던 비주얼 노벨. 원작의 감동은 물론, 'Fragments'의 내용까지 모두 포함된 완전판 총집편입니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
+
+                <div class="feature-card">
                     <img src="pj4_info_03.webp" alt="엔진 통합">
-                    <div class="text">
-                        <h2>Ren'Py로 완성된 궁극의 플레이 경험</h2>
-                        <p>KAS, Artemis 엔진을 거쳐 드디어 Ren'Py 엔진에 도달했습니다. 더 이상의 엔진 이동이나 파편화된 앱은 없습니다. 최적화된 하나의 앱으로 끊김 없이 쾌적한 플레이를 보장합니다.</p>
+                    <div class="feature-body">
+                        <h3>Ren'Py로 완성된 궁극의 플레이 경험</h3>
+                        <p>KAS, Artemis 엔진을 거쳐 드디어 Ren'Py 엔진에 도달했습니다. 최적화된 하나의 앱으로 끊김 없이 즐겨보세요.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj4_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
+        <!-- 캐릭터 -->
+        <!-- <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj4_ch1.webp" alt="캐릭터 1">
+                    <div class="character-body">
+                        <h3>캐릭터 이름</h3>
                         <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
                     </div>
                 </div>
             </div>
+        </section> -->
+
+        <!-- 다운로드 CTA -->
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>부서진 날개의 끝에서 펼쳐지는 선택의 잔혹함, 마지막 결과는 누구의 책임인가?</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project4remakecollectersedition"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project4remakecollectersedition" class="tab-button download aos">다운로드</a>
-        </nav>
-    </div>
+    </div><!-- /.wrap -->
 
-    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+    <!-- 라이트박스 -->
+    <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
+    <!-- 뱃지 토스트 -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
@@ -116,8 +199,9 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 4; 
+        const CURRENT_PROJECT_ID = 4;
     </script>
+    <script src="../theme.js"></script>
     <script src="project.js"></script>
 </body>
 </html>

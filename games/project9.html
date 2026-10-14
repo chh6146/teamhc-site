@@ -2,111 +2,196 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
     <meta name="view-transition" content="same-origin" />
-    <title>달별 공주는 왕따당하지 않아. - Team HC</title>
+
+    <!-- FOUC 방지 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="project.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
     <style>
-    :root {
-        --accent: #f9afd4; 
-    }
+        :root { --accent: #f9afd4; }
     </style>
 </head>
 <body>
+
     <div class="wrap">
-        <header>
-            <img src="title_pj9.webp" alt="로딩 중..." class="logo" id="project-logo">
-            <div class="title-block">
-                <div class="game-sub" id="header-sub">불러오는 중...</div>
-                <div class="game-title" id="header-title">불러오는 중...</div>
-            </div>
+
+        <!-- Sticky Header -->
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
         </header>
 
-        <nav class="tab-container">
-            <div class="tab-inner">
-                <div class="tab-slider"></div>
-                <button class="tab-item active" onclick="showTab('summary')">개요</button>
-                <button class="tab-item" onclick="showTab('manual')">게임 소개</button>
-                <!-- <button class="tab-item" onclick="showTab('characters')">캐릭터 소개</button> -->
-            </div>
-        </nav>
+        <!-- Hero -->
+        <section class="hero" style="--hero-bg: url('pj9_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 9 · 2016.01.28 발매</p>
+                <h1 class="hero-title">달별 공주는 왕따당하지 않아.</h1>
+                <p class="hero-tagline">
+                    밤하늘을 가르는 차가운 전파 소리,<br>
+                    그리고 그 끝에서 들려오는 누군가의 목소리.
+                </p>
 
-        <section id="summary" class="tab-content active">
-            <div class="mid-notice" style="--bg-image: url('pj9_background.webp');">
-                <div class="notice-text">
-                    <p>밤하늘을 가르는 차가운 전파 소리, 그리고 그 끝에서 들려오는 누군가의 목소리</p>
-                    <p>아날로그 신호 속에 담긴 청춘의 단면</p>
-                    
-                    <p class="split">라디오와 SSTV 너머의 작고 소중한 연결</p>
-                    
-                    <p>우리만이 공유할 수 있는 주파수를 찾아나서자</p>
-                    <p>투박한 노이즈 사이로 흐르는 가장 진솔한 이야기</p>
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project9ep1"
+                           class="store-icon-btn"
+                           aria-label="Google Play"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="manual" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj9_info_01.webp" alt="발매 정보">
-                    <div class="text">
-                        <h2>라디오 전파로 이어지는 교신</h2>
+        <!-- 개요 -->
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                밤하늘을 가르는 차가운 전파 소리, 그리고 그 끝에서 들려오는 누군가의 목소리.
+                아날로그 신호 속에 담긴 청춘의 단면.
+                라디오와 SSTV 너머의 작고 소중한 연결.
+                우리만이 공유할 수 있는 주파수를 찾아나서자.
+                투박한 노이즈 사이로 흐르는 가장 진솔한 이야기.
+            </p>
+        </section>
+
+        <!-- 게임 소개 -->
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                라디오 전파로 이어지는, 예측 불가능한 이야기.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="pj9_info_01.webp" alt="라디오 전파로 이어지는 교신">
+                    <div class="feature-body">
+                        <h3>라디오 전파로 이어지는 교신</h3>
                         <p>지구에 조난당했다고 주장하는 자칭 '오르세우스족' 니나와 그녀를 원래의 장소로 돌려보내려는 주인공의 이야기입니다.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
-                    <img src="pj9_info_02.webp" alt="캐릭터 관계">
-                    <div class="text">
-                        <h2>예측 불가능한 인물들의 등장</h2>
+
+                <div class="feature-card">
+                    <img src="pj9_info_02.webp" alt="예측 불가능한 인물들의 등장">
+                    <div class="feature-body">
+                        <h3>예측 불가능한 인물들의 등장</h3>
                         <p>무적의 부회장 연지와 정체를 알 수 없는 리아가 차례로 등장하며 전개되는 이야기. 개성 넘치는 인물들 사이에서 벌어지는 좌충우돌 사건의 흐름을 직접 확인하세요.</p>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="media">
-                    <img src="pj9_info_03.webp" alt="등장인물">
-                    <div class="text">
-                        <h2>죄송합니다.</h2>
+
+                <div class="feature-card">
+                    <img src="pj9_info_03.webp" alt="이벤트 컷 안내">
+                    <div class="feature-body">
+                        <h3>죄송합니다.</h3>
                         <p>해당 게임에는 이벤트 컷이 존재하지 않습니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="characters" class="tab-content">
-            <div class="card">
-                <div class="media">
-                    <img src="pj9_ch1.webp" alt="캐릭터 이름">
-                    <div class="text">
-                        <h2>캐릭터 이름</h2>
+        <!-- 캐릭터 -->
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물들.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj9_ch1.webp" alt="캐릭터 1">
+                    <div class="character-body">
+                        <h3>캐릭터 이름</h3>
                         <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <nav class="bottom-tabbar">
-            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project9ep1" class="tab-button download aos">다운로드</a>
-        </nav>
-    </div>
+        <!-- 다운로드 CTA -->
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>투박한 노이즈 사이로 흐르는 가장 진솔한 이야기.</p>
 
-    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project9ep1"
+                       class="store-icon-btn"
+                       aria-label="Google Play"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.602 12l2.096-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.635-8.635z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /.wrap -->
+
+    <!-- 라이트박스 -->
+    <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
+    <!-- 뱃지 토스트 -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
@@ -114,8 +199,9 @@
     </div>
 
     <script>
-        const CURRENT_PROJECT_ID = 9; 
+        const CURRENT_PROJECT_ID = 9;
     </script>
+    <script src="../theme.js"></script>
     <script src="project.js"></script>
 </body>
 </html>
