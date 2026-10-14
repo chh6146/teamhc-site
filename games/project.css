@@ -47,7 +47,6 @@ body {
         #ffffff 60%,
         var(--accent-tint) 100%
     );
-    background-attachment: fixed;
     color: var(--text-main);
     font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     line-height: 1.7;
@@ -216,7 +215,7 @@ body {
     position: relative;
     margin: 0 -20px 40px;
     min-height: 60vh;
-    min-height: 60dvh;
+    min-height: 60svh;      /* dvh → svh */
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -233,9 +232,17 @@ body {
         ),
         var(--hero-bg, linear-gradient(135deg, var(--accent), #000));
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-position: center top;   /* center → center top */
+    background-repeat: no-repeat;       /* 추가 */
+    /* background-attachment: fixed; ← 삭제 */
     color: #ffffff;
+}
+
+/* 데스크톱에서만 fixed parallax 효과 */
+@media (hover: hover) and (pointer: fine) and (min-width: 721px) {
+    .hero {
+        background-attachment: fixed;
+    }
 }
 
 .hero-content {
@@ -897,7 +904,7 @@ body {
     .hero {
         margin: 0 -16px 32px;
         min-height: 55vh;
-        min-height: 55dvh;
+        min-height: 55svh;    /* dvh → svh */
         padding: 40px 20px;
     }
 
