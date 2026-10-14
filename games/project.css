@@ -1003,3 +1003,10 @@ body {
         scroll-behavior: auto !important;
     }
 }
+
+.feature-card img,
+.character-card img {
+    background: linear-gradient(135deg, var(--accent) 0%, rgba(255,255,255,0.4) 100%);
+    background-blend-mode: screen;
+    min-height: 180px;
+}
