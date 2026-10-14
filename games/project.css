@@ -627,8 +627,6 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 9999px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-
-    /* 유동형: 좁은 화면에서 자연스럽게 wrap */
     max-width: 100%;
     flex-wrap: wrap;
     justify-content: center;
@@ -650,14 +648,12 @@ body {
     justify-content: center;
 }
 
-/* === 버튼: 아이콘 전용 원형 → 텍스트 대응 알약형 === */
+/* === 기본: 아이콘 전용 원형 버튼 === */
 .store-bar .store-icon-btn {
-    /* 원형 고정 해제 */
-    width: auto;
-    height: auto;
-    min-height: 40px;
-    padding: 0 18px;              /* ← 좌우 여백이 버튼 폭을 결정 */
-    border-radius: 9999px;        /* ← 알약 형태 */
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
 
     display: inline-flex;
     align-items: center;
@@ -672,7 +668,8 @@ body {
     font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1;
-    white-space: nowrap;          /* 텍스트 줄바꿈 방지 */
+    white-space: nowrap;
+    flex-shrink: 0;
 
     transition: transform 0.2s var(--ease),
                 filter 0.2s var(--ease),
@@ -682,22 +679,36 @@ body {
 
 .store-bar .store-icon-btn:hover {
     filter: brightness(1.15);
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .store-bar .store-icon-btn:active {
-    transform: scale(0.97);
+    transform: scale(0.95);
 }
 
-/* 아이콘을 같이 쓸 경우 (지금은 텍스트만) */
 .store-bar .store-icon-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     display: block;
     flex-shrink: 0;
 }
 
-/* === Hero(어두운 배경) 위 텍스트 버튼 보정 === */
+/* === 텍스트가 있으면 자동으로 알약형으로 확장 === */
+.store-bar .store-icon-btn:not(:has(svg)),
+.store-bar .store-icon-btn:has(svg + *) {
+    width: auto;
+    height: auto;
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 9999px;
+}
+
+.store-bar .store-icon-btn:not(:has(svg)):hover,
+.store-bar .store-icon-btn:has(svg + *):hover {
+    transform: scale(1.05);
+}
+
+/* === Hero(어두운 배경) 위 버튼 === */
 .store-bar-hero {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(140%);
@@ -781,12 +792,22 @@ body {
 .cta-section .store-bar .store-icon-btn {
     background: var(--accent);
     color: #ffffff;
-    min-height: 42px;
-    padding: 0 20px;
 }
 
 .cta-section .store-bar .store-icon-btn:hover {
     filter: brightness(1.15);
+    transform: scale(1.08);
+}
+
+/* CTA 안의 텍스트 버튼은 살짝 여유 있게 */
+.cta-section .store-bar .store-icon-btn:not(:has(svg)),
+.cta-section .store-bar .store-icon-btn:has(svg + *) {
+    min-height: 42px;
+    padding: 0 20px;
+}
+
+.cta-section .store-bar .store-icon-btn:not(:has(svg)):hover,
+.cta-section .store-bar .store-icon-btn:has(svg + *):hover {
     transform: scale(1.05);
 }
 
@@ -925,16 +946,29 @@ body {
     .store-bar .store-label {
         font-size: 0.85rem;
     }
+
+    /* 아이콘 원형 버튼 */
     .store-bar .store-icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+    .store-bar .store-icon-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* 텍스트 알약 버튼 */
+    .store-bar .store-icon-btn:not(:has(svg)),
+    .store-bar .store-icon-btn:has(svg + *) {
+        width: auto;
+        height: auto;
         min-height: 36px;
         padding: 0 14px;
         font-size: 0.82rem;
     }
-    .store-bar .store-icon-btn svg {
-        width: 14px;
-        height: 14px;
-    }
-    .cta-section .store-bar .store-icon-btn {
+
+    .cta-section .store-bar .store-icon-btn:not(:has(svg)),
+    .cta-section .store-bar .store-icon-btn:has(svg + *) {
         min-height: 38px;
         padding: 0 16px;
     }
@@ -943,7 +977,7 @@ body {
 @media (max-width: 380px) {
     .character-grid { grid-template-columns: 1fr; }
 
-    /* 아주 좁은 화면: 라벨과 버튼 세로 배치 */
+    /* 아주 좁은 화면: 라벨과 버튼을 세로 배치 */
     .store-bar {
         flex-direction: column;
         border-radius: 24px;
@@ -952,9 +986,9 @@ body {
     .store-bar .store-icons {
         width: 100%;
     }
-    .store-bar .store-icon-btn {
+    .store-bar .store-icon-btn:not(:has(svg)),
+    .store-bar .store-icon-btn:has(svg + *) {
         flex: 1;
-        padding: 0 12px;
     }
 }
 
