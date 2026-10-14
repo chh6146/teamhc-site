@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
+    <meta name="view-transition" content="same-origin" />
+
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>로딩 중... - Team HC</title>
+
+    <link rel="icon" href="../favicon.webp" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../tabbar.css">
+    <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="project.css">
+
+    <style>
+        :root { --accent: #1f335a; }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+
+        <header class="site-header">
+            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <nav class="anchor-tabs" aria-label="섹션 이동">
+                <button type="button" data-target="overview" class="active">개요</button>
+                <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button>
+            </nav>
+
+            <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </header>
+
+        <section class="hero" style="--hero-bg: url('pj14_background.webp');">
+            <div class="hero-content">
+                <p class="hero-sub">프로젝트 14 · 발매일 미정</p>
+                <h1 class="hero-title">프로젝트 14</h1>
+                <p class="hero-tagline">
+                    두루뫼로 향한 도망.<br>
+                    그곳에서 다시 마주친 얼굴들, 그리고 풀리지 않는 실종.
+                </p>
+
+                <div class="store-bar store-bar-hero">
+                    <span class="store-label">지금 다운로드</span>
+                    <div class="store-icons">
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project14ep1"
+                           class="store-icon-btn"
+                           aria-label="Google Play - 에피소드 1"
+                           target="_blank"
+                           rel="noopener noreferrer">에피소드 1</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.teamhc.project14ep2"
+                           class="store-icon-btn"
+                           aria-label="Google Play - 에피소드 2"
+                           target="_blank"
+                           rel="noopener noreferrer">에피소드 2</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="section">
+            <h2 class="section-title">개요</h2>
+            <p class="section-lead">
+                고등학교를 졸업한 뒤, 모든 것에 질려버린 하울은 두루뫼로 무작정 이사를 간다.
+                새로운 사람들과 다채로운 청춘을 기대했지만, 그곳에서 다시 마주친 건 옛 얼굴들이었다.
+                <strong>다예, 진아. 그리고 같은 이름을 가진 하얀.</strong>
+                뒤늦게 시작된 아르바이트, 수상한 실험, 그리고 두루뫼시에서 벌어진 실종 사건.
+                편안한 일상을 꿈꿨을 뿐인데, 이상한 일은 끊이지 않는다.
+            </p>
+        </section>
+
+        <section id="system" class="section">
+            <h2 class="section-title">게임 소개</h2>
+            <p class="section-lead">
+                두루뫼에서 벌어지는 또 다른 수상한 이야기.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="pj14_info_01.webp" alt="두루뫼로의 이사">
+                    <div class="feature-body">
+                        <h3>두루뫼로의 이사</h3>
+                        <p>고등학교를 졸업한 뒤, 모든 것에 질려버린 하울은 두루뫼로 무작정 이사를 간다. 새로운 사람들과 다채로운 청춘을 꿈꿨지만, 도착하자마자 다예가 나타나고 얼마 지나지 않아 진아까지 마주치게 된다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj14_info_02.webp" alt="타로카드 포장마차">
+                    <div class="feature-body">
+                        <h3>타로카드 포장마차</h3>
+                        <p>다예의 제안으로 시작된 타로카드 점. 첫 손님 솔라가 2만원을 내고 사라진다. 세 번 연속으로 '달 카드'가 나오는 이상한 운세.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj14_info_03.webp" alt="연구실 아르바이트">
+                    <div class="feature-body">
+                        <h3>연구실 아르바이트</h3>
+                        <p>솔라와 하얀이가 함께 연구하는 실험실에서 수치 입력 아르바이트를 시작한다. 퍼플루오로데칼린이라는 액체를 저렴하게 대량 생산하는 것이 목표!</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj14_info_04.webp" alt="두루뫼 실종 사건">
+                    <div class="feature-body">
+                        <h3>두루뫼 실종 사건</h3>
+                        <p>두루뫼시에서 실종 사건이 발생한다. 그리고 그 장소는 하울이 흑요를 만났던 사슴로. 하울은 실종 사건이 일어난 그 시각, 그 장소에 있었다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="characters" class="section">
+            <h2 class="section-title">캐릭터</h2>
+            <p class="section-lead">
+                이야기를 이끌어가는 인물.
+            </p>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="pj14_ch2.webp" alt="하얀">
+                    <div class="character-body">
+                        <h3>하얀</h3>
+                        <p>길에 쓰러져 있던 기억상실자. 이름은 스스로 하얀이라고 밝혔다. 기억이 돌아오자 이바천에서 솔라와 함께 연구하던 사람이라는 사실이 드러난다. 실험 실패로 기억을 잃었다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj14_ch3.webp" alt="진아">
+                    <div class="character-body">
+                        <h3>진아</h3>
+                        <p>두루뫼에서 다시 마주친 얼굴. 과거 하울에게 고백한 적이 있다. 사모예드 '양샤'를 기르고 있으며, 동물에 관심이 많다. 그 강아지가 사라지자 하울을 찾아온다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj14_ch7.webp" alt="다예">
+                    <div class="character-body">
+                        <h3>다예</h3>
+                        <p>하울을 따라 두루뫼로 이사 온 소꿉친구. 이바천 시절 맛있는 약 유통을 담당했던 전력이 있다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj14_ch11.webp" alt="흑요">
+                    <div class="character-body">
+                        <h3>흑요</h3>
+                        <p>솔라의 연구에 자금을 대는 연예인. 과거 개울가에서 개에게 구조된 경험이 있다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj14_ch15.webp" alt="솔라">
+                    <div class="character-body">
+                        <h3>솔라</h3>
+                        <p>퍼플루오로데칼린을 저렴하게 대량 생산하려는 연구원. 타로카드 손님으로 하울과 처음 만났다. 하얀이와 함께 연구하며, 연구실과 포장마차 두 곳에 실험 공간을 마련한다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="cta-section">
+            <h2>지금 플레이하세요</h2>
+            <p>두루뫼에서 펼쳐지는 이야기, 다양한 엔딩을 만나보세요.</p>
+
+            <div class="store-bar">
+                <span class="store-label">지금 다운로드</span>
+                <div class="store-icons">
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project14ep1"
+                       class="store-icon-btn"
+                       aria-label="Google Play - 에피소드 1"
+                       target="_blank"
+                       rel="noopener noreferrer">에피소드 1</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.teamhc.project14ep2"
+                       class="store-icon-btn"
+                       aria-label="Google Play - 에피소드 2"
+                       target="_blank"
+                       rel="noopener noreferrer">에피소드 2</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="imageLightbox" class="lightbox-overlay">
+        <img class="lightbox-content" id="fullImage">
+    </div>
+
+    <div id="badge-toast" class="toast-overlay">
+        <div class="toast-content">
+            <div class="badge-body">
+                <img src="" alt="아이템" class="badge-img">
+                <div class="badge-info">
+                    <h3 class="badge-title">제목</h3>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
+                </div>
+            </div>
+            <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        const CURRENT_PROJECT_ID = 14;
+    </script>
+    <script src="../theme.js"></script>
+    <script src="project.js"></script>
+</body>
+</html>

@@ -10,7 +10,6 @@
 
     <meta name="view-transition" content="same-origin" />
 
-    <!-- FOUC 방지 -->
     <script>
         (function () {
             var saved = localStorage.getItem('theme');
@@ -20,7 +19,7 @@
         })();
     </script>
 
-    <title>로딩 중... - Team HC</title>
+    <title>상자 속에 갇힌 그녀 - Team HC</title>
 
     <link rel="icon" href="../favicon.webp" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,14 +32,13 @@
     <link rel="stylesheet" href="project.css">
 
     <style>
-        :root { --accent: #6b4b8a; }
+        :root { --accent: #ef9e68; }
     </style>
 </head>
 <body>
 
     <div class="wrap">
 
-        <!-- Sticky Header -->
         <header class="site-header">
             <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -50,8 +48,9 @@
 
             <nav class="anchor-tabs" aria-label="섹션 이동">
                 <button type="button" data-target="overview" class="active">개요</button>
-                <button type="button" data-target="system">게임 소개</button>
-                <button type="button" data-target="characters">캐릭터</button>
+                <!-- <button type="button" data-target="system">게임 소개</button>
+                <button type="button" data-target="characters">캐릭터</button> -->
+                <!-- <button type="button" data-target="devlog">개발일지</button> -->
             </nav>
 
             <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
@@ -69,13 +68,11 @@
         <section class="hero" style="--hero-bg: url('pj15_background.webp');">
             <div class="hero-content">
                 <p class="hero-sub">프로젝트 15 · 2026년 예정</p>
-                <h1 class="hero-title">상자 속에 갇힌 그녀(가제)</h1>
+                <h1 class="hero-title">상자 속에 갇힌 그녀</h1>
                 <p class="hero-tagline">
-                    여기에 게임의 메인 캐치프레이즈나<br>
-                    전체적인 분위기를 설명하는 문구를 입력하세요.
+                    낡은 브라운관 TV 너머에서 온 소녀.<br>
+                    나갈 수 없는 방, 멈춰버린 시간.
                 </p>
-
-                <!-- 개발중: 다운로드 링크 없음 -->
             </div>
         </section>
 
@@ -83,32 +80,57 @@
         <section id="overview" class="section">
             <h2 class="section-title">개요</h2>
             <p class="section-lead">
-                여기에 게임의 메인 캐치프레이즈나 전체적인 분위기를 설명하는 문구를 입력하세요.
-                중요한 강조점은 이 클래스를 사용합니다.
-                마지막 줄 설명을 입력하세요.
+                폐부 위기의 고전매체 보존부. 마지막 남은 브라운관 TV에 전원을 올린 순간, 시공간이 뒤틀린다.
+                부실 밖으로 나갈 수 없는 존재인 <strong>먼 과거에 온 소녀.</strong>
+                감옥 같은 공간에 갇힌 그녀를 원래의 세계로 돌려보내기 위해,
+                그리고 고전매체 보존부를 지키기 위해, 어리석은 자들의 기록이 시작된다.
             </p>
         </section>
 
         <!-- 게임 소개 -->
-        <section id="system" class="section">
+        <!-- <section id="system" class="section">
             <h2 class="section-title">게임 소개</h2>
             <p class="section-lead">
-                게임의 주요 시스템이나 특징을 소개합니다.
+                시공간을 다시 넘나들기 위해 노력하는 어리석은 자의 이야기.
             </p>
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="../favicon.webp" alt="특징 소개">
+                    <img src="pj15_info_01.webp" alt="브라운관 TV와 시공간 이동">
                     <div class="feature-body">
-                        <h3>시스템 특징 제목</h3>
-                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다.</p>
+                        <h3>브라운관 TV와 시공간 이동</h3>
+                        <p>과거에서 온 소녀 연화가 2026년의 부실에 갇힌다. 원인은 브라운관 TV와 알 수 없는 기판, 그리고 바르비탈. 그녀를 되돌려보낼 방법을 찾아야 한다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj15_info_02.webp" alt="고전매체 보존부">
+                    <div class="feature-body">
+                        <h3>폐부 위기의 고전매체 보존부</h3>
+                        <p>부원 3명 미달, 고문 부재. 폐부 위기의 부활동을 지키는 것과 연화를 원래 세계로 돌려보내는 것. 두 가지 목표를 동시에 달성해야 한다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj15_info_03.webp" alt="Re:Pick">
+                    <div class="feature-body">
+                        <h3>Re:Pick - 물건을 통한 소통</h3>
+                        <p>폐기될 물건들을 'Re:Pick'에 올려 필요한 사람에게 판매한다. 다이얼식 전화기, 황동 스탠드부터 시작해 수익금으로 연화의 생존 물품을 마련한다.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <img src="pj15_info_04.webp" alt="부실의 손님들">
+                    <div class="feature-body">
+                        <h3>부실의 손님들</h3>
+                        <p>여자에게 고백만 하면 실패하는 수호, 0차원 카페 회원 린, 위태로운 교생 선생님. 각자의 사연을 가진 자들이 고전매체 보존부에 모인다.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- 캐릭터 -->
-        <section id="characters" class="section">
+        <!-- <section id="characters" class="section">
             <h2 class="section-title">캐릭터</h2>
             <p class="section-lead">
                 이야기를 이끌어가는 인물들.
@@ -116,36 +138,92 @@
 
             <div class="character-grid">
                 <div class="character-card">
-                    <img src="../favicon.webp" alt="캐릭터 1">
+                    <img src="pj15_ch1.webp" alt="주인공">
                     <div class="character-body">
-                        <h3>캐릭터 이름</h3>
-                        <p>캐릭터의 외형, 성격, 배경 스토리 등 상세 설명을 입력하는 칸입니다.</p>
+                        <h3>주인공</h3>
+                        <p>고전매체 보존부 부장. 인간을 어리석다고 여기며 로스트 미디어를 보존하는 것을 목표로 한다. 브라운관 TV에 전원을 올린 장본인으로, 연화를 원래 세계로 돌려보낼 책임을 진다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj15_ch2.webp" alt="연화">
+                    <div class="character-body">
+                        <h3>연화</h3>
+                        <p>단아한 옷차림과 맑은 눈동자. 부실 밖으로 나갈 수 없게 되어 그 안에서 생활한다. 프랑스어 '데카당'을 암호로 지정하는 등 의외의 지식을 지녔다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj15_ch3.webp" alt="교생 선생님">
+                    <div class="character-body">
+                        <h3>교생 선생님</h3>
+                        <p>미휘월 심화학교에 온 교육실습생. 첫날부터 뉴미디어 부실 찾기로 괴롭힘을 당했지만, 위태롭게도 연화의 편에 선다. 수리 영상 매니아로 브라운관 TV 수리에 조언을 해준다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj15_ch4.webp" alt="수호">
+                    <div class="character-body">
+                        <h3>수호</h3>
+                        <p>주인공의 친구. 고백할 때마다 나사 빠진 짓을 저질러 실패한다. 고전매체 보존부를 유지하기 위해 부원으로 합류한다. 이상하게도 연화의 '감금'이라는 표현에 강하게 반응한다.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="pj15_ch5.webp" alt="린">
+                    <div class="character-body">
+                        <h3>린</h3>
+                        <p>같은 반 학급 서기. 자칭 '0차원 카페' 회원. 브라운관 TV 서비스 매뉴얼 PDF를 공유해주는 등 실질적인 도움을 준다. 연화의 존재를 알게 된 후에도 협력한다.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
-        <!-- 다운로드 CTA (개발중) -->
+        <!-- 개발일지 -->
+        <!-- <section id="devlog" class="section">
+            <h2 class="section-title">개발일지</h2>
+            <p class="section-lead">
+                게임 개발 과정을 기록합니다.
+            </p>
+
+            <div class="devlog-list">
+                <a href="https://blog.teamhc.net/2026년/표류하는-이탈자는-궤적이-없다---개발일지-1편"
+                   class="devlog-item"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <div class="devlog-meta">
+                        <span class="devlog-episode">개발일지 1편</span>
+                    </div>
+                    <div class="devlog-title">표류하는 이탈자는 궤적이 없다 - 개발일지 1편</div>
+                    <div class="devlog-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"/>
+                            <polyline points="7 7 17 7 17 17"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </section> -->
+
+        <!-- CTA -->
         <section id="download" class="cta-section">
             <h2>개발 중</h2>
-            <p>상자 속에 갇힌 그녀(가제)는 현재 개발 중입니다. 2026년 출시 예정입니다.</p>
+            <p>상자 속에 갇힌 그녀는 현재 개발 중입니다. 2027년 출시 예정.</p>
         </section>
 
     </div><!-- /.wrap -->
 
-    <!-- 라이트박스 -->
     <div id="imageLightbox" class="lightbox-overlay">
         <img class="lightbox-content" id="fullImage">
     </div>
 
-    <!-- 뱃지 토스트 -->
     <div id="badge-toast" class="toast-overlay">
         <div class="toast-content">
             <div class="badge-body">
                 <img src="" alt="아이템" class="badge-img">
                 <div class="badge-info">
                     <h3 class="badge-title">제목</h3>
-                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
+                    <p class="badge-desc">설명 내용이 여기에 들어간다.</p>
                 </div>
             </div>
             <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="theme-color" content="#e6f9ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a1017" media="(prefers-color-scheme: dark)">
+
+    <meta name="view-transition" content="same-origin" />
+
+    <!-- FOUC 방지 -->
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark' || saved === 'light') {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        })();
+    </script>
+
+    <title>프로젝트 제목 - Team HC</title>
+
+    <link rel="icon" href="../favicon.webp" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- 공통 -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../tabbar.css">
+    <link rel="stylesheet" href="toast.css">
+
+    <!-- 페이지 전용 -->
+    <link rel="stylesheet" href="project.css">
+
+    <!-- 게임별 개성 색상 -->
+    <style>
+        :root { --accent: #012340; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar (뒤로가기 + 테마 토글) -->
+    <div class="top-bar">
+        <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <button class="icon-btn theme-btn" id="themeBtn" aria-label="다크모드 전환">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="wrap">
+        <header>
+            <img src="title_pj13.webp" alt="로딩 중..." class="logo" id="project-logo">
+            <div class="title-block">
+                <div class="game-sub" id="header-sub">불러오는 중...</div>
+                <div class="game-title" id="header-title">불러오는 중...</div>
+            </div>
+        </header>
+
+        <nav class="tab-container">
+            <div class="tab-inner">
+                <div class="tab-slider"></div>
+                <button class="tab-item active" data-tab="summary">개요</button>
+                <button class="tab-item" data-tab="manual">게임 소개</button>
+                <button class="tab-item" data-tab="characters">캐릭터 소개</button>
+            </div>
+        </nav>
+
+        <section id="summary" class="tab-content active">
+            <div class="mid-notice" style="--bg-image: url('pj13_background.webp');">
+                <div class="notice-text">
+                    <p>여기에 게임의 메인 캐치프레이즈나</p>
+                    <p>전체적인 분위기를 설명하는 문구를 입력하세요.</p>
+                    <p class="split">중요한 강조점은 이 클래스를 사용합니다.</p>
+                    <p>마지막 줄 설명을 입력하세요.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="manual" class="tab-content">
+            <div class="card">
+                <div class="media">
+                    <img src="pj13_info_01.webp" alt="특징 소개">
+                    <div class="text">
+                        <h2>시스템 특징 제목</h2>
+                        <p>게임의 주요 시스템이나 특징에 대한 설명을 여기에 적습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="characters" class="tab-content">
+            <div class="card">
+                <div class="media">
+                    <img src="pj13_ch1.webp" alt="캐릭터 이름">
+                    <div class="text">
+                        <h2>캐릭터 이름</h2>
+                        <p>캐릭터 설명을 입력합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="bottom-tabbar">
+            <a href="../index.html" class="tab-button home" id="homeIcon"></a>
+            <a href="https://play.google.com/store/apps/details?id=com.teamhc.project13" class="tab-button download aos">다운로드</a>
+        </nav>
+    </div>
+
+    <div id="imageLightbox" class="lightbox-overlay">
+        <img class="lightbox-content" id="fullImage">
+    </div>
+
+    <div id="badge-toast" class="toast-overlay">
+        <div class="toast-content">
+            <div class="badge-body">
+                <img src="" alt="아이템" class="badge-img">
+                <div class="badge-info">
+                    <h3 class="badge-title">제목</h3>
+                    <p class="badge-desc">설명 내용이 여기에 들어갑니다.</p>
+                </div>
+            </div>
+            <button type="button" class="badge-close-btn" onclick="closeBadge()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        const CURRENT_PROJECT_ID = 13;
+    </script>
+    <script src="../theme.js"></script>
+    <script src="project.js"></script>
+</body>
+</html>
