@@ -1,5 +1,9 @@
 {
     "files.exclude": {
-        "**/*.webp": true
+        "**/*.webp": true,
+        "**/*.rpyc": true,
+        "**/*.rpa": true,
+        "**/*.rpymc": true,
+        "**/cache/": true
     }
 }
