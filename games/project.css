@@ -616,7 +616,7 @@ body {
 }
 
 /* ==========================================================================
-   9. Store Bar (지금 다운로드 + 링크)
+   9. Store Bar (지금 다운로드 + 아이콘)
    ========================================================================== */
 .store-bar {
     display: inline-flex;
@@ -640,69 +640,37 @@ body {
 .store-bar .store-icons {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
-/* === 링크 버튼: 텍스트 담는 알약형 === */
 .store-bar .store-icon-btn {
+    width: 40px;
+    height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-
-    min-height: 40px;
-    padding: 0 18px;              /* ← 원형 → 알약형 */
-    border-radius: 9999px;        /* ← 50% → 알약 */
-
+    border-radius: 50%;
     background: var(--accent);
     color: #ffffff;
     text-decoration: none;
-
-    font-family: inherit;
-    font-size: 0.88rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    white-space: nowrap;
-
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 35%, transparent);
-    transition: transform 0.2s var(--ease),
-                filter 0.2s var(--ease),
-                background 0.2s var(--ease),
-                color 0.2s var(--ease),
-                box-shadow 0.2s var(--ease);
-}
-
-/* 첫 번째(프롤로그) = 아웃라인 / 두 번째(본편) = 채움 */
-.store-bar .store-icons .store-icon-btn:not(:last-child) {
-    background: transparent;
-    color: var(--accent);
-    border: 1.5px solid var(--accent);
-    box-shadow: none;
+    transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
 }
 
 .store-bar .store-icon-btn:hover {
-    filter: brightness(1.08);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 45%, transparent);
-}
-
-.store-bar .store-icons .store-icon-btn:not(:last-child):hover {
-    background: var(--accent-soft);
-    filter: none;
+    filter: brightness(1.15);
+    transform: scale(1.08);
 }
 
 .store-bar .store-icon-btn:active {
-    transform: translateY(0) scale(0.97);
+    transform: scale(0.95);
 }
 
-/* 아이콘이 남아있을 경우 대비 (지금은 텍스트만) */
 .store-bar .store-icon-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     display: block;
 }
 
-/* === Hero(어두운 배경) 위에서의 상태 === */
 .store-bar-hero {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(140%);
@@ -716,29 +684,15 @@ body {
     color: #ffffff;
 }
 
-/* Hero에서는 프롤로그 = 흰 아웃라인, 본편 = 흰 채움 + 강조색 글자 */
-.store-bar-hero .store-icons .store-icon-btn:not(:last-child) {
-    background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
-    border: 1.5px solid rgba(255, 255, 255, 0.6);
-    box-shadow: none;
-}
-
-.store-bar-hero .store-icons .store-icon-btn:not(:last-child):hover {
+.store-bar-hero .store-icon-btn {
     background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
-.store-bar-hero .store-icons .store-icon-btn:last-child {
-    background: #ffffff;
-    color: var(--accent);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-.store-bar-hero .store-icons .store-icon-btn:last-child:hover {
+.store-bar-hero .store-icon-btn:hover {
     background: #ffffff;
     color: var(--accent);
     filter: none;
-    transform: translateY(-1px);
 }
 
 /* ==========================================================================
@@ -797,18 +751,14 @@ body {
     color: #1f2937;
 }
 
-/* CTA 안에서도 동일 규칙(첫=아웃라인, 끝=채움) 유지 */
-.cta-section .store-bar .store-icons .store-icon-btn:last-child {
+.cta-section .store-bar .store-icon-btn {
     background: var(--accent);
     color: #ffffff;
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
-.cta-section .store-bar .store-icons .store-icon-btn:not(:last-child) {
-    background: transparent;
-    color: var(--accent);
-    border: 1.5px solid var(--accent);
-    box-shadow: none;
+.cta-section .store-bar .store-icon-btn:hover {
+    filter: brightness(1.15);
+    transform: scale(1.08);
 }
 
 /* ==========================================================================
@@ -940,20 +890,19 @@ body {
 
 @media (max-width: 480px) {
     .store-bar {
-        padding: 8px 10px 8px 16px;
+        padding: 8px 10px 8px 18px;
         gap: 10px;
     }
     .store-bar .store-label {
-        font-size: 0.85rem;
+        font-size: 0.88rem;
     }
     .store-bar .store-icon-btn {
-        min-height: 36px;
-        padding: 0 14px;
-        font-size: 0.82rem;
+        width: 36px;
+        height: 36px;
     }
     .store-bar .store-icon-btn svg {
-        width: 14px;
-        height: 14px;
+        width: 18px;
+        height: 18px;
     }
 }
 
