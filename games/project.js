@@ -226,3 +226,45 @@ document.addEventListener("DOMContentLoaded", () => {
     initHeaderScroll();
     initAnchorHighlight();
 });
+
+/* ==========================================================================
+   Hero Parallax (애플 스타일 - 살짝 딸려 올라가는 효과)
+   ========================================================================== */
+(function() {
+    const hero = document.querySelector('.hero');
+    const heroBg = document.querySelector('.hero-bg');
+    
+    if (!hero || !heroBg) return;
+    
+    // 모바일에서는 비활성화 (성능 + iOS 이슈)
+    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    
+    // 사용자가 모션 최소화를 원하면 비활성화
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    
+    let ticking = false;
+    
+    function updateParallax() {
+        const rect = hero.getBoundingClientRect();
+        
+        // hero가 화면에 보이는 동안만
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+            // 스크롤한 만큼의 30%만 이미지를 위로 이동
+            // 0.3 = 굼뜬 정도 (작을수록 더 굼뜸)
+            const scrolled = rect.top * 0.3;
+            heroBg.style.transform = `translateY(${scrolled}px)`;
+        }
+        
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    // 초기 실행
+    updateParallax();
+})();

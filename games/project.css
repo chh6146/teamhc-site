@@ -32,9 +32,7 @@
     --accent-line: color-mix(in srgb, var(--accent) 40%, #0a1017);
 }
 
-/* 다크모드에서 강조색이 너무 어두울 때 밝은 대체 색을 지정하는 변수
-   → 프로젝트별 <style>에서 --accent-on-dark를 지정하면 그 값이 쓰임
-   → 지정하지 않으면 color-mix로 자동 밝게 처리 */
+/* 다크모드에서 강조색이 너무 어두울 때 밝은 대체 색을 지정하는 변수 */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
         --accent-fg: var(--accent-on-dark, color-mix(in srgb, var(--accent) 55%, #ffffff 45%));
@@ -220,7 +218,6 @@ body {
     color: #ffffff;
 }
 
-/* 다크모드에서 액티브 탭 텍스트는 어둡게 (밝은 배경 위) */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .anchor-tabs button.active {
         color: #0a1017;
@@ -236,15 +233,23 @@ body {
 .hero {
     position: relative;
     margin: 0 -20px 40px;
-    min-height: 60vh;
-    min-height: 60svh;
+    min-height: clamp(320px, 50svh, 450px);
     display: flex;
     align-items: flex-end;
     justify-content: center;
     padding: 60px 24px;
     overflow: hidden;
     border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    color: #ffffff;
+}
 
+/* 배경 이미지 레이어 */
+.hero-bg {
+    position: absolute;
+    top: -15%;
+    bottom: -15%;
+    left: 0;
+    right: 0;
     background-image:
         linear-gradient(
             to bottom,
@@ -256,16 +261,13 @@ body {
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
-    color: #ffffff;
-}
-
-@media (hover: hover) and (pointer: fine) and (min-width: 721px) {
-    .hero {
-        background-attachment: fixed;
-    }
+    will-change: transform;
+    z-index: 0;
 }
 
 .hero-content {
+    position: relative;
+    z-index: 1;
     max-width: 720px;
     width: 100%;
     text-align: center;
@@ -845,7 +847,6 @@ body {
     color: #ffffff;
 }
 
-/* CTA는 다크모드 영향 안 받도록 */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .cta-section {
         --accent-fg: var(--accent);
@@ -956,9 +957,9 @@ body {
 
     .hero {
         margin: 0 -16px 32px;
-        min-height: 55vh;
-        min-height: 55svh;
-        padding: 40px 20px;
+        min-height: 40svh;
+        max-height: 400px;
+        padding: 32px 20px;
     }
 
     .feature-grid,
@@ -1068,17 +1069,4 @@ body {
 .character-card img {
     display: block;
     width: 100%;
-    min-height: 180px;
-    object-fit: cover;
-
-    background:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E"),
-        radial-gradient(at 20% 20%, color-mix(in srgb, var(--accent) 80%, white) 0%, transparent 50%),
-        radial-gradient(at 80% 80%, color-mix(in srgb, var(--accent) 60%, black) 0%, transparent 60%),
-        var(--accent);
-
-    color: transparent;
-    font-size: 0;
-    text-indent: -9999px;
-    overflow: hidden;
-}
+   
