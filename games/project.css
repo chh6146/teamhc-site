@@ -18,7 +18,7 @@
     --radius-sm: 10px;
 }
 
-/* 다크모드: accent 파생 색상 어둡게 */
+/* 다크모드: accent는 그대로 두고, 파생 색상만 어둡게 */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
         --accent-soft: color-mix(in srgb, var(--accent) 14%, #0a1017);
@@ -30,6 +30,18 @@
     --accent-soft: color-mix(in srgb, var(--accent) 14%, #0a1017);
     --accent-tint: color-mix(in srgb, var(--accent) 22%, #0a1017);
     --accent-line: color-mix(in srgb, var(--accent) 40%, #0a1017);
+}
+
+/* 다크모드에서 강조색이 너무 어두울 때 밝은 대체 색을 지정하는 변수
+   → 프로젝트별 <style>에서 --accent-on-dark를 지정하면 그 값이 쓰임
+   → 지정하지 않으면 color-mix로 자동 밝게 처리 */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --accent-fg: var(--accent-on-dark, color-mix(in srgb, var(--accent) 55%, #ffffff 45%));
+    }
+}
+:root[data-theme="dark"] {
+    --accent-fg: var(--accent-on-dark, color-mix(in srgb, var(--accent) 55%, #ffffff 45%));
 }
 
 html {
@@ -131,15 +143,15 @@ body {
 }
 
 .icon-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+    color: var(--accent-fg, var(--accent));
+    border-color: var(--accent-fg, var(--accent));
     transform: scale(1.05);
 }
 
 .icon-btn:active { transform: scale(0.92); }
 
 .icon-btn:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-fg, var(--accent));
     outline-offset: 2px;
 }
 
@@ -204,8 +216,18 @@ body {
 }
 
 .anchor-tabs button.active {
-    background: var(--accent);
+    background: var(--accent-fg, var(--accent));
     color: #ffffff;
+}
+
+/* 다크모드에서 액티브 탭 텍스트는 어둡게 (밝은 배경 위) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .anchor-tabs button.active {
+        color: #0a1017;
+    }
+}
+:root[data-theme="dark"] .anchor-tabs button.active {
+    color: #0a1017;
 }
 
 /* ==========================================================================
@@ -215,7 +237,7 @@ body {
     position: relative;
     margin: 0 -20px 40px;
     min-height: 60vh;
-    min-height: 60svh;      /* dvh → svh */
+    min-height: 60svh;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -232,13 +254,11 @@ body {
         ),
         var(--hero-bg, linear-gradient(135deg, var(--accent), #000));
     background-size: cover;
-    background-position: center top;   /* center → center top */
-    background-repeat: no-repeat;       /* 추가 */
-    /* background-attachment: fixed; ← 삭제 */
+    background-position: center top;
+    background-repeat: no-repeat;
     color: #ffffff;
 }
 
-/* 데스크톱에서만 fixed parallax 효과 */
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
     .hero {
         background-attachment: fixed;
@@ -318,7 +338,7 @@ body {
     display: block;
     width: 40px;
     height: 3px;
-    background: var(--accent);
+    background: var(--accent-fg, var(--accent));
     border-radius: 2px;
     margin-top: 8px;
 }
@@ -334,7 +354,7 @@ body {
 }
 
 .section-lead strong {
-    color: var(--accent);
+    color: var(--accent-fg, var(--accent));
     font-weight: 700;
 }
 
@@ -369,7 +389,7 @@ body {
 
 .feature-card:hover {
     transform: translateY(-4px);
-    border-color: var(--accent);
+    border-color: var(--accent-fg, var(--accent));
     box-shadow: 0 12px 32px var(--accent-line);
 }
 
@@ -393,7 +413,7 @@ body {
     font-size: 1.02rem;
     font-weight: 700;
     margin: 0 0 8px;
-    color: var(--accent);
+    color: var(--accent-fg, var(--accent));
     letter-spacing: -0.01em;
 }
 
@@ -407,7 +427,7 @@ body {
 
 .item-btn {
     padding: 3px 10px;
-    background-color: var(--accent);
+    background-color: var(--accent-fg, var(--accent));
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -420,6 +440,15 @@ body {
     margin: 0 2px;
     letter-spacing: -0.01em;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .item-btn {
+        color: #0a1017;
+    }
+}
+:root[data-theme="dark"] .item-btn {
+    color: #0a1017;
 }
 
 .item-btn:hover {
@@ -460,7 +489,7 @@ body {
 
 .character-card:hover {
     transform: translateY(-4px);
-    border-color: var(--accent);
+    border-color: var(--accent-fg, var(--accent));
     box-shadow: 0 12px 32px var(--accent-line);
 }
 
@@ -560,7 +589,7 @@ body {
 
 .devlog-item:hover {
     transform: translateY(-2px);
-    border-color: var(--accent);
+    border-color: var(--accent-fg, var(--accent));
     box-shadow: 0 12px 32px var(--accent-line);
 }
 
@@ -579,11 +608,20 @@ body {
     align-items: center;
     padding: 2px 9px;
     border-radius: 8px;
-    background: var(--accent);
+    background: var(--accent-fg, var(--accent));
     color: #ffffff;
     font-weight: 700;
     font-size: 0.7rem;
     letter-spacing: -0.01em;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .devlog-episode {
+        color: #0a1017;
+    }
+}
+:root[data-theme="dark"] .devlog-episode {
+    color: #0a1017;
 }
 
 .devlog-title {
@@ -605,15 +643,24 @@ body {
     justify-content: center;
     border-radius: 50%;
     background: var(--accent-soft);
-    color: var(--accent);
+    color: var(--accent-fg, var(--accent));
     flex-shrink: 0;
     transition: transform var(--t-fast), background var(--t-fast), color var(--t-fast);
 }
 
 .devlog-item:hover .devlog-arrow {
-    background: var(--accent);
+    background: var(--accent-fg, var(--accent));
     color: #ffffff;
     transform: translate(2px, -2px);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .devlog-item:hover .devlog-arrow {
+        color: #0a1017;
+    }
+}
+:root[data-theme="dark"] .devlog-item:hover .devlog-arrow {
+    color: #0a1017;
 }
 
 .devlog-arrow svg {
@@ -655,7 +702,6 @@ body {
     justify-content: center;
 }
 
-/* === 기본: 아이콘 전용 원형 버튼 === */
 .store-bar .store-icon-btn {
     width: 40px;
     height: 40px;
@@ -667,7 +713,7 @@ body {
     justify-content: center;
     gap: 6px;
 
-    background: var(--accent);
+    background: var(--accent-fg, var(--accent));
     color: #ffffff;
     text-decoration: none;
     font-family: inherit;
@@ -700,7 +746,6 @@ body {
     flex-shrink: 0;
 }
 
-/* === 텍스트가 있으면 자동으로 알약형으로 확장 === */
 .store-bar .store-icon-btn:not(:has(svg)),
 .store-bar .store-icon-btn:has(svg + *) {
     width: auto;
@@ -715,7 +760,6 @@ body {
     transform: scale(1.05);
 }
 
-/* === Hero(어두운 배경) 위 버튼 === */
 .store-bar-hero {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(140%);
@@ -736,7 +780,7 @@ body {
 
 .store-bar-hero .store-icon-btn:hover {
     background: #ffffff;
-    color: var(--accent);
+    color: var(--accent-fg, var(--accent));
     filter: none;
 }
 
@@ -797,8 +841,18 @@ body {
 }
 
 .cta-section .store-bar .store-icon-btn {
-    background: var(--accent);
+    background: var(--accent-fg, var(--accent));
     color: #ffffff;
+}
+
+/* CTA는 다크모드 영향 안 받도록 */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .cta-section {
+        --accent-fg: var(--accent);
+    }
+}
+:root[data-theme="dark"] .cta-section {
+    --accent-fg: var(--accent);
 }
 
 .cta-section .store-bar .store-icon-btn:hover {
@@ -806,7 +860,6 @@ body {
     transform: scale(1.08);
 }
 
-/* CTA 안의 텍스트 버튼은 살짝 여유 있게 */
 .cta-section .store-bar .store-icon-btn:not(:has(svg)),
 .cta-section .store-bar .store-icon-btn:has(svg + *) {
     min-height: 42px;
@@ -904,7 +957,7 @@ body {
     .hero {
         margin: 0 -16px 32px;
         min-height: 55vh;
-        min-height: 55svh;    /* dvh → svh */
+        min-height: 55svh;
         padding: 40px 20px;
     }
 
@@ -954,7 +1007,6 @@ body {
         font-size: 0.85rem;
     }
 
-    /* 아이콘 원형 버튼 */
     .store-bar .store-icon-btn {
         width: 36px;
         height: 36px;
@@ -964,7 +1016,6 @@ body {
         height: 18px;
     }
 
-    /* 텍스트 알약 버튼 */
     .store-bar .store-icon-btn:not(:has(svg)),
     .store-bar .store-icon-btn:has(svg + *) {
         width: auto;
@@ -984,7 +1035,6 @@ body {
 @media (max-width: 380px) {
     .character-grid { grid-template-columns: 1fr; }
 
-    /* 아주 좁은 화면: 라벨과 버튼을 세로 배치 */
     .store-bar {
         flex-direction: column;
         border-radius: 24px;
@@ -1011,22 +1061,22 @@ body {
     }
 }
 
+/* ==========================================================================
+   14. 이미지 폴백 (이미지 없을 때 그라데이션)
+   ========================================================================== */
 .feature-card img,
 .character-card img {
-    /* 이미지 위에 덮이도록 */
     display: block;
     width: 100%;
     min-height: 180px;
     object-fit: cover;
 
-    /* 이미지 없을 때만 보이는 폴백 */
     background:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E"),
         radial-gradient(at 20% 20%, color-mix(in srgb, var(--accent) 80%, white) 0%, transparent 50%),
         radial-gradient(at 80% 80%, color-mix(in srgb, var(--accent) 60%, black) 0%, transparent 60%),
         var(--accent);
 
-    /* 깨진 이미지 아이콘/alt 텍스트 숨기기 */
     color: transparent;
     font-size: 0;
     text-indent: -9999px;
