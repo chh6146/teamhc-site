@@ -87,8 +87,8 @@
 html {
     min-height: 100%;
     scroll-behavior: smooth;
-    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
-    background-attachment: fixed;
+    /* ▼ 오버스크롤 영역까지 커버하는 단색 배경 (핵심) */
+    background-color: var(--bg-end);
 }
 
 body {
@@ -107,6 +107,18 @@ body {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     transition: color var(--t-base);
+    background: transparent;   /* ← 추가 */
+    position: relative;        /* ← 추가 */
+}
+
+/* ▼ 뷰포트에 고정된 그라데이션 배경 레이어 (핵심) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    pointer-events: none;
 }
 
 /* ==========================================
