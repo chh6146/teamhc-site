@@ -7,7 +7,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
-    initBackButton();
+    initBackButton(window.BACK_FALLBACK);
 });
 
 /* ---------- 다크모드 토글 ---------- */
@@ -29,24 +29,14 @@ function initThemeToggle() {
 }
 
 /* ---------- 뒤로가기 버튼 ---------- */
-function initBackButton() {
+function initBackButton(fallbackUrl) {
     const btn = document.getElementById('backBtn');
     if (!btn) return;
 
-    // 히스토리 또는 리퍼러가 있으면 표시
-    const hasHistory = history.length > 1;
-    const hasReferrer = document.referrer && 
-                        document.referrer !== location.href;
-
-    if (hasHistory || hasReferrer) {
-        btn.hidden = false;
-    }
+    btn.hidden = false;
 
     btn.addEventListener('click', () => {
-        if (history.length > 1) {
-            history.back();
-        } else {
-            location.href = './';
-        }
+        // 무조건 상위 페이지로. 지정 없으면 index.html
+        location.href = fallbackUrl || 'index.html';
     });
 }

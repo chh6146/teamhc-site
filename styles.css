@@ -169,10 +169,15 @@ body::before {
     left: 12px;
     right: 12px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     z-index: 10;
     pointer-events: none;
+}
+
+/* 테마 버튼은 항상 오른쪽 끝 */
+.top-bar .theme-btn {
+    margin-left: auto;
 }
 
 .top-bar .icon-btn {
@@ -821,5 +826,11 @@ h1 {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+}
+
+@media (max-width: 720px) {
+    .back-btn {
+        display: none !important;
     }
 }

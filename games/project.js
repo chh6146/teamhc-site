@@ -24,6 +24,7 @@ const Lightbox = {
         this.content.style.opacity = "0";
         this.content.src = src;
         this.content.onload = () => { this.content.style.opacity = "1"; };
+        this.content.onerror = () => { this.content.style.opacity = "1"; };  // ← 추가
         this.overlay.style.display = "block";
         document.body.style.overflow = "hidden";
     },
@@ -55,18 +56,28 @@ window.addEventListener('click', (e) => {
     if (modal && e.target === modal) closeBadge();
 });
 
-/* ---------- 3. 헤더 스크롤 효과 ---------- */
+/* ---------- 3. 헤더 스크롤 효과 (숨김/표시) ---------- */
 function initHeaderScroll() {
     const header = document.querySelector('.site-header');
     if (!header) return;
 
     let ticking = false;
+    let lastY = window.scrollY;
+
     const update = () => {
-        if (window.scrollY > 20) {
-            header.classList.add('is-scrolled');
+        const y = window.scrollY;
+
+        // 배경/블러 상태
+        header.classList.toggle('is-scrolled', y > 20);
+
+        // 아래로 스크롤하면 숨김, 위로 스크롤하면 표시
+        if (y > lastY && y > 80) {
+            header.classList.add('is-hidden');
         } else {
-            header.classList.remove('is-scrolled');
+            header.classList.remove('is-hidden');
         }
+
+        lastY = y;
         ticking = false;
     };
 
@@ -76,6 +87,11 @@ function initHeaderScroll() {
             ticking = true;
         }
     }, { passive: true });
+
+    window.addEventListener('pageshow', () => {
+        lastY = window.scrollY;
+        update();
+    });
 
     update();
 }
@@ -90,28 +106,34 @@ function initAnchorHighlight() {
 
     const setActive = (id) => {
         tabs.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.target === id);
+            const on = btn.dataset.target === id;
+            btn.classList.toggle('active', on);
+            btn.setAttribute('aria-selected', on ? 'true' : 'false');  // ← 추가
         });
     };
 
+    let headerOffset = null;
     function getHeaderOffset() {
-        if (!header) return 110;
-        const rect = header.getBoundingClientRect();
-        return rect.height + 40;
+        if (headerOffset !== null) return headerOffset;
+        headerOffset = header ? header.getBoundingClientRect().height + 40 : 110;
+        return headerOffset;
     }
 
     function updateActive() {
+        // 스크롤이 불가능한(짧은) 페이지면 클릭 기반 active만 사용
+        const scrollable = document.documentElement.scrollHeight > window.innerHeight + 4;
+        if (!scrollable) return;
+
         const headerOffset = getHeaderOffset();
         const scrollY = window.scrollY + headerOffset;
 
         let currentId = sections[0].id;
-
         sections.forEach(sec => {
-            if (scrollY >= sec.offsetTop) {
-                currentId = sec.id;
-            }
+            const top = sec.getBoundingClientRect().top + window.scrollY;
+            if (scrollY >= top) currentId = sec.id;
         });
 
+        // 바닥 도달 시 마지막 섹션 (스크롤 가능할 때만)
         if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 20) {
             currentId = sections[sections.length - 1].id;
         }
@@ -137,6 +159,9 @@ function initAnchorHighlight() {
             const targetId = btn.dataset.target;
             const target = document.getElementById(targetId);
             if (!target) return;
+
+            // 클릭 시 즉시 active (스크롤 가능 여부와 무관)
+            setActive(targetId);
 
             const headerOffset = getHeaderOffset();
             const targetY = target.offsetTop - headerOffset + 10;
@@ -165,7 +190,8 @@ function injectHomeIcon() {
 /* ---------- 6. 기기 감지 ---------- */
 function detectDevice() {
     const ua = navigator.userAgent.toLowerCase();
-    const isIos = /iphone|ipad|ipod/.test(ua);
+    const isIos = /iphone|ipad|ipod/.test(navigator.userAgent) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     const isAndroid = /android/.test(ua);
 
     if (!isIos && !isAndroid) return;
@@ -252,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 스크롤한 만큼의 30%만 이미지를 위로 이동
             // 0.3 = 굼뜬 정도 (작을수록 더 굼뜸)
             const scrolled = rect.top * 0.3;
-            heroBg.style.transform = `translateY(${scrolled}px)`;
+            heroBg.style.setProperty('--parallax-y', `${scrolled}px`);
         }
         
         ticking = false;

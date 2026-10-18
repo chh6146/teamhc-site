@@ -107,14 +107,21 @@ body {
     padding: 12px 0;
     padding-top: max(12px, env(safe-area-inset-top));
     margin-bottom: 8px;
-    transition: background 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+    transition: background 0.3s var(--ease),
+                backdrop-filter 0.3s var(--ease),
+                transform 0.35s var(--ease);   /* ← transform 추가 */
+    border-bottom: 1px solid transparent;   /* ← 추가 */
+}
+
+.site-header.is-hidden {
+    transform: translateY(-100%);
 }
 
 .site-header.is-scrolled {
     background: var(--surface-glass);
     backdrop-filter: blur(20px) saturate(140%);
     -webkit-backdrop-filter: blur(20px) saturate(140%);
-    border-bottom: 1px solid var(--border-light);
+    border-bottom-color: var(--border-light);   /* 색만 변경 */
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
@@ -263,6 +270,7 @@ body {
     background-repeat: no-repeat;
     will-change: transform;
     z-index: 0;
+    transform: translateY(var(--parallax-y, 0));
 }
 
 .hero-content {
@@ -937,15 +945,16 @@ body {
         padding: 12px 0;
         padding-top: max(12px, env(safe-area-inset-top));
         margin-bottom: 8px;
+        border-bottom: 1px solid transparent;   /* ← 이 줄 추가 */
         transition: background 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
     }
 
-    .back-btn { margin-right: auto; }
+    /* 뒤로가기는 숨기므로 margin 규칙 불필요 */
     .theme-btn { margin-left: auto; }
+
     .anchor-tabs {
-        grid-area: tabs;
-        justify-self: stretch;
         justify-content: flex-start;
+        margin-right: auto;
     }
 
     .site-header.is-scrolled {
