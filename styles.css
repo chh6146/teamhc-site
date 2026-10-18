@@ -180,6 +180,12 @@ body::before {
     margin-left: auto;
 }
 
+.top-bar .theme-btn,
+.site-header .theme-btn {
+    width: 38px;
+    height: 38px;
+}
+
 .top-bar .icon-btn {
     pointer-events: auto;
     width: 38px;
@@ -225,17 +231,16 @@ body::before {
     display: none;
 }
 
-/* 아이콘 전환 */
-.top-bar .theme-btn .icon-moon { display: none; }
-.top-bar .theme-btn .icon-sun  { display: block; }
+/* 테마 아이콘 3상태 */
+.theme-btn .icon-sun,
+.theme-btn .icon-moon { display: none !important; }
+.theme-btn .icon-system { display: block !important; }
 
-:root[data-theme="dark"] .theme-btn .icon-sun { display: none; }
-:root[data-theme="dark"] .theme-btn .icon-moon { display: block; }
+:root[data-theme="light"] .theme-btn .icon-system { display: none !important; }
+:root[data-theme="light"] .theme-btn .icon-sun { display: block !important; }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .theme-btn .icon-sun { display: none; }
-    :root:not([data-theme="light"]) .theme-btn .icon-moon { display: block; }
-}
+:root[data-theme="dark"] .theme-btn .icon-system { display: none !important; }
+:root[data-theme="dark"] .theme-btn .icon-moon { display: block !important; }
 
 /* ==========================================
    4. 로고 & 설명 & h1
@@ -826,11 +831,5 @@ h1 {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
-    }
-}
-
-@media (max-width: 720px) {
-    .back-btn {
-        display: none !important;
     }
 }
