@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj8beta_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -103,7 +106,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj8beta_info_01.webp" alt="의문의 전화와 갑작스러운 이사">
+                    <img src="pj8beta_info_01.webp" alt="의문의 전화와 갑작스러운 이사" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>의문의 전화와 갑작스러운 이사</h3>
                         <p>한 통의 문자로 시작된 시골행. 도시 생활에 익숙해진 백하는 어쩔 수 없이 초등학교 때 살았던 미리내로 돌아가게 된다.</p>
@@ -111,7 +114,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj8beta_info_02.webp" alt="정체불명의 소녀들">
+                    <img src="pj8beta_info_02.webp" alt="정체불명의 소녀들" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>마을에서 마주친 낯선 인물들</h3>
                         <p>미리내역에 도착하자마자 오라버니라 부르는 예지, 창문으로 들락날락하는 정윤, 갑자기 운명이라 외치는 채하까지. 평범해 보이던 마을은 점차 알 수 없는 분위기로 흘러가는데...</p>
@@ -119,7 +122,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj8beta_info_03.webp" alt="재회 그리고 예상을 벗어난 상황">
+                    <img src="pj8beta_info_03.webp" alt="재회 그리고 예상을 벗어난 상황" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>재회, 그리고 예상을 벗어난 상황</h3>
                         <p>어릴 적 함께 지냈던 소꿉친구 정윤과 재회하게 되지만, 무언가 잘못된 듯한 기묘한 일들이 벌어지기 시작하는데...</p>

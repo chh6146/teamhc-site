@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj4a_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -103,7 +106,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj4a_info_01.webp" alt="가너축 컨셉">
+                    <img src="pj4a_info_01.webp" alt="가너축 컨셉" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>동경</h3>
                         <p>청소년의 풋풋한 일상을 동경하는 사람들이 모여 개발했습니다. 현실에서 볼 수 없는 이야기를 가상에서라도 마주하고 싶어 하는 건 조금은 애처롭네요.</p>
@@ -111,7 +114,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj4a_info_02.webp" alt="시스템 특징">
+                    <img src="pj4a_info_02.webp" alt="시스템 특징" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>풍성해진 선택지와 애니메이션</h3>
                         <p>기존 공개된 게임보다 늘어난 선택지를 제공합니다. 선택에 따라 히로인의 변화를 관찰해보세요.</p>
@@ -119,7 +122,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj4a_info_03.webp" alt="사건의 전말">
+                    <img src="pj4a_info_03.webp" alt="사건의 전말" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>모든 엔딩 끝에 기다리는 진실</h3>
                         <p>준비된 총 여섯 가지의 엔딩을 모두 확인하세요. 모든 엔딩을 거쳐 비로소 이 게임이 숨기고 있는 전말을 이해할 수 있습니다.</p>

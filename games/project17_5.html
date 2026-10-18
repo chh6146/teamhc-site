@@ -26,6 +26,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj17_5_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -40,7 +43,7 @@
     <div class="wrap">
 
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -101,7 +104,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj17_5_info_01.webp" alt="아침·점심·저녁·밤">
+                    <img src="pj17_5_info_01.webp" alt="아침·점심·저녁·밤" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>아침·점심·저녁·밤</h3>
                         <p>하루가 네 개의 시간대로 나뉩니다. 각 시간대마다 주인공의 행동을 선택할 수 있으며, 선택에 따라 능력치와 호감도가 변화합니다.</p>
@@ -109,7 +112,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj17_5_info_02.webp" alt="능력치와 호감도">
+                    <img src="pj17_5_info_02.webp" alt="능력치와 호감도" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>능력치와 호감도</h3>
                         <p>매력·체력·화술·스트레스·자본의 다섯 가지 능력치가 있습니다. 특정 능력치가 일정 수치 이상이어야 선택할 수 있는 선택지도 존재합니다.</p>
@@ -117,7 +120,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj17_5_info_03.webp" alt="자유로운 스케줄">
+                    <img src="pj17_5_info_03.webp" alt="자유로운 스케줄" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>자유로운 스케줄</h3>
                         <p>아르바이트로 돈을 벌거나, 외출로 스트레스를 풀거나, 아이오와 함께 시간을 보냅니다. 어떤 하루를 쌓아 올리느냐에 따라 결말이 달라집니다.</p>
@@ -134,7 +137,7 @@
 
             <div class="character-grid">
                 <div class="character-card">
-                    <img src="pj17_5_ch1.webp" alt="주인공">
+                    <img src="pj17_5_ch1.webp" alt="주인공" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>주인공</h3>
                         <p>연애를 할 줄 모르는 주인공. 세계가 재구성될 때마다 연애를 시도하지만 번번이 실패한다.</p>
@@ -142,7 +145,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj17_5_ch2.webp" alt="아이오">
+                    <img src="pj17_5_ch2.webp" alt="아이오" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>아이오</h3>
                         <p>주인공이 공략 대상으로 삼은 인물. 자기 자신만 생각하고 남의 의견은 듣지 않는 독불장군 같은 성격.</p>

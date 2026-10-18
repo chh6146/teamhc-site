@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj12_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -105,7 +108,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj12_info_01.webp" alt="점장이 된 하늘">
+                    <img src="pj12_info_01.webp" alt="점장이 된 하늘" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>생계형 도둑에서 하루아침에 점장으로</h3>
                         <p>빚을 피해 도망치던 중 우연히 들어선 두루뫼 시의 수상한 가게. 굶주림에 못 이겨 빵을 훔치다 들킨 주인공 하늘은, 예상치 못한 제안을 받고 얼떨결에 가게의 운영을 맡게 됩니다.</p>
@@ -113,7 +116,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj12_info_02.webp" alt="아르바이트 모집">
+                    <img src="pj12_info_02.webp" alt="아르바이트 모집" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>좌충우돌 아르바이트생</h3>
                         <p>제빵 지식도, 서빙 경험도 없는 초보 점장에게 닥친 난관. 빵을 만들 줄 아는 제빵사 렌토를 시작으로, 가게를 정상화하기 위해 개성 넘치는 아르바이트생들을 모집합니다.</p>
@@ -121,7 +124,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj12_info_03.webp" alt="가게 경영">
+                    <img src="pj12_info_03.webp" alt="가게 경영" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>생각보다 어려운, 그래서 더 즐거운 경영</h3>
                         <p>단순한 운영을 넘어 예상치 못한 사건들이 가게 안팎에서 벌어집니다. 렌토를 중심으로 다양한 아르바이트생들과 함께 '다 카포'를 운영해보세요.</p>
@@ -139,7 +142,7 @@
 
             <div class="character-grid">
                 <div class="character-card">
-                    <img src="pj12_ch1.webp" alt="하늘">
+                    <img src="pj12_ch1.webp" alt="하늘" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>하늘</h3>
                         <p>본작의 주인공. 친구의 보증을 서줬다가 빚쟁이들에게 쫓겨 두루뫼 시까지 도망친 도망자. 굶주림에 못 이겨 빵을 훔치다 수상한 마법사에게 빵집 '다 카포'를 넘겨받고 얼떨결에 점장이 된다.</p>
@@ -147,7 +150,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj12_ch2.webp" alt="렌토">
+                    <img src="pj12_ch2.webp" alt="렌토" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>렌토</h3>
                         <p>'다 카포'의 첫 아르바이트생. 밥솥으로 빵을 만든 것이 계기가 되어 제빵을 시작한 학생. 독학이라 마카롱과 츄러스는 아직 잘 못 만듭니다.</p>
@@ -155,7 +158,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj12_ch3.webp" alt="비바체">
+                    <img src="pj12_ch3.webp" alt="비바체" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>비바체</h3>
                         <p>수시 합격자 고3. 접객에 자신 있다며 찾아온 밝고 당찬 아르바이트생. 하루 지나면 버려지는 빵으로 시식 행사를 뛰는 등, 가게를 위해 자발적으로 나서는 마케팅 담당.</p>
@@ -164,7 +167,7 @@
 
                 <!-- 포르테 -->
                 <div class="character-card">
-                    <img src="pj12_ch4.webp" alt="포르테">
+                    <img src="pj12_ch4.webp" alt="포르테" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>포르테</h3>
                         <p>근처 빵집 '코다'를 운영하는 사장. '다 카포'에 종종 찾아와 조언을 건네며, 남은 빵 활용 레시피를 알려준다.</p>
@@ -173,7 +176,7 @@
 
                 <!-- 모토 -->
                 <div class="character-card">
-                    <img src="pj12_ch5.webp" alt="모토">
+                    <img src="pj12_ch5.webp" alt="모토" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>모토</h3>
                         <p>새벽 4시마다 '다 카포'에 식재료를 배달하는 납품업자. 리어카를 끌고 가게를 돌며 재료를 전달합니다.</p>

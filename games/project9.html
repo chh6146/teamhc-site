@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj9_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -105,7 +108,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj9_info_01.webp" alt="라디오 전파로 이어지는 교신">
+                    <img src="pj9_info_01.webp" alt="라디오 전파로 이어지는 교신" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>단파 라디오로 이어지는 교신</h3>
                         <p>지구에 불시착한 오르세우스족 니나와 그녀를 원래의 장소로 돌려보내려는 이야기.</p>
@@ -113,7 +116,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj9_info_02.webp" alt="예측 불가능한 인물들의 등장">
+                    <img src="pj9_info_02.webp" alt="예측 불가능한 인물들의 등장" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>예측 불가능한 인물들의 등장</h3>
                         <p>가슴을 크게 만드는 마법을 노리는 리아와 그 추종자들, 화장실에서 나오지 못한 연지까지. 개성 넘치는 인물들 사이에서 벌어지는 사건의 흐름을 직접 확인하세요.</p>
@@ -121,7 +124,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj9_info_03.webp" alt="이벤트 컷 안내">
+                    <img src="pj9_info_03.webp" alt="이벤트 컷 안내" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>죄송합니다.</h3>
                         <p>해당 게임에는 이벤트 컷이 존재하지 않습니다.</p>

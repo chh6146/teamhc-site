@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj6_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -100,7 +103,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj6_info_01.webp" alt="다시 비상하는 이야기">
+                    <img src="pj6_info_01.webp" alt="다시 비상하는 이야기" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>다시 비상하는 이야기</h3>
                         <p>'우리들의 날개는 언제부턴가 부서졌다' 그 이후의 이야기를 담은 정식 후속작이 찾아옵니다. 끝나지 않은 이야기를 확인하세요.</p>
@@ -108,7 +111,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj6_info_02.webp" alt="은빛 공원에서 시작되는 의혹">
+                    <img src="pj6_info_02.webp" alt="은빛 공원에서 시작되는 의혹" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>은빛 공원에서 시작되는 의혹</h3>
                         <p>'그' 사건으로부터 1년 뒤. 연구원이 된 노랑이에게 전해 들은 기묘한 이야기, 나래가 은빛 공원에 나타난다는 정보. 하서는 직감적인 이질감을 느끼며 진실을 쫓지만, 사건은 좀처럼 연관점을 드러내지 않는다.</p>
@@ -116,7 +119,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj6_info_03.webp" alt="금기의 물건, LI001">
+                    <img src="pj6_info_03.webp" alt="금기의 물건, LI001" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>금기의 물건, LI001</h3>
                         <p>단서가 보이지 않는 막막함 속에서 다시 한번 손에 쥐게 된 'LI001'. 과거와 현재를 관통하는 이 물건은 과연 하서에게 해답을 줄 것인가, 아니면 또 다른 비극의 서막일까?</p>

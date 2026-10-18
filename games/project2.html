@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj2_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -108,7 +111,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj2_info_01.webp" alt="시리즈의 대단원">
+                    <img src="pj2_info_01.webp" alt="시리즈의 대단원" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>시리즈의 대단원</h3>
                         <p>『저편 하늘을 향해』를 잇는 이바천 시리즈의 마지막 작품. 모든 기억을 잃어버린 미상, 그리고 하울을 되찾기 위해 떠난 혜울 일행의 이야기를 지금 확인하세요.</p>
@@ -116,7 +119,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj2_info_02.webp" alt="추가된 이벤트 CG">
+                    <img src="pj2_info_02.webp" alt="추가된 이벤트 CG" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>추가된 이벤트 CG</h3>
                         <p>추가적인 내용과 이벤트 CG가 포함되어 조금 더 볼륨감 있는 게임으로 재탄생 하였습니다.</p>
@@ -124,7 +127,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj2_info_03.webp" alt="고철 위에서 펼쳐지는 모험">
+                    <img src="pj2_info_03.webp" alt="고철 위에서 펼쳐지는 모험" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>고철 위에서 펼쳐지는 모험</h3>
                         <p>고철을 타고 떠나는 혜울 일행의 신비로운 이야기. 지금 바로 그들의 특별한 여정에 동참해보세요.</p>
@@ -132,7 +135,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj2_info_04.webp" alt="다양한 기능의 추가">
+                    <img src="pj2_info_04.webp" alt="다양한 기능의 추가" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>다양한 기능의 추가</h3>
                         <p>메시지 기능을 추가하여 등장인물과 단방향 소통이 가능해졌으며, UI도 모바일에서 사용하기 편하게 변경 되었습니다.</p>

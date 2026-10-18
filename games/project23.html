@@ -26,6 +26,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj23_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -40,7 +43,7 @@
     <div class="wrap">
 
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -99,7 +102,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj23_info_01.webp" alt="아침·낮·밤 3교대">
+                    <img src="pj23_info_01.webp" alt="아침·낮·밤 3교대" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>아침·낮·밤 3교대</h3>
                         <p>하루는 세 개의 시간대로 나뉜다. 아침에는 상태를 확인하고, 낮에는 물자를 구하러 나가고, 밤에는 집에서 할 수 있는 일을 한다.</p>
@@ -107,7 +110,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj23_info_02.webp" alt="생존 상태 관리">
+                    <img src="pj23_info_02.webp" alt="생존 상태 관리" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>생존 상태 관리</h3>
                         <p>체력, 배고픔, 수분. 세 가지 상태를 관리해야 한다. 체력이 낮으면 전투에서 위험해지고, 배고프면 움직일 수 없고, 목마르면 쓰러진다. 상처, 감염, 공포 같은 상태이상도 주의해야 한다.</p>
@@ -115,7 +118,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj23_info_03.webp" alt="물자 수집">
+                    <img src="pj23_info_03.webp" alt="물자 수집" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>물자 수집</h3>
                         <p>대형마트, 경찰서, 약국, 카페, 수퍼, 전자상가 등 다양한 장소에서 물자를 구할 수 있다. 쌀, 생수, 육포, 구급상자, 라디오, 무기, 방어구까지. 가방은 한정적이니 무엇을 챙길지 고민해야 한다.</p>
@@ -123,7 +126,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj23_info_04.webp" alt="생존자와의 조우">
+                    <img src="pj23_info_04.webp" alt="생존자와의 조우" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>생존자와의 조우</h3>
                         <p>밖에 나가면 다른 생존자를 만날 수 있다. 도움을 주는 사람도 있고, 무기를 들고 덤비는 사람도 있다. 때로는 유진처럼 함께 지내는 동료가 생기기도 한다.</p>
@@ -131,7 +134,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj23_info_05.webp" alt="기지 관리">
+                    <img src="pj23_info_05.webp" alt="기지 관리" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>기지 관리</h3>
                         <p>상수도 시설과 가스레인지를 수리하면 물과 연료를 마음껏 쓸 수 있다. 자물쇠를 교체하면 밤 침입자를 막을 수 있다. 농장에서 강아지·고양이·닭을 기를 수도 있다.</p>
@@ -139,7 +142,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj23_info_06.webp" alt="다중 엔딩">
+                    <img src="pj23_info_06.webp" alt="다중 엔딩" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>다중 엔딩</h3>
                         <p>라디오 주파수를 통해 서울 집결, 보급상자, 피의 무리, 오토바이 수리 등 다양한 루트가 열린다. 어떤 선택을 쌓아 올리느냐에 따라 완전히 다른 결말이 기다린다.</p>

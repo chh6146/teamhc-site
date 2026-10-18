@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj13_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -106,7 +109,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj13_info_01.webp" alt="작은 호의">
+                    <img src="pj13_info_01.webp" alt="작은 호의" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>작은 호의</h3>
                         <p>도서관에서 책 꺼내는 것을 돕고, 길 잃은 새를 돌봐준 평범한 선행. 하지만 그 대가로 돌아온 것은 행운이 아닌, 이해할 수 없는 인연과 복잡하게 얽힌 일상.</p>
@@ -114,7 +117,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj13_info_02.webp" alt="겹쳐지는 인연">
+                    <img src="pj13_info_02.webp" alt="겹쳐지는 인연" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>겹쳐지는 인연</h3>
                         <p>이유 없이 주인공을 따르기 시작한 라일라와 예상치 못한 정체가 탄로나며 소란에 휘말린 클로에. 각기 다른 사연을 가진 그녀들이 주인공의 곁으로 모여든다.</p>
@@ -122,7 +125,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj13_info_03.webp" alt="사건의 중심">
+                    <img src="pj13_info_03.webp" alt="사건의 중심" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>사건의 중심</h3>
                         <p>사건의 핵심인 포카를 중심으로 벌어지는 갈등을 해결할 수 있는 사람은 오직 주인공뿐. 얽히고설킨 문제들을 풀어나가기 위한 당신의 선택이 시작된다.</p>
@@ -140,7 +143,7 @@
 
             <div class="character-grid">
                 <div class="character-card">
-                    <img src="pj13_ch1.webp" alt="하레">
+                    <img src="pj13_ch1.webp" alt="하레" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>하레</h3>
                         <p>평범한 학생이지만 동물에게 유난히 친절하다. 도서관에서 낡은 마녀 이야기 책을 읽고, 집에 가는 길에 다친 새를 치료하고 길 잃은 검은 고양이를 키우게 된다.</p>
@@ -148,7 +151,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj13_ch2.webp" alt="라일라">
+                    <img src="pj13_ch2.webp" alt="라일라" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>라일라</h3>
                         <p>검은 고양이에서 인간으로 변신할 수 있는 존재. 과거 마녀 웨스트의 동물 친구 중 한 명이었다. 하레의 동물을 향한 친절함에 반해 스스로 집을 찾아왔다. 인간의 모습일 때가 더 편하다고 말하며, 하레의 곁에 남고 싶어한다.</p>
@@ -156,14 +159,14 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj13_ch3.webp" alt="클로에">
+                    <img src="pj13_ch3.webp" alt="클로에" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>클로에</h3>
                         <p>하레의 친구. 고양이에 대해 해박한 지식을 가지고 있으며, 하레가 고양이를 키우게 되었다는 소식에 함께 같이 생활용품을 골라준다. 하레에게 잔소리도 하지만, 과거의 어떤 일 때문에 하레가 클로에를 보는 시선이 100% 바뀌었다고 말한다.</p>
                     </div>
                 </div>
                 <div class="character-card">
-                    <img src="pj13_ch4.webp" alt="포카">
+                    <img src="pj13_ch4.webp" alt="포카" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>포카</h3>
                         <p>인간과 친하게 지내는 동물들을 막으려는 정체불명의 존재. 과거 웨스트 버지니아의 곁에 있던 동물 중 한 명으로, 그녀의 슬픔을 기리며 인간에 대한 적대감을 드러낸다. 처음부터 끝까지 존댓말을 사용하는 예의 바른 태도와는 달리, 본인도 인간들 사이에서 지내고 있다는 모순을 안고 있다.</p>

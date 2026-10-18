@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj22_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -41,7 +44,7 @@
     <div class="wrap">
 
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -100,7 +103,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj22_info_01.webp" alt="야자 탈출">
+                    <img src="pj22_info_01.webp" alt="야자 탈출" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>야자 탈출</h3>
                         <p>강제 야간자율학습을 어떻게든 빠져나가려는 주인공. 선생님의 감시를 피해 교실을 빠져나가고, 시내를 돌아다니며 색다른 일상을 찾아 나선다.</p>
@@ -108,7 +111,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj22_info_02.webp" alt="자판기 앞의 소녀">
+                    <img src="pj22_info_02.webp" alt="자판기 앞의 소녀" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>자판기 앞의 소녀</h3>
                         <p>키가 작아 자판기에 손이 닿지 않는 미이. 항상 자판기 앞에서 낑낑대고 있다. 주인공이 지나갈 때마다 미에로 화이바를 대신 뽑아준다.</p>
@@ -116,7 +119,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj22_info_03.webp" alt="해외 과자점">
+                    <img src="pj22_info_03.webp" alt="해외 과자점" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>해외 과자점</h3>
                         <p>과자 고르기를 유난히 어려워하는 빅토리아와 자주 가는 해외 과자점. 영국 유학파인 그녀는 과자에 진심이다.</p>
@@ -124,7 +127,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj22_info_04.webp" alt="은하의 이상한 대화">
+                    <img src="pj22_info_04.webp" alt="은하의 이상한 대화" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>은하의 이상한 대화</h3>
                         <p>과학실을 지나가다 살이 찐다거나, 언론은 믿을 수 없다거나. 은하의 대화는 항상 영문을 알 수 없다.</p>
@@ -141,7 +144,7 @@
 
             <div class="character-grid">
                 <div class="character-card">
-                    <img src="pj22_ch2.webp" alt="미이">
+                    <img src="pj22_ch2.webp" alt="미이" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>미이</h3>
                         <p>자판기 앞에서 항상 낑낑대는 작은 체구의 소녀. 미에로 화이바를 좋아한다. 무용(발레)을 오래 해서 그만둘 수 없게 되었다고. 집에서는 구속받는 느낌이 강해 밖에 있는 것을 좋아한다. "선배는 만만해요"라고 당당하게 말하는 그녀.</p>
@@ -149,7 +152,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj22_ch3.webp" alt="빅토리아">
+                    <img src="pj22_ch3.webp" alt="빅토리아" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>빅토리아</h3>
                         <p>영국 유학파. 본명이 따로 있지만 유학 때 썼던 이름을 그대로 사용 중. 과자 고르기를 유난히 어려워한다. 한국의 시선 문화에 지쳐 있으며, 트렌드에 민감하다.</p>
@@ -157,7 +160,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj22_ch5.webp" alt="은하">
+                    <img src="pj22_ch5.webp" alt="은하" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>은하</h3>
                         <p>영문을 알 수 없는 대화를 자주 하는 인물. "과학실을 지나가다 살이 찐다", "언론은 믿을 수 없다" 등 이해하기 어려운 말을 한다. 하지만 그 안에는 나름의 논리가 숨겨져 있다.</p>
@@ -165,7 +168,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj22_ch10.webp" alt="선생님">
+                    <img src="pj22_ch10.webp" alt="선생님" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>선생님</h3>
                         <p>야자를 째려는 주인공을 항상 붙잡는 담임 선생님. 위압감 있는 목소리로 "알겠지?"를 반복한다. 하지만 결국 주인공의 사정을 봐주는 자상한 면도 있다.</p>

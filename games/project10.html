@@ -27,6 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj10_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -42,7 +45,7 @@
 
         <!-- Sticky Header -->
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -106,7 +109,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj10_info_01.webp" alt="마법 교육과정">
+                    <img src="pj10_info_01.webp" alt="마법 교육과정" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>기묘한 마법 교육</h3>
                         <p>마법이라는 존재를 마주한 학생들의 갈등과 성장을 담고 있습니다. 항상 밝게만 빛날 것 같던 마법, 하지만 그 이면에는 항상 좋은 일만 있는 건 아니네요.</p>
@@ -114,7 +117,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj10_info_03.webp" alt="마법소녀의 운명">
+                    <img src="pj10_info_03.webp" alt="마법소녀의 운명" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>마법소녀라는 화려함 뒤의 무게</h3>
                         <p>마법소녀가 된다는 것은 생각만큼 낭만적인 일만은 아닙니다. 사소했던 일상들이 하나둘씩 중요한 과업이 되어버리는 현실.</p>
@@ -122,7 +125,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj10_info_02.webp" alt="새로운 시스템">
+                    <img src="pj10_info_02.webp" alt="새로운 시스템" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>새롭게 추가된 문자 시스템</h3>
                         <p>이번에 새롭게 추가된 '문자 시스템'을 통해 캐릭터들과 더욱 긴밀하게 소통하고, 당신의 선택이 불러올 파장을 확인하세요.</p>
@@ -140,7 +143,7 @@
 
             <div class="character-grid">
                 <div class="character-card">
-                    <img src="pj10_ch1.webp" alt="하린">
+                    <img src="pj10_ch1.webp" alt="하린" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>하린</h3>
                         <p>본작의 주인공. 작은 소리를 잘 듣는 능력을 가진 평범한(?) 여고생. 공부에는 흥미가 없지만 호기심이 강하다. 담당 과목이 없는 선생님에 흥미를 느껴 수색을 시작한다.</p>
@@ -148,7 +151,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj10_ch2.webp" alt="봄이">
+                    <img src="pj10_ch2.webp" alt="봄이" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>봄이</h3>
                         <p>하린의 친구. 전교 상위 19퍼센트의 우등생이지만 집에서는 공부를 하지 않는다. 도시전설과 이고깽 소설을 좋아하며, 흥미 있는 일에는 엄청난 추진력을 발휘한다.</p>
@@ -156,7 +159,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj10_ch3.webp" alt="토아">
+                    <img src="pj10_ch3.webp" alt="토아" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>토아</h3>
                         <p>특수반에서 마법 수업을 받고 있는 학생. 모든 마법을 쓸 수 있는 천부적인 재능을 가졌다. 코스프레 같은 복장을 입고 다니며, 선생님을 따르고 있다.</p>
@@ -164,7 +167,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj10_ch4.webp" alt="규영">
+                    <img src="pj10_ch4.webp" alt="규영" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>규영</h3>
                         <p>담당 과목이 없는 선생님. 정령의 축복을 받은 능력자들을 구별할 수 있으며, 특수반에서 마법 수업을 가르친다. 눈이 빨갛게 변하는 등 기묘한 분위기를 풍긴다.</p>

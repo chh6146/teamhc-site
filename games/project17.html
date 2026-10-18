@@ -26,6 +26,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <!-- 추가: Hero 배경 이미지 미리 불러오기 (LCP 개선) -->
+    <link rel="preload" as="image" href="pj17_background.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../tabbar.css">
     <link rel="stylesheet" href="toast.css">
@@ -40,7 +43,7 @@
     <div class="wrap">
 
         <header class="site-header">
-            <button class="icon-btn back-btn" id="backBtn" aria-label="뒤로 가기" hidden>
+            <button class="icon-btn back-btn" id="backBtn" aria-label="상위 페이지로" hidden>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 15 12 9 18 15"/>
                 </svg>
@@ -99,7 +102,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="pj17_info_01.webp" alt="HCer">
+                    <img src="pj17_info_01.webp" alt="HCer" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>HCer</h3>
                         <p>10대에서 20대가 주류인 숨겨진 커뮤니티. 위법적인 내용이 오간다. 마리아나 웹에서 파생된 사이트로 노드를 뛰어넘어 쉽게 차단되지 않는다.</p>
@@ -107,7 +110,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj17_info_02.webp" alt="개도">
+                    <img src="pj17_info_02.webp" alt="개도" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>개도</h3>
                         <p>피에르의 목적은 HCer 사용자를 찾아 그만두게 만드는 것. 약물 사용자는 종아리나 팔뚝에 멍이나 털을 민 흔적을 가진 특이한 사람이 있다면 반드시 피에르에게 먼저 알려야 한다.</p>
@@ -115,7 +118,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <img src="pj17_info_03.webp" alt="평범한 일상 속 균열">
+                    <img src="pj17_info_03.webp" alt="평범한 일상 속 균열" loading="lazy" decoding="async">
                     <div class="feature-body">
                         <h3>평범한 일상 속 균열</h3>
                         <p>다정한 여동생 석류, 상냥한 NC 선배, 츤데레 아이오. 평범한 학교 생활 속에 HCer라는 그림자가 드리운다.</p>
@@ -132,7 +135,7 @@
 
             <div class="character-grid">
                 <div class="character-card">
-                    <img src="pj17_ch2.webp" alt="아이오">
+                    <img src="pj17_ch2.webp" alt="아이오" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>아이오</h3>
                         <p>주인공과 같은 반 친구. 석류와 만나면 항상 으르렁거린다. 주인공을 사이에 두고 신경전을 벌인다.</p>
@@ -140,7 +143,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj17_ch3.webp" alt="NC 선배">
+                    <img src="pj17_ch3.webp" alt="NC 선배" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>NC 선배</h3>
                         <p>주인공이 존경하는 선배. 상냥하고 다정하며, 힘들어 보이는 주인공을 자주 안아준다. 항상 안전을 강조한다.</p>
@@ -148,7 +151,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj17_ch4.webp" alt="석류">
+                    <img src="pj17_ch4.webp" alt="석류" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>석류</h3>
                         <p>주인공의 여동생. 중학생이지만 요리 솜씨가 뛰어나다. 오빠를 무릎 베개로 재워주는 등 다정한 성격.</p>
@@ -156,7 +159,7 @@
                 </div>
 
                 <div class="character-card">
-                    <img src="pj17_ch5.webp" alt="피에르">
+                    <img src="pj17_ch5.webp" alt="피에르" loading="lazy" decoding="async">
                     <div class="character-body">
                         <h3>피에르</h3>
                         <p>전학생. 체육 창고에 숨어 있다가 주인공과 아이오에게 발견된다. 밝은 성격으로 첫 등장부터 반 전체를 정적에 빠뜨린다. HCer라는 위험한 사이트를 아는 유일한 인물이며, 사용자를 찾아 개도하려 한다.</p>
