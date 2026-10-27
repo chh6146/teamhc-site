@@ -839,3 +839,158 @@ h1 {
         scroll-behavior: auto !important;
     }
 }
+
+/* ==========================================
+   11. 다양한 효과
+   ========================================== */
+/* ==========================================
+   [효과 A] 배경 앰비언트 글로우 (떠다니는 빛 덩어리)
+   - 화면에 큰 radial 빛 2개를 고정
+   - 24초 주기로 미세하게 표류(ambientDrift)
+   ========================================== */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;              /* body::before(그라데이션) 위에 얹힘 */
+    pointer-events: none;
+    overflow: hidden;
+    background:
+        radial-gradient(60vmax 60vmax at 15% 10%, var(--primary-glow) 0%, transparent 60%),
+        radial-gradient(50vmax 50vmax at 85% 90%, rgba(168, 85, 247, 0.10) 0%, transparent 60%);
+    opacity: 0.55;
+    filter: blur(10px);
+    animation: ambientDrift 24s ease-in-out infinite alternate;
+    transform: translateZ(0);
+}
+
+/* 글로우가 좌우/상하로 살짝 흔들리며 호흡하는 애니메이션 */
+@keyframes ambientDrift {
+    from { transform: translate3d(-2%, -1%, 0) scale(1); }
+    to   { transform: translate3d(2%, 1%, 0) scale(1.06); }
+}
+
+
+/* ==========================================
+   [효과 B] 카드 테두리 회전 그라데이션 (conic border)
+   - .container 테두리를 따라 빛줄기가 한 바퀴 돎
+   - conic-gradient + mask로 "테두리만" 남기는 기법
+   ========================================== */
+.container {
+    position: relative;
+    /* 기존 border는 유지하되 색만 투명에 가깝게 */
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;               /* 테두리 두께 */
+    background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0deg,
+        var(--primary-color) 60deg,   /* 빛줄기 길이 = 60deg */
+        transparent 120deg,
+        transparent 360deg
+    );
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    animation: spinBorder 6s linear infinite;
+}
+
+/* @property로 --angle을 각도 타입으로 등록해야 애니메이션 가능 */
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* 0deg → 360deg 회전 = 빛줄기가 테두리를 한 바퀴 */
+@keyframes spinBorder {
+    to { --angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .container::before { animation: none; }
+}
+
+
+/* ==========================================
+   [효과 C] 버튼 hover 시 테두리 빛 추적 (border trace)
+   - 효과 B와 같은 원리지만, hover일 때만 동작
+   - 기존 .link-button::before(커서 글로우)와 역할 분리:
+     ::before = 배경 글로우 / ::after = 테두리 빛
+   ========================================== */
+.link-button { position: relative; }
+
+.link-button::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+        from var(--a, 0deg),
+        transparent 0deg,
+        var(--primary-color) 40deg,   /* 빛줄기 길이 */
+        transparent 80deg,
+        transparent 360deg
+    );
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;                       /* 평소엔 숨김 */
+    transition: opacity var(--t-base);
+    pointer-events: none;
+}
+
+/* hover 시에만 빛줄기 나타나 + 회전 */
+.link-button:hover::after {
+    opacity: 1;
+    animation: traceSpin 2.4s linear infinite;
+}
+
+@property --a {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes traceSpin {
+    to { --a: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .link-button:hover::after { animation: none; opacity: 0.4; }
+}
+
+
+/* ==========================================
+   [효과 D] 아이콘 둥실 (icon float)
+   - 버튼 hover 시 아이콘만 위아래로 살짝 떠오름
+   - 마우스 환경(hover)에서만 적용
+   ========================================== */
+@media (hover: hover) and (pointer: fine) {
+    .link-button:hover img,
+    .link-button:hover .icon-img {
+        animation: iconFloat 1.6s ease-in-out infinite;
+    }
+}
+
+/* -3px 위로 떠올랐다 내려오는 왕복 애니메이션 */
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .link-button:hover img,
+    .link-button:hover .icon-img { animation: none; }
+}

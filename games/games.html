@@ -66,5 +66,16 @@
     <script src="../theme.js"></script>
     <script src="games.js"></script>
     <script src="../tabbar.js"></script>
+    
+    <!-- 커서 추적 빛 효과 (동적 버튼 대응) -->
+    <script>
+        document.addEventListener('pointermove', function (e) {
+            var btn = e.target.closest('.link-button');
+            if (!btn) return;
+            var r = btn.getBoundingClientRect();
+            btn.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+            btn.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+    </script>
 </body>
 </html>
